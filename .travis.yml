@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "node"
+  - "8"
+  before_install:
+  - npm i -g npm@version-number
+  cache:
+  directories:
+    - "node_modules"
+    install: true
+    script: npm run start:dev
+    deploy:
+  skip_cleanup: true
+  env:
+- DB=postgres
+matrix:
+  fast_finish: true
+  

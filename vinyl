@@ -1,0 +1,10 @@
+var gulp = require('gulp')
+  , file = require('gulp-file');
+ 
+gulp.task('js', function() {
+  var str = primus.library();
+ 
+  return gulp.src('scripts/**.js')
+    .pipe(file('primus.js', str))
+    .pipe(gulp.dest('dist'));
+});
