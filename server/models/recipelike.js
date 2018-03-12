@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var RecipeItem = sequelize.define('RecipeItem', {
+  var RecipeLike = sequelize.define('RecipeLike', {
     content: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -8,23 +8,19 @@ module.exports = (sequelize, DataTypes) => {
     complete: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
+    }
   });
-  RecipeItem.associate = function(models) {
+  RecipeLike.associate = function(models) {
     // associations can be defined here
-    RecipeItem.belongsTo(models.User, {
+    RecipeLike.belongsTo(models.User, {
       foreignKey: 'userId',
       onDelete: 'CASCADE',
     });
-    RecipeItem.hasMany(models.RecipeComment, {
+    RecipeLike.belongsTo(models.RecipeItem, {
       foreignKey: 'recipeItemId',
-      as: 'recipeComments'
+      onDelete: 'CASCADE',
     });
-    RecipeItem.hasMany(models.RecipeLike, {
-      foreignKey: 'recipeItemId',
-      as: 'recipeLikes',
-    });
+    
   };
-
-  return RecipeItem;
+  return RecipeLike;
 };
