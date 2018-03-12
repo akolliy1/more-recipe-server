@@ -7,6 +7,12 @@
     "port": 5436,
     "dialect": "postgres"
   },
+  "config": {
+    "language": "nodejs",
+    "os": "window",
+    "group": "stable",
+    "dist": "trusty"
+  },
   "test": {
     "username": "root",
     "password": null,

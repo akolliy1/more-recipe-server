@@ -1,14 +1,20 @@
 {
   "name": "more-recipe-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "for Food recipe",
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "config": {
+    "language": "nodejs",
+    "os": "window",
+    "group": "stable",
+    "dist": "trusty"
+  },
   "keywords": [],
-  "author": "",
+  "author": "akolade adesanmi",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -17,6 +23,7 @@
     "nodemon": "^1.17.1",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
+    "pivotal": "^0.2.0",
     "sequelize": "^4.35.5"
   }
 }
