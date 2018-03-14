@@ -2,6 +2,10 @@ language: node_js
 node_js:
   - "node"
   - "8"
+  install:
+  - bundle install --path vendor/bundle
+  - npm install
+  install: true
   script: npm run start:dev
   deploy:
   skip_cleanup: true
@@ -9,4 +13,3 @@ node_js:
 - DB=postgres
 matrix:
   fast_finish: true
-  
