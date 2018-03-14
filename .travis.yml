@@ -2,14 +2,15 @@ language: node_js
 node_js:
   - "node"
   - "8"
-  install:
-  - bundle install --path vendor/bundle
-  - npm install
-  install: true
-  script: npm run start:dev
   deploy:
   skip_cleanup: true
   env:
 - DB=postgres
 matrix:
   fast_finish: true
+  include:
+  - node_js: 8
+  env: KEY=VALUE
+  allow_failures:
+  - node_js: 8
+  env: KEY=VALUE
