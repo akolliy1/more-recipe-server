@@ -7,6 +7,8 @@
   "author": "akolade adesanmi",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "expect": "^22.4.3",
@@ -18,7 +20,6 @@
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "pivotal": "^0.2.0",
-    "sequelize": "^4.35.5",
     "supertest": "^3.0.0"
   },
   "devDependencies": {
@@ -27,10 +28,12 @@
     "expect.js": "^0.3.1",
     "mocha": "^5.0.5",
     "nodemon": "^1.17.3",
+    "sequelize": "^4.37.6",
     "should": "^13.2.1"
   },
   "scripts": {
-    "start:dev": "nodemon ./bin/www",
-    "test": "mocha --timeout 10000"
+    "start:dev": "nodemon --exec babel-node -- ./bin/www",
+    "test": "mocha --compilers js:babel-core/register --timeout 10000 --exit",
+    "test-migrate": "NODE_ENV=test sequelize db:migrate"
   }
 }

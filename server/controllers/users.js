@@ -1,11 +1,12 @@
-const bcrypt = require('bcrypt');
-const User = require('../models').User;
-const RecipeItem = require('../models').RecipeItem;
-const RecipeComment = require('../models').RecipeComment;
-const RecipeLike = require('../models').RecipeLike;
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
+import Sequelize from 'sequelize'
+import model from '../models'
 
-module.exports = {
-    create(req, res) {
+const { User, RecipeItem, RecipeComment, RecipeLike } = model;
+
+class Users {
+    static create(req, res) {
         const { name, username, email } = req.body
         let { password } = req.body;
         password = bcrypt.hashSync(password, bcrypt.genSaltSync());
@@ -18,93 +19,40 @@ module.exports = {
             })
             .then(user => res.status(201).send(user))
             .catch(error => res.status(400).send(error));
-    },
-    list(req, res) {
-        return User
-            .findAll({
-                include: [{
-                    model: RecipeItem,
-                    as: 'recipeItems',
-                    include: [
-                        {
-                            model: RecipeComment,
-                            as: 'recipeComments',
-                        },
-                        {
-                            model: RecipeLike,
-                            as: 'recipeLikes',
-                        },
-                    ],
-                }],
-            })
-            .then(users => res.status(200).send(users))
-            .catch(error => res.status(400).send(error));
-    },
-    retrieve(req, res) {
-        return User
-            .findById(req.params.userId, {
-                include: [{
-                    model: RecipeItem,
-                    as: 'recipeItems',
-                    include: [
-                        {
-                            model: RecipeComment,
-                            as: 'recipeComments',
-                        },
-                        {
-                            model: RecipeLike,
-                            as: 'recipeLikes',
-                        },
-                    ],
-                }],
-            })
-            .then(user => {
-                if (!user) {
-                    return res.status(404).send({
-                        message: 'User Not Found',
-                    });
-                }
-                return res.status(200).send(user);
-            })
-            .catch(error => res.status(400).send(error));
-    },
-    update(req, res) {
-        return User
-            .findById(req.params.userId, {
-                include: [{
-                    model: RecipeItem,
-                    as: 'recipeItems',
-                    include: [
-                        {
-                            model: RecipeComment,
-                            as: 'recipeComments',
-                        },
-                        {
-                            model: RecipeLike,
-                            as: 'recipeLikes',
-                        },
-                    ],
-                }],
-            })
-            .then(user => {
-                if (!user) {
-                    return res.status(404).send({
-                        message: 'User Not Found',
-                    });
-                }
-                return user
-                    .update({
-                        name: req.body.name || user.name,
-                        username: req.body.username || user.username,
-                        email: req.body.email || user.email,
-                        password: req.body.password || user.password,
+    }
+    static signin(req,res) {
+        const Op = Sequelize.Op;     
+        return User.find({
+            where: {
+                [Op.or]: [{username: req.body.username},{email: req.body.email}],
+            }
+        })
+        .then((user) => {
+            if(!user) {
+                return res.status(400).json('User/email doesn\'t exist')
+            } else {
+                const { id, username, email, password } = user
+                const payload = { id, username, email }
+                const token = jwt.sign(payload, 'SECRET', {
+                    expiresIn: '1h'
+                })
+                if(bcrypt.compareSync(req.body.password, password)) {
+                    return res.status(200).send({
+                        message: 'Signin successfuly',
+                        user,
+                        token
                     })
-                    .then(() => res.status(200).send(user))  // Send back the updated todo.
-                    .catch((error) => res.status(400).send(error));
-            })
-            .catch((error) => res.status(400).send(error));
-    },
-    destroy(req, res) {
+                } else {
+                    return res.status(400).send({
+                        msg: 'Incorrect password'
+                    })
+                }
+                
+            }
+        })
+
+    };
+    static destroy(req, res) {
         return User
             .findById(req.params.userId)
             .then(user => {
@@ -121,6 +69,7 @@ module.exports = {
                     .catch(error => res.status(400).send(error));
             })
             .catch(error => res.status(400).send(error));
-    },
+    }
+}
 
-};
+export default Users;

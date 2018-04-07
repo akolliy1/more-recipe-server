@@ -1,18 +1,18 @@
 {
   "development": {
     "username": "postgres",
-    "password": "k.code1234",
-    "database": "recipes-dev",
+    "password": "keniks",
+    "database": "kolade-test",
     "host": "127.0.0.1",
-    "port": 5436,
+    "port": 5432,
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "k.code1234",
+    "password": "keniks",
     "database": "test",
     "host": "127.0.0.1",
-    "port":5436,
+    "port":5432,
     "dialect": "postgres"
   },
   "production": {

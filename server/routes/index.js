@@ -1,4 +1,5 @@
-const usersController = require('../controllers').users;
+import User from '../controllers/users'
+
 const recipeItemsController = require('../controllers').recipeItems;
 const recipeCommentsController = require('../controllers').recipeComments;
 const recipeLikesController = require('../controllers').recipeLikes;
@@ -8,11 +9,9 @@ module.exports = (app) => {
         message: 'Welcome to the Users API!',
     }));
 
-    app.post('/api/users', usersController.create);
-    app.get('/api/users', usersController.list);
-    app.put('/api/users/:userId', usersController.update);
-    app.get('/api/users/:userId', usersController.retrieve);
-    app.delete('/api/users/:userId', usersController.destroy);
+    app.post('/api/users', User.create);
+    app.post('/api/users/signin', User.signin);
+    app.delete('/api/users/:userId', User.destroy);
     app.post('/api/users/:userId/items', recipeItemsController.create);
     app.get('/api/users/:userId/items', recipeItemsController.list);
     app.get('/api/users/:userId/items/:recipeItemId', recipeItemsController.retrieve);

@@ -1,21 +1,18 @@
 language: node_js
 node_js:
-  - "0.11"
-  - "0.10"
-  - "0.8"
+  - "8.9.4"
  
-matrix:
-  allow_failures:
-    - node_js: "0.11"
- 
+script:
+  - npm run test
 env:
   - NODE_ENV=test
  
 install:
   - npm install
-  - ./node_modules/.bin/bower install
- 
+
+services:
+  - postgresql
+
 before_script:
-  - psql -c 'create database sea_blog_test;' -U postgres
-  - cp server/config/config.json server/config/config.json
-  - "npm start &" # start a Web server
+  - createdb test --username=postgres
+  - sequelize db:migrate

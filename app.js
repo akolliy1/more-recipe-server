@@ -1,16 +1,13 @@
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
+import express from 'express';
+import logger from 'morgan';
+import bodyParser from 'body-parser';
 
 const app = express();
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const jwt = require('jsonwebtoken');
-
-// We also need a secret to encode/decode our JWTs
-app.set('appSecret', 'super-secret-secret')
 
 // home route
 app.get('/', (req, res) => res.status(200).send({
