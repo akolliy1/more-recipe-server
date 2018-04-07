@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models').User;
 const RecipeItem = require('../models').RecipeItem;
 const RecipeComment = require('../models').RecipeComment;
@@ -5,11 +6,15 @@ const RecipeLike = require('../models').RecipeLike;
 
 module.exports = {
     create(req, res) {
+        const { name, username, email } = req.body
+        let { password } = req.body;
+        password = bcrypt.hashSync(password, bcrypt.genSaltSync());
         return User
             .create({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
+                name,
+                username,
+                email,
+                password
             })
             .then(user => res.status(201).send(user))
             .catch(error => res.status(400).send(error));
@@ -90,6 +95,7 @@ module.exports = {
                 return user
                     .update({
                         name: req.body.name || user.name,
+                        username: req.body.username || user.username,
                         email: req.body.email || user.email,
                         password: req.body.password || user.password,
                     })

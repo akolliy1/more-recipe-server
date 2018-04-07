@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<report>
+
+  <header>
+    <generated>4/7/2018 11:45:39 AM</generated>
+    <server>PostgreSQL 9.3 (localhost:5436)</server>
+    <database>test</database>
+    <schema>public</schema>
+    <table>Users</table>
+    <title>Columns list report</title>
+  </header>
+
+  <section id="s1" number="1" name="Columns">
+    <table>
+      <columns>
+        <column id="c1" number="1" name="Column" />
+        <column id="c2" number="2" name="Owner" />
+        <column id="c3" number="3" name="Comment" />
+      </columns>
+      <rows>
+        <row id="r1" number="1" c1="id" c2="" c3="" />
+        <row id="r2" number="2" c1="name" c2="" c3="" />
+        <row id="r3" number="3" c1="username" c2="" c3="" />
+        <row id="r4" number="4" c1="email" c2="" c3="" />
+        <row id="r5" number="5" c1="password" c2="" c3="" />
+        <row id="r6" number="6" c1="createdAt" c2="" c3="" />
+        <row id="r7" number="7" c1="updatedAt" c2="" c3="" />
+      </rows>
+    </table>
+  </section>
+
+</report>

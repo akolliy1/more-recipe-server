@@ -1,0 +1,4 @@
+C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Debug\more-recipe-server.vbprojResolveAssemblyReference.cache
+C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Debug\more-recipe-server.vbproj.CoreCompileInputs.cache
+C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Debug\more_recipe_server.Resources.resources
+C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Debug\more-recipe-server.vbproj.GenerateResource.Cache

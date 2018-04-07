@@ -3,22 +3,34 @@
   "version": "1.0.0",
   "description": "for Food recipe",
   "main": "index.js",
-  "scripts": {
-    "start:dev": "nodemon ./bin/www",
-    "test": "vows --spec"
-  },
   "keywords": [],
   "author": "akolade adesanmi",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "expect": "^22.4.3",
     "express": "^4.16.2",
     "gulp-file": "^0.4.0",
+    "jsonwebtoken": "^8.2.1",
+    "lodash": "^4.17.5",
     "morgan": "^1.9.0",
-    "nodemon": "^1.17.1",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "pivotal": "^0.2.0",
-    "sequelize": "^4.35.5"
+    "sequelize": "^4.35.5",
+    "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^5.0.5",
+    "nodemon": "^1.17.3",
+    "should": "^13.2.1"
+  },
+  "scripts": {
+    "start:dev": "nodemon ./bin/www",
+    "test": "mocha --timeout 10000"
   }
 }

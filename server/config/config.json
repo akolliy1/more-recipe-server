@@ -7,18 +7,13 @@
     "port": 5436,
     "dialect": "postgres"
   },
-  "config": {
-    "language": "nodejs",
-    "os": "window",
-    "group": "stable",
-    "dist": "trusty"
-  },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "postgres",
+    "password": "k.code1234",
+    "database": "test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "port":5436,
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",

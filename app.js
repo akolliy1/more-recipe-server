@@ -7,6 +7,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const jwt = require('jsonwebtoken');
+
+// We also need a secret to encode/decode our JWTs
+app.set('appSecret', 'super-secret-secret')
+
+// home route
+app.get('/', (req, res) => res.status(200).send({
+  message: 'Welcome to the Homepage.',
+}));
+
 // Require our routes into the application.
 require('./server/routes')(app);
 app.get('*', (req, res) => res.status(200).send({
