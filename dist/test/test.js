@@ -1,102 +1,87 @@
-//During the test the env variable is set to test
-process.env.NODE_ENV = 'test'
+'use strict';
 
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-const server = require("../src/app");
-const User = require('../server/models').User
+//During the test the env variable is set to test
+process.env.NODE_ENV = 'test';
+
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var server = require("../app");
+var User = require('../../server/models').User;
 // var request = require('superagent');supertest
 var request = require('supertest');
 // const should = chai.should();
-let should = require('should');
+var should = require('should');
 // let should = require('should/as-function');
-let expect = require("expect");
+var expect = require("expect");
 chai.use(chaiHttp);
-let assert = require('assert');
+var assert = require('assert');
 // const User = require('../models').User;
 // User.hosts.modelName = 'Hosts'
 // User.victims.modelName = 'Victims'
 // let models = [User.hosts, User.victims]
 
-describe('Users', () => {
-    beforeEach((done) => {
-        User.destroy({ where: { id: [1, 2, 3] } })
-            .then(function () {
-                done();
-            })
+describe('Users', function () {
+    beforeEach(function (done) {
+        User.destroy({ where: { id: [1, 2, 3] } }).then(function () {
+            done();
+        });
     });
     describe("get('/')", function () {
         describe("it should GET / homepage route", function () {
             it("should return status code 200 when value is present", function (done) {
-                request(server)
-                    .get('/')
-                    .expect(200)
-                    .end((err, res) => {
-                        if (err) done(err);
-                        else setImmediate(done);
-                    })
-            })
-        })
-    })
+                request(server).get('/').expect(200).end(function (err, res) {
+                    if (err) done(err);else setImmediate(done);
+                });
+            });
+        });
+    });
     describe("get('/api')", function () {
         describe("it should GET / Api route", function () {
             it("should return status code 200 when value is present", function (done) {
-                request(server)
-                    .get('/api')
-                    .expect(200)
-                    .end((err, res) => {
-                        if (err) done(err);
-                        else setImmediate(done);
-                    })
-            })
-        })
-    })
+                request(server).get('/api').expect(200).end(function (err, res) {
+                    if (err) done(err);else setImmediate(done);
+                });
+            });
+        });
+    });
     describe("get('/api/users')", function () {
         describe("it should GET /api/users route", function () {
             it("should return status code 200 when get value is present", function (done) {
-                request(server)
-                    .get('/api/users')
-                    .expect(200)
-                    .end((err, res) => {
-                        if (err) done(err);
-                        else setImmediate(done);
-                    })
-            })
-        })
-    })
+                request(server).get('/api/users').expect(200).end(function (err, res) {
+                    if (err) done(err);else setImmediate(done);
+                });
+            });
+        });
+    });
     describe("get('/api/users')", function () {
         describe("it should POST /api/users route", function () {
             it("should return status code 201 when Posted value is not present", function (done) {
-                let person = {
+                var person = {
                     name: "sean",
                     username: "akolliy1",
                     email: "J.R.R.Tolkien@gmail.com",
                     password: 'ball1954'
-                }
-                request(server)
-                    .post('/api/users')
-                    .expect(201)
-                User.create(person)
-                    .then(function (user) {
-                        //victim name should be equivalent to the fake submission we are using
-                        expect(user.name).toEqual("sean");
-                        expect(user.email).toBe('J.R.R.Tolkien@gmail.com')
-                        expect(201).toEqual(201)
-                        //remove the entry from the database
-                        User.destroy({
-                            where: {
-                                id: user.id
-                            }
-                        }).then(function (res) {
-                            expect(204).toEqual(204)
-                            done();
-                        })
-                    })
-            })
-        })
-    })
-    
-})
+                };
+                request(server).post('/api/users').expect(201);
+                User.create(person).then(function (user) {
+                    //victim name should be equivalent to the fake submission we are using
+                    expect(user.name).toEqual("sean");
+                    expect(user.email).toBe('J.R.R.Tolkien@gmail.com');
+                    expect(201).toEqual(201);
+                    //remove the entry from the database
+                    User.destroy({
+                        where: {
+                            id: user.id
+                        }
+                    }).then(function (res) {
+                        expect(204).toEqual(204);
+                        done();
+                    });
+                });
+            });
+        });
+    });
+});
 
 // describe("put(/api/users/:userId)", function () {
 //     describe("it should PUT /api/users/:userId route", function () {
@@ -189,9 +174,6 @@ describe('Users', () => {
 // });
 
 
-
-
-
 // describe("Creating default catch all route", function () {
 //     describe("app.get('*')", function () {
 //         it("should return default route ,make sure is not place up of other route", (done) => {
@@ -207,8 +189,6 @@ describe('Users', () => {
 // })
 
 
-
-
 // describe("Creating Array test", function () {
 //     describe("#indexOf()", function () {
 //         it("should return return -1 when value is not present", function(done){
@@ -217,8 +197,8 @@ describe('Users', () => {
 //         })
 //     })
 // })
-    // .end((err, res) => {
-    //     expect(200);
-    //     expect('array');
-    //     done()
-    // })
+// .end((err, res) => {
+//     expect(200);
+//     expect('array');
+//     done()
+// })
