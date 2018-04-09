@@ -7,7 +7,7 @@ script:
 env:
   - NODE_ENV=test
   global:
-  - PGPORT=5433
+  - PGPORT=5436
  
 install:
   - npm install
@@ -16,8 +16,9 @@ services:
   - postgresql
 
 before_script:
-  - createdb test --username=postgres
-  - npm run "test-migrate"
+  - createdb test --username=postgres --password=k.code1234
+  - npm run build
+  - node_modules/.bin/sequelize db:migrate
   after_success:
   - npm run report-coverage
 # after_success: npm run coverage
