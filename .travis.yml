@@ -7,16 +7,8 @@ script:
 env:
   - NODE_ENV=test
   global:
-  - PGPORT=5436
- addons:
-  postgresql: "9.3"
-  apt:
-    packages:
-    - postgresql-9.3
-    - postgresql-client-9.3
-env:
-  global:
-  - PGPORT=5436
+  - PGPORT=5433
+ 
 install:
   - npm install
 
@@ -24,13 +16,7 @@ services:
   - postgresql
 
 before_script:
-  - sudo apt-get update
-  - sudo apt-get install language-pack-es
-  - sudo /etc/init.d/postgresql stop
-  - sudo /etc/init.d/postgresql start 9.3
-  - psql -c 'create database test;' -U postgres
-  - npm run build
-  - sequelize db:migrate
+  - createdb test --username=postgres
+  - npm run "test-migrate"
   after_success:
   - npm run report-coverage
-# after_success: npm run coverage
