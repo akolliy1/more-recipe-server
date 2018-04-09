@@ -16,7 +16,7 @@ services:
   - postgresql
 
 before_script:
-  - createdb test --username=postgres
+  - createdb travis --username=postgres
   - npm run "test-migrate"
   after_success:
   - npm run report-coverage
