@@ -16,7 +16,7 @@ services:
   - postgresql
 
 before_script:
-  - createdb travis_test --username=postgres
+  - psql -c 'create database travis_test;' -U postgres
   - npm run "test-migrate"
   after_success:
   - npm run report-coverage
