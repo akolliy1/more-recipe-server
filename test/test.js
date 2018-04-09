@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test'
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-const server = require("../app");
+const server = require("../src/app");
 const User = require('../server/models').User
 // var request = require('superagent');supertest
 var request = require('supertest');

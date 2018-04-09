@@ -1,8 +1,8 @@
 import User from '../controllers/users'
 
-const recipeItemsController = require('../controllers').recipeItems;
-const recipeCommentsController = require('../controllers').recipeComments;
-const recipeLikesController = require('../controllers').recipeLikes;
+import recipeItemsController from '../controllers/recipeItems';
+import recipeCommentsController from '../controllers/recipeComments';
+import recipeLikesController from '../controllers/recipeLikes';
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({

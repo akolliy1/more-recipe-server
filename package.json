@@ -7,22 +7,27 @@
   "author": "akolade adesanmi",
   "license": "ISC",
   "dependencies": {
-    "babel-cli": "^6.26.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "coveralls": "^3.0.0",
+    "dotenv": "^5.0.1",
     "expect": "^22.4.3",
     "express": "^4.16.2",
     "gulp-file": "^0.4.0",
     "jsonwebtoken": "^8.2.1",
     "lodash": "^4.17.5",
     "morgan": "^1.9.0",
+    "nyc": "^11.6.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "pivotal": "^0.2.0",
     "supertest": "^3.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "expect.js": "^0.3.1",
@@ -33,7 +38,12 @@
   },
   "scripts": {
     "start:dev": "nodemon --exec babel-node -- ./bin/www",
+    "babel-node": "babel-node ./src/index.js --presets=env",
     "test": "mocha --compilers js:babel-core/register --timeout 10000 --exit",
-    "test-migrate": "NODE_ENV=test sequelize db:migrate"
+    "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate&& sequelize db:seed:all&& nyc",
+    "build": "babel src -d dist",
+    "start": "node src/app.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls"
   }
 }
