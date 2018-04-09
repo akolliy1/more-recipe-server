@@ -11,7 +11,6 @@ before_script:
 - psql -c "CREATE USER root WITH PASSWORD 'k.code1234';" -U postgres
 - npm run build
 - sequelize db:migrate
-- sequelize db:seed:all
 script: npm test
 after_success: npm run coverage
 # after_success: npm run coverage
