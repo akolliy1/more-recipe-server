@@ -8,4 +8,3 @@ const recipeLikes = require('./recipelikes');
      recipeComments,
      recipeLikes,
  }
- 
