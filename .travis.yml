@@ -17,6 +17,6 @@ services:
 
 before_script:
   - createdb test --username=postgres
-  - sequelize db:migrate
+  - npm run "test-migrate"
   after_success:
   - npm run report-coverage
