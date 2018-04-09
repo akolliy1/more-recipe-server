@@ -8,7 +8,15 @@ env:
   - NODE_ENV=test
   global:
   - PGPORT=5436
- 
+ addons:
+  postgresql: "9.3"
+  apt:
+    packages:
+    - postgresql-9.3
+    - postgresql-client-9.3
+env:
+  global:
+  - PGPORT=5433
 install:
   - npm install
 
@@ -16,7 +24,12 @@ services:
   - postgresql
 
 before_script:
-  - createdb test --username=postgres --password=k.code1234
+  - sudo apt-get update
+  - sudo apt-get install language-pack-es
+  - sudo /etc/init.d/postgresql stop
+  - sudo /etc/init.d/postgresql start 9.3
+  - psql -c 'create database test;' -U postgres
+  - psql -c "CREATE USER root WITH PASSWORD 'k.code1234';" -U postgres
   - npm run build
   - node_modules/.bin/sequelize db:migrate
   after_success:
