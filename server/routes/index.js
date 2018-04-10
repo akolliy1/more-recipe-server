@@ -12,11 +12,11 @@ module.exports = (app) => {
     app.post('/api/users', User.create);
     app.post('/api/users/signin', User.signin);
     app.delete('/api/users/:userId', User.destroy);
-    app.post('/api/users/:userId/items', recipeItemsController.create);
-    app.get('/api/users/:userId/items', recipeItemsController.list);
-    app.get('/api/users/:userId/items/:recipeItemId', recipeItemsController.retrieve);
-    app.put('/api/users/:userId/items/:recipeItemId', recipeItemsController.update);
-    app.delete('/api/users/:userId/items/:recipeItemId', recipeItemsController.destroy);
+    app.post('/api/users/signin/items', recipeItemsController.create);
+    app.get('/api/users/signin/items', recipeItemsController.list);
+    app.get('/api/users/signin/items/:recipeItemId', recipeItemsController.retrieve);
+    app.put('/api/users/signin/items/:recipeItemId', recipeItemsController.update);
+    app.delete('/api/users/signin/items/:recipeItemId', recipeItemsController.destroy);
 
     app.post('/api/users/:userId/items/:recipeItemId/comments', recipeCommentsController.create);
     app.put('/api/users/:userId/items/:recipeItemId/comments/:recipeCommentId', recipeCommentsController.update);
