@@ -1,18 +1,20 @@
-const RecipeItem = require('../models').RecipeItem;
-const RecipeComment = require('../models').RecipeComment;
-const RecipeLike = require('../models').RecipeLike;
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
+import Sequelize from 'sequelize'
+import model from '../models';
+const { User, RecipeItem, RecipeComment, RecipeLike } = model;
 
-module.exports = {
-    create(req, res) {
-        return RecipeItem
+class Recipes extends User {
+    static create(req, res) {
+            return RecipeItem
             .create({
                 content: req.body.content,
-                userId: req.params.userId,
+                userId: req.params.userId
             })
             .then(recipeItem => res.status(201).send(recipeItem))
             .catch(error => res.status(400).send(error));
-    },
-    list(req, res) {
+    }
+    static list(req, res) {
         return RecipeItem
             .findAll({
                 include: [
@@ -28,8 +30,8 @@ module.exports = {
             })
             .then(recipeItems => res.status(200).send(recipeItems))
             .catch(error => res.status(400).send(error));
-    },
-    retrieve(req, res) {
+    }
+    static retrieve(req, res) {
         return RecipeItem
             .find({
                 where: {
@@ -56,8 +58,8 @@ module.exports = {
                 return res.status(200).send(recipeItem);
             })
             .catch(error => res.status(400).send(error));
-    },
-    update(req, res) {
+    }
+    static update(req, res) {
         return RecipeItem
             .find({
                 where: {
@@ -81,8 +83,8 @@ module.exports = {
                     .catch(error => res.status(400).send(error));
             })
             .catch(error => res.status(400).send(error));
-    },
-    destroy(req, res) {
+    }
+    static destroy(req, res) {
         return RecipeItem
             .find({
                 where: {
@@ -103,5 +105,6 @@ module.exports = {
                     .catch(error => res.status(400).send(error));
             })
             .catch(error => res.status(400).send(error));
-    },
+    }
 };
+    export default Recipes;

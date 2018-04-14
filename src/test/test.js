@@ -1,16 +1,15 @@
 //During the test the env variable is set to test
 process.env.NODE_ENV = 'test'
-
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-const server = require("../app");
+import server from "../app";
+import chai, { expect } from "chai";
+import chaiHttp from 'chai-http';
 const User = require('../../server/models').User
 // var request = require('superagent');supertest
-var request = require('supertest');
+import request from 'supertest';
 // const should = chai.should();
-let should = require('should');
+import should from 'should';
 // let should = require('should/as-function');
-let expect = require("expect");
+// import expect from "expect";
 chai.use(chaiHttp);
 let assert = require('assert');
 // const User = require('../models').User;
@@ -19,21 +18,23 @@ let assert = require('assert');
 // let models = [User.hosts, User.victims]
 
 describe('Users', () => {
-    beforeEach((done) => {
-        User.destroy({ where: { id: [1, 2, 3] } })
-            .then(function () {
-                done();
-            })
+    before((done) => {
+        User.destroy({
+            cascade: true,
+            truncate: true
+        })
+        done()
     });
     describe("get('/')", function () {
         describe("it should GET / homepage route", function () {
             it("should return status code 200 when value is present", function (done) {
-                request(server)
+                chai.request(server)
                     .get('/')
-                    .expect(200)
                     .end((err, res) => {
                         if (err) done(err);
-                        else setImmediate(done);
+                        else 
+                        expect(res.statusCode).to.equal(200)
+                        setImmediate(done);
                     })
             })
         })
@@ -43,10 +44,11 @@ describe('Users', () => {
             it("should return status code 200 when value is present", function (done) {
                 request(server)
                     .get('/api')
-                    .expect(200)
                     .end((err, res) => {
                         if (err) done(err);
-                        else setImmediate(done);
+                        else 
+                        expect(res.status).to.equal(200)
+                        setImmediate(done);
                     })
             })
         })
@@ -56,17 +58,18 @@ describe('Users', () => {
             it("should return status code 200 when get value is present", function (done) {
                 request(server)
                     .get('/api/users')
-                    .expect(200)
                     .end((err, res) => {
                         if (err) done(err);
-                        else setImmediate(done);
+                        else 
+                        expect(res.status).to.equal(200)
+                        setImmediate(done);
                     })
             })
         })
     })
-    describe("get('/api/users')", function () {
+    describe("post('/api/users')", function () {
         describe("it should POST /api/users route", function () {
-            it("should return status code 201 when Posted value is not present", function (done) {
+            it("should have 201 and non-spacing password character", function (done) {
                 let person = {
                     name: "sean",
                     username: "akolliy1",
@@ -78,20 +81,29 @@ describe('Users', () => {
                     .expect(201)
                 User.create(person)
                     .then(function (user) {
+                        let regex = /\s/g
                         //victim name should be equivalent to the fake submission we are using
-                        expect(user.name).toEqual("sean");
-                        expect(user.email).toBe('J.R.R.Tolkien@gmail.com')
-                        expect(201).toEqual(201)
+                        expect(user.name).to.equal("sean");
+                        expect(user.email).to.equal('J.R.R.Tolkien@gmail.com')
+                        expect(user.username).should.be.string;
+                        expect(user.password).not.to.match(regex)
                         //remove the entry from the database
                         User.destroy({
                             where: {
                                 id: user.id
                             }
                         }).then(function (res) {
-                            expect(204).toEqual(204)
+                            expect(204).to.equal(204)
                             done();
                         })
                     })
+            })
+        })
+    })
+    describe('user signin route', function () {
+        describe('should sign in user with basic authentications', function () {
+            it('should hashed user password and unique username and email', function () {
+                
             })
         })
     })
