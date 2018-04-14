@@ -3,3 +3,5 @@ node_modules
 .waste
 img
 template
+obj
+dist
