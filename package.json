@@ -41,12 +41,12 @@
   "scripts": {
     "start:dev": "nodemon --exec babel-node -- ./bin/www",
     "babel-node": "babel-node ./src/index.js --presets=env",
-    "test": "nyc mocha ./src/test/test.js --compilers js:babel-core/register --timeout 10000 --exit",
+    "test": "mocha ./src/test/test.js --compilers js:babel-core/register --timeout 10000 --exit",
     "dev-migrate": "sequelize db:migrate:undo:all&& sequelize db:migrate",
     "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate&& npm run test",
     "build": "babel src -d dist",
     "start": "node src/app.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls"
+    "test:coverage": "run coveralls",
+    "coveralls": "nyc npm run test&& nyc report --reporter=text-lcov | coveralls"
   }
 }

@@ -1,22 +1,12 @@
 language: node_js
-node_js:
-  - "8.9.4"
- 
-script:
-  - npm run test
-env:
-  - NODE_ENV=test
-  global:
-  - PGPORT=5433
- 
 install:
   - npm install
-
-services:
-  - postgresql
-
-before_script:
-  - psql -c 'create database travis_test;' -U postgres
-  - npm run "test-migrate"
-  after_success:
-  - npm run report-coverage
+node_js:
+  - "stable"
+cache:
+ directories:
+  - node_modules
+after_success:
+  - npm run test:coverage
+env:
+  - NODE_ENV=test
