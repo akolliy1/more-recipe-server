@@ -1,8 +1,9 @@
-const RecipeLike = require('../models').RecipeLike;
-const RecipeItem = require('../models').RecipeItem
+import model from '../models'
 
-module.exports = {
-    create(req, res) {
+const { RecipeLike, RecipeItem } = model
+
+class recipeLikes {
+    static create(req, res) {
         return RecipeLike
             .create({
                 content: req.body.content,
@@ -11,8 +12,8 @@ module.exports = {
             })
             .then(recipeLike => res.status(201).send(recipeLike))
             .catch(error => res.status(400).send(error));
-    },
-    update(req, res) {
+    }
+    static update(req, res) {
         return RecipeLike
             .find({
                 where: {
@@ -37,8 +38,8 @@ module.exports = {
                     .catch(error => res.status(400).send(error));
             })
             .catch(error => res.status(400).send(error));
-    },
-    destroy(req, res) {
+    }
+    static destroy(req, res) {
         return RecipeLike
             .find({
                 where: {
@@ -60,5 +61,6 @@ module.exports = {
                     .catch(error => res.status(400).send(error));
             })
             .catch(error => res.status(400).send(error));
-    },
+    }
 };
+export default recipeLikes
