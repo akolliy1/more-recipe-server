@@ -1,6 +1,6 @@
 import User from '../controllers/users'
 
-import recipeItemsController from '../controllers/recipeItems';
+import recipeItemsController from '../controllers/recipeitems';
 import recipeCommentsController from '../controllers/recipeComments';
 import recipeLikesController from '../controllers/recipeLikes';
 
@@ -15,9 +15,9 @@ module.exports = (app) => {
 
     app.post('/api/users/:userId/items', recipeItemsController.create);
     app.get('/api/users/:userId/items', recipeItemsController.list);
-    app.get('/api/users/signin/items/:recipeItemId', recipeItemsController.retrieve);
-    app.put('/api/users/signin/items/:recipeItemId', recipeItemsController.update);
-    app.delete('/api/users/signin/items/:recipeItemId', recipeItemsController.destroy);
+    app.get('/api/users/:userId/items/:recipeItemId', recipeItemsController.retrieve);
+    app.put('/api/users/:userId/items/:recipeItemId', recipeItemsController.update);
+    app.delete('/api/users/:userId/items/:recipeItemId', recipeItemsController.destroy);
 
     app.post('/api/users/:userId/items/:recipeItemId/comments', recipeCommentsController.create);
     app.put('/api/users/:userId/items/:recipeItemId/comments/:recipeCommentId', recipeCommentsController.update);

@@ -4,7 +4,7 @@ import Sequelize from 'sequelize'
 import model from '../models';
 const { User, RecipeItem, RecipeComment, RecipeLike } = model;
 
-class Recipes extends User {
+class RecipeItems extends User {
     static create(req, res) {
             return RecipeItem
             .create({
