@@ -1,5 +1,6 @@
 language: node_js
 install:
+  - npm install -g sequelize-cli
   - npm install
 node_js:
   - "stable"
