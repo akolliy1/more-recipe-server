@@ -107,4 +107,4 @@ class Recipes extends User {
             .catch(error => res.status(400).send(error));
     }
 };
-    export default Recipes;
+export default RecipeItems;
