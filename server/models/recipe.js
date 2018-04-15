@@ -1,0 +1,79 @@
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Recipe = sequelize.define('Recipe', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'name must be provided for the recipe'
+        }
+      }
+    },
+    discriptiont: DataTypes.TEXT,
+    procedure: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "description must be specified"
+        }
+      }
+    },
+    ingredients: {
+      type: DataTypes.TEXT,
+      allowNull:  false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "ingredients can't be empty"
+        }
+      }
+    },
+    imageUrl: DataTypes.STRING,
+    imageId: DataTypes.STRING,
+    viewCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    upvote: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true
+    },
+    downvote: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        models: 'Users',
+        key: 'id',
+        as: 'userId'
+      }
+    }
+  });
+  Recipe.associate = function(models) {
+    // associations can be defined here
+    Recipe.belongsTo(models.User, {
+      foreignKey: 'userId'
+    })
+    Recipe.hasMany(models.Review, {
+      foreignKey: 'recipeId'
+    })
+    Recipe.hasMany(models.Favorite, {
+      foreignKey: 'recipeId'
+    })
+    Recipe.hasMany(models.Upvote, {
+      foreignKey: 'recipeId'
+    })
+    Recipe.hasMany(models.Downvote, {
+      foreignKey: 'recipeId'
+    })
+  };
+  return Recipe;
+};

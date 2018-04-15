@@ -7,8 +7,6 @@ node_js:
 cache:
  directories:
   - node_modules
-before_script:
-  - sequelize db:migrate 
 after_success:
   - npm run test:coverage
 env:

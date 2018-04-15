@@ -21,9 +21,13 @@ describe('Users', () => {
     before((done) => {
         User.destroy({
             cascade: true,
-            truncate: true
-        })
-        done()
+            truncate: true,
+            restartIdentity: true
+        });
+        User.create(validUser)
+            .then(() => {
+                done();
+            });
     });
     describe("get('/')", function () {
         describe("it should GET / homepage route", function () {
@@ -63,39 +67,6 @@ describe('Users', () => {
                         else 
                         expect(res.status).to.equal(200)
                         setImmediate(done);
-                    })
-            })
-        })
-    })
-    describe("post('/api/users')", function () {
-        describe("it should POST /api/users route", function () {
-            it("should have 201 and non-spacing password character", function (done) {
-                let person = {
-                    name: "sean",
-                    username: "akolliy1",
-                    email: "J.R.R.Tolkien@gmail.com",
-                    password: 'ball1954'
-                }
-                request(server)
-                    .post('/api/users')
-                    .expect(201)
-                User.create(person)
-                    .then(function (user) {
-                        let regex = /\s/g
-                        //victim name should be equivalent to the fake submission we are using
-                        expect(user.name).to.equal("sean");
-                        expect(user.email).to.equal('J.R.R.Tolkien@gmail.com')
-                        expect(user.username).should.be.string;
-                        expect(user.password).not.to.match(regex)
-                        //remove the entry from the database
-                        User.destroy({
-                            where: {
-                                id: user.id
-                            }
-                        }).then(function (res) {
-                            expect(204).to.equal(204)
-                            done();
-                        })
                     })
             })
         })

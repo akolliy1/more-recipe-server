@@ -9,7 +9,7 @@ module.exports = (app) => {
         message: 'Welcome to the Users API!',
     }));
 
-    app.post('/api/users', User.create);
+    app.post('/api/users/signup', User.create);
     app.post('/api/users/signin', User.signin);
     app.delete('/api/users/:userId', User.destroy);
 

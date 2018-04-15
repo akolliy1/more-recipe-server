@@ -1,29 +1,27 @@
-'use strict';
-
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:*/
-    return queryInterface.bulkInsert('Users', [{
-        name: 'John Doe',
-        email: 'adex@example.com',
-        username: 'iamuser',
-        password: 'ampassword'
-        // isBetaMember: false
-      }], {});
-    
+import jwt from "jsonwebtoken";
+import { User,recipeItem,recipeComment } from "../models";
+const users = [
+  {
+    name: 'John Doe',
+    email: 'adex@example.com',
+    username: 'iamuser',
+    password: 'ampassword',
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
   },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:*/
-    return queryInterface.bulkDelete('Users', null, {});
+  {
+    name: 'akolade',
+    username: 'akolliy',
+    email: 'akolliy@example.com',
+    password: 'akolliy1',
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  }
+];
+const recipes = [
+  {
+    id: 1,
     
   }
-};
+]
+ 

@@ -5,10 +5,11 @@ const { RecipeLike, RecipeItem } = model
 class recipeLikes {
     static create(req, res) {
         return RecipeLike
-            .create({
-                content: req.body.content,
-                userId: req.params.userId,
-                recipeItemId: req.params.recipeItemId,
+            .findOrCreate({
+                where: {
+                    userId: req.params.userId,
+                    recipeItemId: req.params.recipeItemId,
+                }
             })
             .then(recipeLike => res.status(201).send(recipeLike))
             .catch(error => res.status(400).send(error));
