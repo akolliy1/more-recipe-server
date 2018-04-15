@@ -12,10 +12,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       imageUrl: {
         type: Sequelize.STRING
@@ -36,7 +38,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, /* Sequelize*/) => {
     return queryInterface.dropTable('Users');
   }
 };

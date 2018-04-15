@@ -1,6 +1,11 @@
-'use strict';
+/** Define the Favorite database model/association
+ * @exports Favorite
+ * @param {object} sequelize - sequelize
+ * @param {object} DataTypes - sequelize DataTypes
+ * @returns {object} - the Favorite model 
+ */
 module.exports = (sequelize, DataTypes) => {
-  var Favorite = sequelize.define('Favorite', {
+  const Favorite = sequelize.define('Favorite', {
     recipeId: {
       types: DataTypes.INTEGER,
       references: {

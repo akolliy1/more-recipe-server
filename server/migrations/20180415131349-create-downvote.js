@@ -9,10 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       recipeId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Recipes',
+          key: 'id',
+          as: 'recipeId'
+        }
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -24,7 +34,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, /* Sequelize*/) => {
     return queryInterface.dropTable('Downvotes');
   }
 };

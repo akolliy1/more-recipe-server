@@ -1,4 +1,9 @@
-'use strict';
+/** Define the Review database model/association
+ * @exports Review
+ * @param  {object} sequelize - sequelize
+ * @param  {object} DataTypes - sequelize Datatypes
+ * @return {object} The Review model
+ */
 module.exports = (sequelize, DataTypes) => {
   var Review = sequelize.define('Review', {
     content: {
