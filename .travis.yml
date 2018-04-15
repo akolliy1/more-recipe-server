@@ -6,7 +6,10 @@ node_js:
 cache:
  directories:
   - node_modules
-after_success:
-  - npm run test:coverage
 env:
   - NODE_ENV=test
+script:
+    - npm test
+before_script:
+  - createdb test --username=postgres
+  - sequelize db:migrate

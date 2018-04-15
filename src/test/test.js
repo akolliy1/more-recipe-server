@@ -100,13 +100,6 @@ describe('Users', () => {
             })
         })
     })
-    describe('user signin route', function () {
-        describe('should sign in user with basic authentications', function () {
-            it('should hashed user password and unique username and email', function () {
-                
-            })
-        })
-    })
     
 })
 // describe("put(/api/users/:userId)", function () {
