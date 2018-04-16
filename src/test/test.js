@@ -1,6 +1,7 @@
 //During the test the env variable is set to test
 process.env.NODE_ENV = 'test'
 import server from "../app";
+import { validUser } from "../../server/seeders/testseederdata";
 import chai, { expect } from "chai";
 import chaiHttp from 'chai-http';
 const User = require('../../server/models').User
