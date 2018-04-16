@@ -3,24 +3,51 @@ import jwt from 'jsonwebtoken'
 import Sequelize from 'sequelize'
 import model from '../models'
 
-const { User, RecipeItem, RecipeComment, RecipeLike } = model;
+const { User, Recipe, Review } = model;
 
 class Users {
-    static create(req, res) {
+   /**
+   * @description User signup method
+   *
+   * @param {object} req HTTP request object
+   * @param {object} res HTTP response object
+   *
+   * @returns {object} object
+   */
+    static signUp(req, res) {
         const { name, username, email } = req.body
         let { password } = req.body;
-        password = bcrypt.hashSync(password, bcrypt.genSaltSync());
+        password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
         return User
             .create({
                 name,
                 username,
                 email,
+                imageUrl: '',
                 password
             })
-            .then(user => res.status(201).send(user))
+            .then((user) => {
+                const payload = {id: user.id,username: user.username,email: user.email };
+                const token = jwt.sign(payload,process.env.JWT_SECRET,{
+                    expiresIn: '24h'
+                });
+                res.status(201).send(user)
+            })
             .catch(error => res.status(400).send(error));
     }
-    static signin(req,res) {
+
+   /**
+   * @description - Sign In a user (Search for user)
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {object} this - Class instance
+   *
+   * @memberof Users
+   */
+    static signIn(req,res) {
         const Op = Sequelize.Op;     
         return User.find({
             where: {
@@ -29,15 +56,16 @@ class Users {
         })
         .then((user) => {
             if(!user) {
-                return res.status(400).json('User/email doesn\'t exist')
+                return res.status(401).json('User not found')
             } else {
                 const { id, username, email, password } = user
                 const payload = { id, username, email }
-                const token = jwt.sign(payload, 'SECRET', {
-                    expiresIn: '1h'
+                const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                    expiresIn: '4h'
                 })
                 if(bcrypt.compareSync(req.body.password, password)) {
                     return res.status(200).send({
+                        success: true,
                         message: 'Signin successfuly',
                         user,
                         token

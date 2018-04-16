@@ -4,43 +4,44 @@
  * @param  {object} DataTypes - sequelize Datatypes
  * @return {object} The Review model
  */
-module.exports = (sequelize, DataTypes) => {
-  var Review = sequelize.define('Review', {
+export default (sequelize, DataTypes) => {
+  const Review = sequelize.define('Review', {
     content: {
       type: DataTypes.TEXT,
-      allowNull: false,
       validate: {
         notEmpty: {
           args: true,
-          msg: 'review can\'t be empty'
+          msg: 'review cannot be empty'
         }
       }
     },
     recipeId: {
       type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
       references: {
-        models: 'Recipes',
+        model: 'Recipes',
         key: 'id',
-        as: 'recipeId'
-      }
+        as: 'recipeId',
+      },
     },
     userId: {
       type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
       references: {
-        models: 'Users',
+        model: 'Users',
         key: 'id',
         as: 'userId',
       }
-    },
+    }
   });
-  Review.associate = function(models) {
-    // associations can be defined here
-    Review.belongsTo(models.User, {
-      foreignKey: 'userId'
-    })
+
+  Review.associate = (models) => {
     Review.belongsTo(models.Recipe, {
-      foreignKey: 'recipeId'
-    })
+      foreignKey: 'recipeId',
+    });
+    Review.belongsTo(models.User, {
+      foreignKey: 'userId',
+    });
   };
   return Review;
 };

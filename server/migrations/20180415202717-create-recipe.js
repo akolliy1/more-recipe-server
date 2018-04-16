@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Recipes', {
@@ -30,12 +29,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
-      upvote: {
+      upvotes: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0,
       },
-      downvote: {
+      downvotes: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0
@@ -52,7 +51,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          models: 'Users',
+          model: 'Users',
           key: 'id',
           as: 'userId',
         }

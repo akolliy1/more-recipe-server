@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     ingredients: {
       type: DataTypes.TEXT,
-      allowNull:  false,
+      allowNull: false,
       validate: {
         notEmpty: {
           args: true,
@@ -51,13 +51,13 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       references: {
-        models: 'Users',
+        model: 'Users',
         key: 'id',
         as: 'userId'
       }
     }
   });
-  Recipe.associate = function(models) {
+  Recipe.associate = function (models) {
     // associations can be defined here
     Recipe.belongsTo(models.User, {
       foreignKey: 'userId'

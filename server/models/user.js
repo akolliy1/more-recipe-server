@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: 'name field can\'t be empty'
+          msg: 'name field cannot be empty'
         }
       }
     },
@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   });
-  User.associate = function(models) {
+  User.associate = (models) => {
     // associations can be defined here
     User.hasMany(models.Recipe, {
       foreignKey: 'userId'
@@ -75,8 +75,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId'
     });
     User.hasMany(models.Upvote, {
-      foreignKey: userId
-    })
+      foreignKey: 'userId'
+    });
     User.hasMany(models.Downvote, {
       foreignKey: 'userId'
     });

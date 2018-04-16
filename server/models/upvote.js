@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   });
-  Upvote.associate = function(models) {
+  Upvote.associate = function (models) {
     // associations can be defined here
     Upvote.belongsTo(models.User, {
       foreignKey: 'userId'
