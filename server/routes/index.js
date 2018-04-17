@@ -1,11 +1,21 @@
 import User from '../controllers/users'
+import Validations from "../middlewares/userValidations";
+import userAndEmail from "../middlewares/userInputValidation";
+/**
+ * @description Invoking Object Data as new object
+ * @method  { any } method = new method
+ */
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the Users API!',
     }));
 
-    app.post('/api/users/signup', User.signUp);
+    app.post('/api/v1/users/signup', 
+        Validations.userInputValidation,
+        userAndEmail.userNameValidation,
+        User.signUp
+    );
     app.post('/api/users/signin', User.signIn);
     app.delete('/api/users/:userId', User.destroy);
 
