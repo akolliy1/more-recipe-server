@@ -14,7 +14,9 @@ class Validations {
         const promise = new Promise((resolve, reject) => {
             req.checkBody('name', 'Name is required')
             .notEmpty(true);
-            req.checkBody(trimData('username'), 'username cannot be empty and no spacing')
+            req.checkBody('username', 'username cannot be empty')
+            .notEmpty(true);
+            req.checkBody('username', 'username cannot be empty')
             .notEmpty(true);
             req.checkBody('email', 'email address is required')
             .notEmpty(true);
@@ -42,7 +44,6 @@ class Validations {
                     success: false,
                     errors: allErrors,
                 }))
-                console.log(allErrors)
             }
             next()
         })

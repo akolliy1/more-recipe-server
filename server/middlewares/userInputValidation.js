@@ -1,52 +1,40 @@
 import models from "../models";
 /**
- * @description User input data for email
+ * @description User input data for email and username 
+ * @extends to controllers User file
  * @param { User } User models
- * @param { req } req
- * @param { res } res
- * @param { next } next - next step if no problem
+ * @param { req } email - email check
+ * @param { res } username - username check
+ * @param { next } resolve - resolve if no problem
  * @returns {Promise} promise
  */
 
-const { User, Recipe } = models
-class userAndEmail {
-    static userNameValidation (req, res, next) {
+const { Recipe } = models
+class inputValidations {
+    static userNameAndEmailValidation (username, email) {
         const promise = new Promise((resolve, reject) => {
+            const Op = Sequelize.Op;
             User
             .findOne({
+                attributes: ['email','username'],
                 where: {
-                    username: req.body.username,
+                    [Op.or]: [{username: username},{email: email}],
                 }
             })
             .then((user) => {
-                if(!user) {
-                    resolve(
-                        User
-                        .findOne({
-                            where: {
-                                email: req.body.email
-                            }
-                        })
-                        .then((email) => {
-                            if(!email) {
-                                resolve()
-                            } else {
-                                reject(res.status(409).send({
-                                    success: false,
-                                    message: `Email already exist`
-                                }))
-                            }
-                        })
-                    )
-                } else {
-                    reject(res.status(409).send({
-                        success: false,
-                        message: 'Username have been taken'
-                    }))
+                if(user) {
+                    let field;
+                    if (user.username.toUpperCase() === username.toUpperCase()) {
+                        field = 'Username';
+                    }
+                    else {
+                        field = 'Email'
+                    }
+                    reject(`${field} already exist`)
                 }
-                next()
-            })
-        })
+                resolve();
+            });
+        });
         return promise;
     }
 /**
@@ -54,4 +42,4 @@ class userAndEmail {
  * @param {res}
  */
 }
-export default userAndEmail
+export default inputValidations

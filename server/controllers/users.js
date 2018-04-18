@@ -1,9 +1,35 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import Sequelize from 'sequelize'
-import model from '../models'
+import { User, Recipe, Review, Favorite } from '../models';
+// import inputValidations from "../middlewares/userInputValidation";
 
-const { User, Recipe, Review } = model;
+const userNameAndEmailValidation = (username, email) => {
+    const promise = new Promise((resolve, reject) => {
+        const Op = Sequelize.Op;
+        User
+            .findOne({
+                attributes: ['email', 'username'],
+                where: {
+                    [Op.or]: [{ username: username }, { email: email }],
+                }
+            })
+            .then((user) => {
+                if (user) {
+                    let field;
+                    if (user.username.toUpperCase() === username.toUpperCase()) {
+                        field = 'Username';
+                    }
+                    else {
+                        field = 'Email'
+                    }
+                    reject(`${field} already exist`)
+                }
+                resolve();
+            });
+    });
+    return promise;
+}
 
 class Users {
    /**
@@ -14,11 +40,16 @@ class Users {
    *
    * @returns {object} object
    */
-    static signUp(req, res) {
-        const { name, username, email } = req.body
-        let { password } = req.body;
+    static signUp({ body }, res) {
+        console.log(body)
+        const name = body.name,
+              username = body.username,
+              email = body.email;
+        let password = body.password;
         password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-        return User
+
+        userNameAndEmailValidation(username, email).then(() => {
+            User
             .create({
                 name,
                 username,
@@ -31,9 +62,24 @@ class Users {
                 const token = jwt.sign(payload,process.env.JWT_SECRET,{
                     expiresIn: '24h'
                 });
-                res.status(201).send(user)
+                res.status(201).send({
+                    success: true,
+                    message: 'User created successfully',
+                    user
+                })
             })
-            .catch(error => res.status(400).send(error));
+                .catch(error => res.status(500).json({
+                    success: false,
+                    message: `Error creating user ${error.message}`
+                }));
+        })
+        .catch(error =>
+            res.status(409).json({
+                success: false,
+                message: error
+            })
+        );
+        return this;
     }
 
    /**
