@@ -1,9 +1,15 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
-import Sequelize from 'sequelize'
+import Sequelize from 'sequelize';
+import {inputValidation} from "../middlewares/inputValidation";;
 import { User, Recipe, Review, Favorite } from '../models';
-// import inputValidations from "../middlewares/userInputValidation";
 
+/**
+ * @description Validate username and Email
+ * @param {object} Username
+ * @param {object} Email
+ * @returns {Promise} if validated
+ */
 const userNameAndEmailValidation = (username, email) => {
     const promise = new Promise((resolve, reject) => {
         const Op = Sequelize.Op;
@@ -47,6 +53,15 @@ class Users {
               email = body.email;
         let password = body.password;
         password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+        const error = inputValidation(
+            name,
+            username,
+            email,
+            password
+        );
+        if(error > 0) {
+            res.status(400).send(error)
+        }
 
         userNameAndEmailValidation(username, email).then(() => {
             User

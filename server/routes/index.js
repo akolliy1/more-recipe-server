@@ -1,5 +1,4 @@
-import User from '../controllers/users'
-import Validations from "../middlewares/userValidations";
+import User from '../controllers/users';
 
 /**
  * @description Invoking Object Data as new object
@@ -11,10 +10,7 @@ module.exports = (app) => {
         message: 'Welcome to the Users API!',
     }));
 
-    app.post('/api/v1/users/signup', 
-        Validations.userInputValidation,
-        User.signUp
-    );
+    app.post('/api/v1/users/signup', User.signUp );
     app.post('/api/users/signin', User.signIn);
     app.delete('/api/users/:userId', User.destroy);
 
