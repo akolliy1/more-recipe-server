@@ -10,7 +10,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      discriptiont: {
+      discription: {
         type: Sequelize.TEXT
       },
       procedure: {
@@ -29,12 +29,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
-      upvotes: {
+      upvote: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0,
       },
-      downvotes: {
+      downvote: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0

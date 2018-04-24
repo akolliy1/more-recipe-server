@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    discriptiont: DataTypes.TEXT,
+    discription: DataTypes.TEXT,
     procedure: {
       type: DataTypes.STRING,
       allowNull: false,

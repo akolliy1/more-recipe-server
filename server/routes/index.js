@@ -1,4 +1,5 @@
 import User from '../controllers/users';
+import recipes from "../controllers/recipes";
 
 /**
  * @description Invoking Object Data as new object
@@ -12,6 +13,9 @@ module.exports = (app) => {
 
     app.post('/api/v1/users/signup', User.signUp );
     app.post('/api/users/signin', User.signIn);
+    app.get('/api/users/:userId/profile', User.listAUser);
+    // route to create recipes
+    app.post('/recipes/create', recipes.createRecipes)
     app.delete('/api/users/:userId', User.destroy);
 
     // For any other request method on todo items, we're going to return "Method Not Allowed"
