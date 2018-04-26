@@ -3,7 +3,7 @@ install:
   - npm install -g sequelize-cli
   - npm install
 node_js:
-  - "stable"
+    - "8.9.4"
 cache:
  directories:
   - node_modules
