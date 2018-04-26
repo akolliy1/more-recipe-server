@@ -8,6 +8,7 @@ script:
   - npm test
 cache: 
   - npm install
+  - npm install bcrypt@1.0.3
 after_success:
   - travis_wait npm run coveralls
 env:
