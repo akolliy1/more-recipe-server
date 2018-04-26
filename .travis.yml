@@ -4,10 +4,11 @@ install:
   - npm install
 node_js:
   - "stable"
-cache:
- directories:
-  - node_modules
+script:
+  - npm test
+cache: 
+  - npm install
 after_success:
-  - npm run test:coverage
+  - travis_wait npm run coveralls
 env:
   - NODE_ENV=test
