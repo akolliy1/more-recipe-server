@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'test'
 import server from "../../app"
 import { insertUserSeed, user1token } from "../../../server/seeders/testseederdata";
 import chai, { expect } from "chai";
+import jwt from "jsonwebtoken";
 import chaiHttp from 'chai-http';
 import { Recipe } from "../../../server/models";
 import request from 'supertest';

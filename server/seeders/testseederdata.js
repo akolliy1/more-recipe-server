@@ -118,8 +118,9 @@ export const insertReviewSeed = () => {
  * @returns {string} token - Generated token
  */
 const generateToken = (id, username, email) => {
+  const secret = process.env.JWT_SECRET;
   const payload = { id, username, email };
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+  const token = jwt.sign(payload, secret, {
     expiresIn: '4h'
   })
   return token
