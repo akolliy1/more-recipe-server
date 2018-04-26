@@ -4,12 +4,12 @@ install:
   - npm install
 node_js:
   - "stable"
+cache:
+ directories:
+  - node_modules
 script:
   - npm test
-cache: 
-  - npm install
-  - npm install bcrypt@1.0.3
 after_success:
-  - travis_wait npm run coveralls
+  - npm run test:coverage
 env:
   - NODE_ENV=test
