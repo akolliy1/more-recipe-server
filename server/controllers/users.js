@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 import Sequelize from 'sequelize';
 import {inputValidation} from "../middlewares/inputValidation";;
 import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models';
+const secret = process.env.JWT_SECRET;
 
 /**
  * @description Validate username and Email
@@ -69,7 +70,7 @@ class Users {
                     })
                     .then((user) => {
                         const payload = { id: user.id, username: user.username, email: user.email };
-                        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                        const token = jwt.sign(payload, secret, {
                             expiresIn: '24h'
                         });
                         res.status(201).json({
@@ -121,7 +122,7 @@ class Users {
             } else {
                 const { id, username, email, password } = user
                 const payload = { id, username, email }
-                const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                const token = jwt.sign(payload, secret, {
                     expiresIn: '4h'
                 })
                 if(bcrypt.compareSync(req.body.password, password)) {
