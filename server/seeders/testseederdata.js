@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User,recipeItem,recipeComment } from "../models";
+import { User, recipeItem, recipeComment } from "../models";
 const users = [
   {
     name: 'John Doe',
@@ -86,7 +86,9 @@ const reviews = [
  * @returns {void} Nothing
  */
 export const insertUserSeed = () => {
-  User.bulkCreate(users);
+  User.bulkCreate(users,{validate: true}).catch(errors => {
+    console.log(errors)
+  });
 };
 
 /**
@@ -128,9 +130,9 @@ export const user2token = generateToken(2, users[1].username, users[1].email)
 
 export const validUser = {
   name: 'akolliy bobo',
-  email: 'akolliy@gmail.com',
-  username: 'akolliy',
-  password: 'akolloool'
+  email: 'akolliy12@gmail.com',
+  username: 'akolliy12',
+  password: 'akooooool'
 }
 
 export const validRecipe = {
