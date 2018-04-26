@@ -11,31 +11,10 @@
                 "name": "Launch via NPM",
                 "runtimeExecutable": "npm",
                 "runtimeArgs": [
-                    "run",
-                    "test"
+                    "run-script",
+                    "build"
                 ],
-                "port": 5475
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch Program",
-                "program": "${workspaceFolder}/src/test/test.js"
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Mocha Tests",
-                "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-                "args": [
-                    "-u",
-                    "tdd",
-                    "--timeout",
-                    "999999",
-                    "--colors",
-                    "${workspaceFolder}/src/test"
-                ],
-                "internalConsoleOptions": "openOnSessionStart"
-            },
+                "port": 9229
+            }
         ]
     }

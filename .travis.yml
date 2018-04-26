@@ -1,18 +1,22 @@
 language: node_js
-install:
-  - npm install -g sequelize-cli
-  - npm install
 node_js:
-    - "8.9.4"
-cache:
- directories:
-  - node_modules
+  - "8.9.4"
+ 
 script:
   - npm run test
-before_script:
-  - createdb test --username=postgres
-  - sequelize db:migrate 
-after_success:
-  - npm run test:coverage
 env:
   - NODE_ENV=test
+  global:
+  - PGPORT=5433
+ 
+install:
+  - npm install
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database travis_test;' -U postgres
+  - npm run "test-migrate"
+  after_success:
+  - npm run report-coverage

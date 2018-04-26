@@ -1,42 +1,19 @@
-"use strict";
-
-var _app = require("../app");
-
-var _app2 = _interopRequireDefault(_app);
-
-var _chai = require("chai");
-
-var _chai2 = _interopRequireDefault(_chai);
-
-var _chaiHttp = require("chai-http");
-
-var _chaiHttp2 = _interopRequireDefault(_chaiHttp);
-
-var _supertest = require("supertest");
-
-var _supertest2 = _interopRequireDefault(_supertest);
-
-var _should = require("should");
-
-var _should2 = _interopRequireDefault(_should);
-
-var _expect = require("expect");
-
-var _expect2 = _interopRequireDefault(_expect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+'use strict';
 
 //During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var server = require("../app");
 var User = require('../../server/models').User;
 // var request = require('superagent');supertest
-
+var request = require('supertest');
 // const should = chai.should();
-
+var should = require('should');
 // let should = require('should/as-function');
-
-_chai2.default.use(_chaiHttp2.default);
+var expect = require("expect");
+chai.use(chaiHttp);
 var assert = require('assert');
 // const User = require('../models').User;
 // User.hosts.modelName = 'Hosts'
@@ -52,7 +29,7 @@ describe('Users', function () {
     describe("get('/')", function () {
         describe("it should GET / homepage route", function () {
             it("should return status code 200 when value is present", function (done) {
-                (0, _supertest2.default)(_app2.default).get('/').expect(200).end(function (err, res) {
+                request(server).get('/').expect(200).end(function (err, res) {
                     if (err) done(err);else setImmediate(done);
                 });
             });
@@ -61,7 +38,7 @@ describe('Users', function () {
     describe("get('/api')", function () {
         describe("it should GET / Api route", function () {
             it("should return status code 200 when value is present", function (done) {
-                (0, _supertest2.default)(_app2.default).get('/api').expect(200).end(function (err, res) {
+                request(server).get('/api').expect(200).end(function (err, res) {
                     if (err) done(err);else setImmediate(done);
                 });
             });
@@ -70,13 +47,13 @@ describe('Users', function () {
     describe("get('/api/users')", function () {
         describe("it should GET /api/users route", function () {
             it("should return status code 200 when get value is present", function (done) {
-                (0, _supertest2.default)(_app2.default).get('/api/users').expect(200).end(function (err, res) {
+                request(server).get('/api/users').expect(200).end(function (err, res) {
                     if (err) done(err);else setImmediate(done);
                 });
             });
         });
     });
-    describe("post('/api/users')", function () {
+    describe("get('/api/users')", function () {
         describe("it should POST /api/users route", function () {
             it("should return status code 201 when Posted value is not present", function (done) {
                 var person = {
@@ -85,31 +62,27 @@ describe('Users', function () {
                     email: "J.R.R.Tolkien@gmail.com",
                     password: 'ball1954'
                 };
-                (0, _supertest2.default)(_app2.default).post('/api/users').expect(201);
-                User.create(person).then(function (err, res) {
-                    console.log(res);
-                    done();
+                request(server).post('/api/users').expect(201);
+                User.create(person).then(function (user) {
+                    //victim name should be equivalent to the fake submission we are using
+                    expect(user.name).toEqual("sean");
+                    expect(user.email).toBe('J.R.R.Tolkien@gmail.com');
+                    expect(201).toEqual(201);
+                    //remove the entry from the database
+                    User.destroy({
+                        where: {
+                            id: user.id
+                        }
+                    }).then(function (res) {
+                        expect(204).toEqual(204);
+                        done();
+                    });
                 });
-                // .then(function (user) {
-                //     //victim name should be equivalent to the fake submission we are using
-                //     expect(user.name).toEqual("sean");
-                //     expect(user.email).toBe('J.R.R.Tolkien@gmail.com')
-                //     expect(201).toEqual(201);
-                //     console.log(user)
-                //     //remove the entry from the database
-                //     User.destroy({
-                //         where: {
-                //             id: user.id
-                //         }
-                //     }).then(function (res) {
-                //         expect(204).toEqual(204)
-                //         done();
-                //     })
-                // })
             });
         });
     });
 });
+
 // describe("put(/api/users/:userId)", function () {
 //     describe("it should PUT /api/users/:userId route", function () {
 //         it("should return status code 200 when value is present", function (done) {
