@@ -27,7 +27,7 @@ export const validRecipe = (name,
                 options: true,
                 errorMessage: 'Recipe name cannot be empty'
             },
-            len: {
+            isLength: {
                 options: [{ min: 3 }],
                 errorMessage: 'recipe name length must be 3 letters'
             },

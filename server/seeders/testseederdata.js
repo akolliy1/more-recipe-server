@@ -13,7 +13,7 @@ const users = [
     name: 'akolade',
     username: 'akolliy',
     email: 'akolliy@example.com',
-    password: 'akolliy1',
+    password: 'akolliy1234',
     createdAt: Date.now(),
     updatedAt: Date.now(),
   }
@@ -130,5 +130,13 @@ export const validUser = {
   name: 'akolliy bobo',
   email: 'akolliy@gmail.com',
   username: 'akolliy',
-  password: 'akolliy1'
+  password: 'akolloool'
+}
+
+export const validRecipe = {
+  name: 'Fried Rice',
+  procedure: 'Put the rice in water wash it well and have it in your plate',
+  description: 'Just the way you like it',
+  ingredients: 'water;;salt;;rice',
+  userId: 1
 }

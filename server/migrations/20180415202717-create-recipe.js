@@ -8,9 +8,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
-      discription: {
+      description: {
         type: Sequelize.TEXT
       },
       procedure: {
@@ -29,12 +30,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
-      upvote: {
+      upvotes: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0,
       },
-      downvote: {
+      downvotes: {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0

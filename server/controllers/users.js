@@ -107,8 +107,9 @@ class Users {
     static signIn(req,res) {
         const Op = Sequelize.Op;     
         return User.find({
+            attributes: ['id', 'name', 'username', 'email', 'password'],
             where: {
-                [Op.or]: [{username: req.body.username},{email: req.body.email}],
+                [Op.or]: [{ username: req.body.authName }, { email: req.body.authName}],
             }
         })
         .then((user) => {
@@ -184,7 +185,7 @@ class Users {
                                     res.status(200).send({
                                         success: true,
                                         userInfo,
-                                        message: 'User found and succefully count contents'
+                                        message: 'User found and counts succesful '
                                     })
                                 )
                             })

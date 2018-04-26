@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    discription: DataTypes.TEXT,
+    description: DataTypes.TEXT,
     procedure: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -38,12 +39,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    upvote: {
+    upvotes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: true
     },
-    downvote: {
+    downvotes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: true
