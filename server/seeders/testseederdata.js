@@ -12,7 +12,7 @@ const users = [
   {
     name: 'akolade',
     username: 'akolliy',
-    email: 'akolliy@example.com',
+    email: 'akooolliy@example.com',
     password: 'akolliy1234',
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -87,7 +87,7 @@ const reviews = [
  */
 export const insertUserSeed = () => {
   User.bulkCreate(users,{validate: true}).catch(errors => {
-    console.log(errors)
+    console.log(errors.path)
   });
 };
 
@@ -130,8 +130,8 @@ export const user2token = generateToken(2, users[1].username, users[1].email)
 
 export const validUser = {
   name: 'akolliy bobo',
-  email: 'akolliy12@gmail.com',
-  username: 'akolliy12',
+  email: 'akolliy@example.com',
+  username: 'akolliyy',
   password: 'akooooool'
 }
 

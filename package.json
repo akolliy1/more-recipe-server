@@ -7,9 +7,6 @@
   "author": "akolade adesanmi",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
@@ -32,6 +29,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.2",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "expect.js": "^0.3.1",
@@ -45,7 +47,7 @@
   "scripts": {
     "start:dev": "nodemon --exec babel-node -- ./bin/www",
     "babel-node": "babel-node ./src/app.js --presets=env",
-    "test": "mocha src/test/controllers/* --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000 --exit",
+    "test": "mocha src/test/allTest.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000 --exit",
     "test:server": "mocha --timeout 500000 --compilers js:babel-core/register src/test/controllers/*",
     "dev-migrate": "sequelize db:migrate:undo:all&& sequelize db:migrate",
     "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate&& npm run test",
