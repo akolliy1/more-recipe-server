@@ -9,6 +9,8 @@ cache:
   - node_modules
 script:
   - npm run test
+before_script:
+  - sequelize db:migrate 
 after_success:
   - npm run test:coverage
 env:
