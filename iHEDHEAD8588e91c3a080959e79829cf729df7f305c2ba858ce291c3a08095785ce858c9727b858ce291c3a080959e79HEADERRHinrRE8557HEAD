@@ -1,0 +1,355 @@
+[33mcommit 714fb851d2ba98fa2dfb9ce539d72ac0b7ac6f3e[m[33m ([m[1;36mHEAD -> [m[1;32mError[m[33m, [m[1;32mmaster[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 22:03:43 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit f858ce291c3a080959e79829cf729df7f305c2ba[m[33m ([m[1;31morigin/Error[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 21:55:45 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit e96521d4480b8ba708b4c429e0a1a058e4c73274[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 21:52:27 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit ea920028ed9d7fbfecf0934c1b9080187efe827c[m[33m ([m[1;32mimportant[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 21:14:33 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit c818b8c16b81ea098104ce1f7aefa0b62b2fc38b[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 21:01:53 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit 4814c2642174f1e5b63702ffb30b149d1e3f68cf[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 20:49:52 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit 926043b72054e4f479fc42406856c253cf8949a7[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 20:37:40 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit a804bd505e89df2bf2effdd1a33870ba87c9a481[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 19:29:16 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit 9d5f431397dac4b1b455e9426d35580421ccee81[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 18:58:05 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit 8a9639d9c34425050ad25c700450a26aef3c5db2[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 18:52:25 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit cfbfd96709a31ec73b31374dc1ec6400439f796d[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 18:08:16 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit 2e0149fd438b93f3549fc571aa115a61c22d6f9d[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Thu Apr 26 16:34:57 2018 +0100
+
+    addition to test folder on recipe test
+
+[33mcommit 565e05e545e8a2ef22dc7d8551bc7283f1ca0547[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Tue Apr 24 21:39:28 2018 +0100
+
+    add users test and recipes
+
+[33mcommit 325b51915d3df4218aac5a67deb03a31fceda853[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 22 20:51:30 2018 +0100
+
+    Signed-off-by: akolliy1 <adesanmiakoladedotun@gmail.com>
+    
+    Signed-off-by: akolliy1 <adesanmiakoladedotun@gmail.com>
+
+[33mcommit 0eaa59002c7c59e7c942b145f898a42508ca40cd[m[33m ([m[1;32mstandard[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Wed Apr 18 14:12:25 2018 +0100
+
+    error setting header after response
+
+[33mcommit fc866e74e518595a0493a2253ff73104803f3293[m[33m ([m[1;31morigin/standard[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Tue Apr 17 21:07:53 2018 +0100
+
+    Update on controller and User validation
+
+[33mcommit c7e3ca4f376cce0a79a36d8bd85b38f721c07a48[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 16 02:35:53 2018 +0100
+
+    controller set up
+
+[33mcommit e2e869d7c2c7cf1d2820da5937641b815a4f9139[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 16 01:40:04 2018 +0100
+
+    controller set up
+
+[33mcommit f2f04f92dc0ca5aa9c858db67c2d2195b475f02c[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 21:14:01 2018 +0100
+
+    Naming convention for models and database
+
+[33mcommit 97408d8208d4c4d478ceac142354f6e41f967b41[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 14:40:43 2018 +0100
+
+    additions to user schema
+
+[33mcommit 07136378eeee846f59054e23d91402609b1b91dd[m[33m ([m[1;31morigin/validation[m[33m, [m[1;32mvalidation[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 10:04:18 2018 +0100
+
+    travis failure license addition
+
+[33mcommit 8b6cd71aa2b954176ef301608bd7ffac5afa9f98[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 09:59:55 2018 +0100
+
+    travis failure license addition
+
+[33mcommit 1b8a00bf3702d7fe7bd763995f7daafd6587331f[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 09:40:56 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit 8c97c82ba55293b88b121e708f98996961cab0d9[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 09:35:45 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit 8b531fbfd465feea1d2004d3ed32271749942d93[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 09:19:25 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit 32851d8bef09c2d30422601ff0b7f31bc4090997[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 08:59:08 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit 09f781055b09c8c0371dae898e3b923f107fb805[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 08:48:23 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit 0486bf76905483ab18d892ad1edc0274c1cbae8f[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 08:45:11 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit b4a425b1b264294baa64e738a7deed37bf45dd99[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 08:27:19 2018 +0100
+
+    travis failure coz of coveralls token
+
+[33mcommit 20c6c54432822c9a649a326205eb132ca28a4e14[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 00:05:52 2018 +0100
+
+    test failure
+
+[33mcommit e38dc19456c8b1d2206703b49492f5bfcbf1b45b[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Apr 15 00:00:33 2018 +0100
+
+    test failure
+
+[33mcommit dca4378762ee8e15f08d9b29ddcaf281a5145587[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sat Apr 14 23:38:36 2018 +0100
+
+    validation implementation
+
+[33mcommit 07b09e41c24ed4f1d1933626fc5c0c3fe6e5390e[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Tue Apr 10 15:49:04 2018 +0100
+
+    Trigger build for travis
+
+[33mcommit 523f49f2c5950bd21106ff983263f8fc3cf3e730[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 20:29:12 2018 +0100
+
+    Trigger build for travis
+
+[33mcommit f22fde5e573a0716e46a7bd8e91e79267b376e74[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 19:57:36 2018 +0100
+
+    Changes to unit test
+
+[33mcommit 5b1f91ee37487655332d4cf5b8efcf9cfde882f9[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 19:44:48 2018 +0100
+
+     edit travis test failure
+
+[33mcommit d25b08a192bcb7ed0c4895fe7497c634663f4f07[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 19:24:56 2018 +0100
+
+     edit travis test failure
+
+[33mcommit ecb980dde128722cad462f3726c560157ca021ae[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 19:21:45 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 3f6dadc70c6b1d0c4629e566887896de4bf98c29[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 19:08:28 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 75344bd51d8fe48bcb33793e38408af4e5ea3f4d[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 18:25:19 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 5a26ae7a24e07fb2de5909b4f250c3724febaec8[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 17:48:30 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 59ba20bbd3731aa784207f91d85b5cd2f0bf9f03[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 15:23:36 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 17c400964c6ca90aab04b86998c99778aca5133d[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 15:12:12 2018 +0100
+
+     edit travis test failure
+
+[33mcommit d15d3f64d0450d4b095d907628f3c703a781130c[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 15:07:30 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 4b2b94315d980baaed2a66e8eda546943a9302bb[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 14:50:20 2018 +0100
+
+     edit travis test failure
+
+[33mcommit ad304aac6a9702c90b5d2f8d7474ee0676dbf326[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 14:12:32 2018 +0100
+
+     edit travis test failure
+
+[33mcommit a6185492082521d50126f5fd46d0193b4e059fe0[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 14:11:12 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 7ae8e58830232ca98430ab0f5710cfb54fed7eab[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 10:41:24 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 015b08097b5112e0bc41a9037806c805b6da93e7[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Apr 9 10:26:06 2018 +0100
+
+     edit travis test failure
+
+[33mcommit 43c6485262c3440ec4b02eae7a62540bbec739aa[m
+Author: Sanni Kehinde <kensanni@gmail.com>
+Date:   Sun Apr 8 00:25:58 2018 +0100
+
+    add signin funtionality
+
+[33mcommit c383781e0478f3fbb75da89219694ecebf1476ca[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sat Apr 7 21:34:44 2018 +0100
+
+    test implementation
+
+[33mcommit 790e526afa84d42a3088b2ebe592ed3654ffe1a4[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Wed Mar 14 19:55:02 2018 +0100
+
+    fifth commit
+
+[33mcommit a4268d0cb4ccf10be9e2b95ae90f381ce740566f[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Wed Mar 14 19:49:15 2018 +0100
+
+    fifth commit
+
+[33mcommit 2ce60ce3ca96c7d8c69514278b65f3eadf9d34d8[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Wed Mar 14 19:11:13 2018 +0100
+
+    fifth commit
+
+[33mcommit c9f4bf55533e454f8d1ef151a819c4d5734d2874[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Mar 12 21:13:18 2018 +0100
+
+    fifth commit
+
+[33mcommit a2944ac09eddaddd06eb36f52994ce3116093be1[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Mar 12 21:03:20 2018 +0100
+
+    forth commit
+
+[33mcommit 5b3e60aec7237d9922d9770e5ca5ea51e065d714[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Mar 12 20:13:12 2018 +0100
+
+    third
+
+[33mcommit 399060de396b5f0945fa5a396e840f56a967ef4f[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Mon Mar 12 19:27:43 2018 +0100
+
+    second commit
+
+[33mcommit e8610827fd6aeba481bb8612d5dc01ab70989b10[m
+Author: akolliy1 <adesanmiakoladedotun@gmail.com>
+Date:   Sun Mar 11 10:48:41 2018 +0100
+
+    First commit
