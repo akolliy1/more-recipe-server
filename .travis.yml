@@ -4,8 +4,11 @@ node_js:
 cache:
  directories:
   - node_modules
+<<<<<<< HEAD
 script:
   - npm run test
+=======
+>>>>>>> parent of 8a9639d... addition to test folder on recipe test
 after_success:
   - npm run test:coverage
 env:
