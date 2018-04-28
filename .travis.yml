@@ -9,7 +9,8 @@ cache:
   - node_modules
 script:
   - npm run test
-after_success:
-  - npm run test:coverage
+before_script:
+  - psql createdb test -U postgres
+  - sequelize db:migrate
 env:
   - NODE_ENV=test

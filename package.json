@@ -50,10 +50,10 @@
     "test": "mocha src/test/allTest.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000 --exit",
     "test:server": "mocha --timeout 500000 --compilers js:babel-core/register src/test/controllers/*",
     "dev-migrate": "sequelize db:migrate:undo:all&& sequelize db:migrate",
-    "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate&& npm run test",
+    "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate",
     "build": "babel src -d dist",
     "start": "node src/app.js",
     "test:coverage": "npm run coveralls",
-    "coveralls": "nyc npm run test:server && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm run test-migrate&& nyc report --reporter=text-lcov | coveralls"
   }
 }
