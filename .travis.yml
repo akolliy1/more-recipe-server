@@ -1,14 +1,11 @@
 language: node_js
 node_js:
-  - "8.9.4"
- 
+  - "stable"
+cache:
+ directories:
+  - node_modules
 script:
   - npm run test
-<<<<<<< HEAD
-=======
-before_script:
-  - sequelize db:migrate 
->>>>>>> parent of f858ce2... addition to test folder on recipe test
 after_success:
   - npm run test:coverage
 env:
