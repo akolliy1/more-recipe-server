@@ -10,7 +10,7 @@ cache:
 script:
   - npm run test
 before_script:
-  - psql createdb test -U postgres
+  - createdb test -U postgres
   - sequelize db:migrate
 env:
   - NODE_ENV=test
