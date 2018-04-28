@@ -4,6 +4,11 @@ node_js:
  
 script:
   - npm run test
+<<<<<<< HEAD
+=======
+before_script:
+  - sequelize db:migrate 
+>>>>>>> parent of f858ce2... addition to test folder on recipe test
 after_success:
   - npm run test:coverage
 env:
