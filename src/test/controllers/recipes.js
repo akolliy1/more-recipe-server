@@ -88,18 +88,16 @@ describe("Recipe", () => {
                 })
                 .end((err, res) => {
                     expect(res.status).to.equal(400)
-                    expect(res.body).deep.equal({
-                        success: false,
-                        message: 'Name colunm must contain only alphanumeral',
-                        field: 'name'
-                    })
+                    expect(res.body).to.be.an('array');
+                    expect(res.body[0]).to.equal('name cannot be less than 3 character and no spacing');
+                    expect(res.body[1]).to.equal('name')
                     setImmediate(done)
                 })
             });
 
             it("should return name cannot be less than 3 and greater 100", (done) => {
                 chai.request(server)
-                .post('/recipes/create/')
+                .post('/recipes')
                 .set('Accept', 'application/json')
                 .send({
                     token,
@@ -109,19 +107,37 @@ describe("Recipe", () => {
                     ingredients: 'water,salt , rice',
                 })
                 .end((err, res) => {
-                    expect(res.status).to.equal(400)
-                    expect(res.body).deep.equal({
-                        success: false,
-                        message: 'Name must be between 3 to 100',
-                        field: 'name'
-                    })
-                    setImmediate(done)
+                    expect(res.status).to.equal(400);
+                    expect(res.body[0]).to.equal('name cannot be less than 3 character and no spacing');
+                    expect(res.body[1]).to.equal('name');
+                    expect(res.body).to.be.an('array');
+                    setImmediate(done);
+                })
+            });
+
+            it("should not be empty field", (done) => {
+                chai.request(server)
+                .post('/recipes')
+                .set('Accept', 'application/json')
+                .send({
+                    token,
+                    name: '',
+                    procedure: 'Put the rice in water wash it well and have it in your plate',
+                    description: 'Just the way you like it',
+                    ingredients: 'water,salt , rice',
+                })
+                .end((err, res) => {
+                    expect(res.status).to.equal(400);
+                    expect(res.body[0]).to.equal('name cannot be less than 3 character and no spacing');
+                    expect(res.body[1]).to.equal('name');
+                    expect(res.body).to.be.an('array');
+                    setImmediate(done);
                 })
             });
 
             it("should return ingredient must be between 10 to 100 character", (done) => {
                 chai.request(server)
-                .post('/recipes/create/')
+                .post('/recipes')
                 .set('Accept', 'application/json')
                 .send({
                     token,

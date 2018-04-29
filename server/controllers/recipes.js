@@ -1,5 +1,5 @@
 import { Recipe, Favorite, Upvote, Downvote } from "../models";
-import { validRecipe } from "../middlewares/recipeValidation";
+import { Recipevalidation } from "../middlewares/recipeValidation";
 import Sequelize from 'sequelize';
 /**
  * @description Create Recipes
@@ -27,6 +27,10 @@ export default class recipes {
  * @param {object} name -Recipe name
  * @returns {async}
  */
+        const errors = Recipevalidation({name,procedure,ingredients});
+        if(errors.length > 0) {
+            return res.status(400).send(errors)
+        }
         const RecipeNameAndIdCheck = async function(userId, name){
             const Op = Sequelize.Op;
             const recipe = await Recipe.findOne({

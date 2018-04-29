@@ -4,7 +4,6 @@ import Sequelize from 'sequelize';
 import trimUserData from "../utility/trimUserData";
 import { inputValidation, signInValidation } from "../middlewares/inputValidation";;
 import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models';
-import { error } from 'util';
 const secret = process.env.JWT_SECRET;
 
 /**
