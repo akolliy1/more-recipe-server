@@ -1,11 +1,7 @@
 const users = require('./users');
-const recipeItems = require('./recipeitems');
-const recipeComments = require('./recipecomments');
-const recipeLikes = require('./recipelikes');
+const recipes = require('./recipes');
  module.exports = {
     users,
-     recipeItems,
-     recipeComments,
-     recipeLikes,
+    recipes
  }
  
