@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User, recipeItem, recipeComment } from "../models";
+import { User, Review, Favorite } from "../models";
 const users = [
   {
     name: 'John Doe',
@@ -132,7 +132,7 @@ export const user2token = generateToken(2, users[1].username, users[1].email)
 export const validUser = {
   name: 'akolliy bobo',
   email: 'akolliy@example.com',
-  username: 'akolliyy',
+  username: 'akolliiy',
   password: 'akooooool'
 }
 

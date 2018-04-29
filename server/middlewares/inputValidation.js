@@ -1,4 +1,5 @@
 import models from "../models";
+import trimUserData from "../utility/trimUserData";
 /**
  * @description User input data for email and username 
  * @memberOf Users
@@ -30,8 +31,8 @@ export const inputValidation = ( req, res) => {
                 errorMessage: 'Username field cannot be empty'
             },
             isLength: {
-                options: [{ min: 6 }],
-                errorMessage: 'Username should be atleast 6 characters'
+                options: [{ min: 3 }],
+                errorMessage: 'Username should be atleast 3 characters'
             },
             matches: {
                 options: [(/^[a-z0-9]+$/gi)],
@@ -73,4 +74,47 @@ export const inputValidation = ( req, res) => {
         });
         return allErrors
     }
+}
+
+export const signInValidation = (authName, password) => {
+    let message,
+        field,
+        errors = [];
+
+    if(!authName) {
+
+        message = 'Field cannot be empty';
+        field = 'username';
+        errors.push({message,field});
+
+    }   
+    if (authName) {
+        let length,
+        isLength = authName.length;
+
+        if(isLength < 3) {
+
+            message = 'username cannot be less than 3 character';
+            field = 'username';
+            errors.push({message, field});
+
+        }
+    }
+    if (!password) {
+        
+        message = 'password cannot be empty';
+        field = 'Password';
+        errors.push({message, field})
+
+    } 
+    if (password) { 
+        if(password.length < 8) {
+
+            message = 'password cannot be less than 8 character';
+            field = 'password';
+            errors.push({message, field})
+
+        }
+    }
+    return errors
 }

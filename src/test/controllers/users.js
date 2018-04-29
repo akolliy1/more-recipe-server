@@ -111,7 +111,7 @@ describe('Users', () => {
                 })
                 .end((err, res) => {
                     expect(res.statusCode).to.equal(400)
-                    expect(res.body[0].message).to.equal('Username should be atleast 6 characters')
+                    expect(res.body[0].message).to.equal('Username should be atleast 3 characters')
                     expect(res.body[0].field).to.equal('username')
                     setImmediate(done)
                 })
@@ -278,37 +278,53 @@ describe('Users', () => {
     
     describe('User signin', () => {
         describe('signin Error', () => {
-            it('should return username cannot contain space',(done) => {
+            it('should return username without space when there is space',(done) => {
                 chai.request(server)
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    username: ' ak',
+                    authName: ' ak',
                     password: 'akooooool'
                 })
                 .end((err, res) => {
-                    expect(res.statusCode).to.equal(401)
-                    expect(res.body).deep.equal({
-                        field: 'username',
-                        message: 'Username should contain lower and upper character and no spacing'
-                    })
+                    expect(res.statusCode).to.equal(404)
+                    expect(res.body.success).to.equal(false);
+                    expect(res.body.message).to.equal('User not found');
+                    expect(res.body.authName).to.equal('ak')
+                    setImmediate(done)
                 })
             });
 
-            it('should return username cannot be less than 3 characters',(done) => {
+            it('should return User not found when username is less than 3 characters',(done) => {
                 chai.request(server)
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    username: 'ak',
+                    authName: 'ak',
                     password: 'akooooool'
                 })
                 .end((err, res) => {
-                    expect(res.statusCode).to.equal(401)
-                    expect(res.body).deep.equal({
-                        field: 'username',
-                        message: 'Username character must be atleast 3'
-                    })
+                    expect(res.statusCode).to.equal(404)
+                    expect(res.body.success).to.equal(false);
+                    expect(res.body.authName).to.equal('ak')
+                    expect(res.body.message).to.equal('User not found')
+                    setImmediate(done)
+                })
+            });
+
+            it('should return User not found when field is empty',(done) => {
+                chai.request(server)
+                .post('/api/users/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    authName: '',
+                    password: 'akooooool'
+                })
+                .end((err, res) => {
+                    expect(res.statusCode).to.equal(404)
+                    expect(res.body.success).to.equal(false);
+                    expect(res.body.message).to.equal('User not found');
+                    setImmediate(done)
                 })
             });
 
@@ -317,61 +333,77 @@ describe('Users', () => {
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    username: 'akolli',
+                    authName: 'akolliyyyy',
                     password: 'akooooool'
                 })
                 .end((err, res) => {
-                    expect(res.statusCode).to.equal(401)
-                    expect(res.body).deep.equal({
-                        success: false,
-                        message: 'User not found'
-                    })
+                    expect(res.statusCode).to.equal(404)
+                    expect(res.body.success).to.equal(false);
+                    expect(res.body.message).to.equal('User not found')
                     setImmediate(done)
                 })
             });
 
-            it('should return Invalid Email when there is space at the beginin', (done) => {
+            it('should return valid Email and remove space when Email or Username contain space', (done) => {
                 chai.request(server)
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    email: ' akolade@example.com',
+                    authName: ' akolade@example.com',
                     password: 'akooooool'
                 })
                 .end((err, res) => {
-                    expect(res.statusCode).to.equal(401)
-                    expect(res.body).deep.equal({
-                        success: false,
-                        message: 'email must be standard'
-                    })
+                    expect(res.statusCode).to.equal(200);
+                    expect(res.body.success).to.equal(true);
+                    expect(res.body.user.email).to.equal('akolade@example.com');
+                    expect(res.body).to.have.all.deep.keys(
+                        "success", "message", "token", "user"
+                    )
                     setImmediate(done)
                 })
             });
 
-            it('should return Invalid Email when there is no @', (done) => {
+            it('should return User not found when Email does not has @', (done) => {
                 chai.request(server)
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    email: 'akoladeexample.com',
+                    authName: 'akoladeexample.com',
                     password: 'akooooool'
                 })
                 .end((err, res) => {
-                    expect(res.statusCode).to.equal(401)
-                    expect(res.body).deep.equal({
-                        success: false,
-                        message: 'email must be standard'
-                    })
+                    expect(res.statusCode).to.equal(404);
+                    expect(res.body.authName).to.equal('akoladeexample.com');
+                    expect(res.body.success).to.equal(false);
+                    expect(res.body.message).to.equal('User not found')
                     setImmediate(done)
                 })
-            })
+            });
+
+            it('should Signin user and remove whitespace in username or email', (done) => {
+                chai.request(server)
+                .post('/api/users/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    authName: ' akolliys',
+                    password: 'akooooool'
+                })
+                .end((err, res) => {
+                    expect(res.statusCode).to.equal(200);
+                    expect(res.body.user.username).to.equal('akolliys')
+                    expect(res.body).to.have.all.deep.keys(
+                        "success","message","token","user"
+                    )
+                    setImmediate(done)
+                })
+            });
 
             it('should Signin user with username', (done) => {
                 chai.request(server)
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    username: 'akolliys',
+                    authName: 'akolliys',
                     password: 'akooooool'
                 })
                 .end((err, res) => {
@@ -388,7 +420,7 @@ describe('Users', () => {
                 .post('/api/users/signin')
                 .set('Accept', 'application/json')
                 .send({
-                    email: 'akolade@example.com',
+                    authName: 'akolade@example.com',
                     password: 'akooooool'
                 })
                 .end((err, res) => {

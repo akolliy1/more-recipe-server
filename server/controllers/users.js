@@ -1,8 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Sequelize from 'sequelize';
-import {inputValidation} from "../middlewares/inputValidation";;
+import trimUserData from "../utility/trimUserData";
+import { inputValidation, signInValidation } from "../middlewares/inputValidation";;
 import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models';
+import { error } from 'util';
 const secret = process.env.JWT_SECRET;
 
 /**
@@ -106,42 +108,52 @@ class Users {
    * @memberof Users
    */
     static signIn(req,res) {
-        const Op = Sequelize.Op;     
-        return User.find({
-            attributes: ['id', 'name', 'username', 'email', 'password'],
-            where: {
-                [Op.or]: [{ username: req.body.authName }, { email: req.body.authName}],
-            }
-        })
-        .then((user) => {
-            if(!user) {
-                return res.status(401).send({
-                    success: false,
-                    message: 'User not found'
-                    })
-            } else {
-                const { id, username, email, password } = user
-                const payload = { id, username, email }
-                const token = jwt.sign(payload, secret, {
-                    expiresIn: '4h'
-                })
-                if(bcrypt.compareSync(req.body.password, password)) {
-                    return res.status(200).send({
-                        success: true,
-                        message: 'Signin successfuly',
-                        user,
-                        token
-                    })
-                } else {
-                    return res.status(400).send({
-                        msg: 'Incorrect password'
-                    })
-                }
-                
-            }
-        })
+        const Op = Sequelize.Op;
+        let authName = req.body.authName;
+        let password = req.body.password;
+            password = trimUserData(password, '');
+            authName = trimUserData(authName,'');
 
-    };
+            return User.find({
+                attributes: ['id', 'name', 'username', 'email', 'password'],
+                where: {
+                    [Op.or]: [{ username: authName }, { email: authName}],
+                }
+            })
+            .then((user) => {
+                if(!user) {
+                    return res.status(404).send({
+                        authName,
+                        success: false,
+                        message: 'User not found'
+                        })
+                } else {
+                    const { id, username, email, password } = user
+                    const payload = { id, username, email }
+                    const token = jwt.sign(payload, secret, {
+                        expiresIn: '4h'
+                    })
+                    if(bcrypt.compareSync(req.body.password, password)) {
+                        return res.status(200).send({
+                            success: true,
+                            message: 'Signin successfuly',
+                            user,
+                            token
+                        })
+                    } else {
+                        return res.status(400).send({
+                            msg: 'Incorrect password'
+                        })
+                    }
+                }
+            })
+        .catch((/*error*/) => {
+                res.status(500).send({
+                    success: false,
+                    message: 'internal server Error '
+                })
+            })
+        }
     /**
      * @description Get A User details
      * @param {object} req - Request

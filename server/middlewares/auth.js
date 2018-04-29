@@ -5,7 +5,6 @@
  *@returns { object } - verifications success
  */
 import jwt from "jsonwebtoken";
-import { error } from "util";
 
 class auth {
     verify(req, res, next) {

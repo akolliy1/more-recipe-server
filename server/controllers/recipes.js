@@ -74,5 +74,9 @@ export default class recipes {
         };
         RecipeNameAndIdCheck(userId, name)
         
+    };
+
+    static async getAllRecipe(req, res) {
+        return Recipe
     }
 }
