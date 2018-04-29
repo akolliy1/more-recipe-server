@@ -72,7 +72,6 @@ export default class recipes {
             })
             return promise
         };
-        RecipeNameAndIdCheck(userId, name)
         
     }
 }
