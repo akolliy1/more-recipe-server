@@ -15,7 +15,9 @@ module.exports = (app) => {
     app.post('/api/users/signin', User.signIn);
     app.get('/api/users/:userId/profile', User.listAUser);
     // route to create recipes
-    app.post('/recipes', recipes.createRecipes)
+    app.post('/recipes', recipes.createRecipes);
+    app.get('/recipes', recipes.getAllRecipes);
+    app.get('/recipes/:recipeId', recipes.getSingleRecipe);
     app.delete('/api/users/:userId', User.destroy);
 
     // For any other request method on todo items, we're going to return "Method Not Allowed"

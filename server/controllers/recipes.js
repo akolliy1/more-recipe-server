@@ -1,4 +1,4 @@
-import { Recipe, Favorite, Upvote, Downvote } from "../models";
+import { User, Recipe, Favorite, Upvote, Downvote } from "../models";
 import { Recipevalidation } from "../middlewares/recipeValidation";
 import Sequelize from 'sequelize';
 /**
@@ -35,13 +35,13 @@ export default class recipes {
             const Op = Sequelize.Op;
             const recipe = await Recipe.findOne({
                 where: {
-                    [Op.or]: [{ userId }, { name }]
+                    [Op.and]: [{ userId }, { name }]
                 }
             })
             if (recipe) {
                 return res.status(401).send({
                     success: false,
-                    message: `sorry recipe: ${name} name already exist`
+                    message: `sorry ${name} recipe name already exist`
                 })
             }
             const promise = new Promise((resolve, reject) => {
@@ -73,6 +73,12 @@ export default class recipes {
                             )
                         }
                     })
+                    .catch(() => {
+                        res.status(400).send({
+                            message: 'error occur userId not identified',
+                            success: false
+                        })
+                    })
             })
             return promise
         };
@@ -80,7 +86,50 @@ export default class recipes {
         
     };
 
-    static async getAllRecipe(req, res) {
-        return Recipe
+    static async getAllRecipes(req, res) {
+        const recipes = await Recipe.findAll({});
+        if(recipes) {
+            return res.status(200).send({
+                success: true,
+                recipes
+            })
+        }   
+        return res.status(200).send({
+            success: true,
+            message: 'You have not add recipes'
+        })
+    };
+
+    static async getSingleRecipe(req, res) {
+        const recipeId = req.params.recipeId;
+        try {
+            const recipe = await Recipe.findOne({
+                where: {id: recipeId},
+                include: [{
+                    model: User, attributes: ['name']
+                }]
+            });
+            if(recipe) {
+                const recipeIncre = await recipe.increment('viewCount');
+                if(recipeIncre) {
+                    return res.status(200).send({
+                        success: true,
+                        message: 'Recipe found',
+                        recipe
+                    })
+                }
+                throw new Error('Unable to Increment view')
+            }
+            throw new Error('can\'t find Recipe')
+            
+        }
+        catch(err) {
+            let message = err.message;
+            return res.status(404).send({
+                success: false,
+                message
+            })
+        }
     }
+
 }

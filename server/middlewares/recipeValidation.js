@@ -30,7 +30,7 @@ export const Recipevalidation = ({name, procedure, ingredients}) => {
     }
     if (!procedure || procedure.length < 8) {
         message = 'Procedure cannot be less than 8 character';
-        field = 'Password';
+        field = 'Procedure';
         errors.push( message, field)
     }
     return errors
