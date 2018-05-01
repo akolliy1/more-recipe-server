@@ -2,7 +2,7 @@
 more-recipe is basically about Food recipes.
 This app provides a platform for users to share the awesome and exciting  recipe ideas they have invented or learnt. 
 # More-Recipes
-![Build Status](https://travis-ci.org/kensanni/More-recipes.svg?branch=develop) [![Coverage Status](https://coveralls.io/repos/github/kensanni/More-recipes/badge.svg?branch=develop)](https://coveralls.io/github/kensanni/More-recipes?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/61935e09f001a06fb347/maintainability)](https://codeclimate.com/github/kensanni/More-recipes/maintainability)
+![Build Status](https://travis-ci.org/akolliy1/more-recipe-server.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/akolliy1/more-recipe-server/badge.svg?branch=master)](https://coveralls.io/github/akolliy1/more-recipe-server?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/61935e09f001a06fb347/maintainability)](https://codeclimate.com/github/kensanni/More-recipes/maintainability)
 
 ### Features
 - Add recipes to catalog
