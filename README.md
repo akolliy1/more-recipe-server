@@ -69,3 +69,4 @@ You can get the app running locally in the following way:
 		 - Application would be up and running on localhost 2000
 		 
 #### Testing
+	WIP (WORK IN PROGRESS)
