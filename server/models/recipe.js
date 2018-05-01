@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId'
     })
     Recipe.hasMany(models.Review, {
-      foreignKey: 'recipeId'
+      foreignKey: 'recipeId',
     })
     Recipe.hasMany(models.Favorite, {
       foreignKey: 'recipeId'

@@ -10,6 +10,12 @@ module.exports = {
       content: {
         type: Sequelize.TEXT
       },
+      imageUrl: {
+        type: Sequelize.STRING
+      },
+      name: {
+        type: Sequelize.STRING
+      },
       recipeId: {
         type: Sequelize.INTEGER,
         references: {

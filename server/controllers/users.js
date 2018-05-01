@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Sequelize from 'sequelize';
 import trimUserData from "../utility/trimUserData";
-import { inputValidation, signInValidation } from "../middlewares/inputValidation";;
+import { inputValidation } from "../middlewares/inputValidation";;
 import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models';
 const secret = process.env.JWT_SECRET;
 

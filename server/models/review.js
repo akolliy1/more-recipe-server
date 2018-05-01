@@ -15,6 +15,8 @@ export default (sequelize, DataTypes) => {
         }
       }
     },
+    name: DataTypes.STRING,
+    imageUrl: DataTypes.STRING,
     recipeId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
@@ -41,6 +43,7 @@ export default (sequelize, DataTypes) => {
     });
     Review.belongsTo(models.User, {
       foreignKey: 'userId',
+      constraints: false,
     });
   };
   return Review;
