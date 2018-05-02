@@ -183,9 +183,9 @@ class Users {
                                         message: 'User found and counts succesful '
                                     })
                         }
-                        throw new Error('cannot count favorites')
+                        throw new Error('cannot count favorites');
                     }
-                    throw new Error('cannot count reviews')
+                    throw new Error('cannot count reviews');
                 }
                 throw new Error('no recipe for count')
             }
