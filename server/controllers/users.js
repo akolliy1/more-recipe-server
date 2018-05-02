@@ -106,53 +106,38 @@ class Users {
    *
    * @memberof Users
    */
-    static signIn(req,res) {
+static async signIn(req,res) {
         const Op = Sequelize.Op;
-        let authName = req.body.authName;
-        let password = req.body.password;
-            password = trimUserData(password, '');
-            authName = trimUserData(authName,'');
-
-            return User.find({
-                attributes: ['id', 'name', 'username', 'email', 'password'],
-                where: {
-                    [Op.or]: [{ username: authName }, { email: authName}],
-                }
+        const password = trimUserData(req.body.password, '');
+        const authName = trimUserData(req.body.authName,'');
+        const user = await User.find({
+            attributes: ['id', 'name', 'username', 'email', 'password'],
+            where: {
+                [Op.or]: [{ username: authName }, { email: authName }],
+            }
+        })
+        if(user) {
+            const { id, username, email, password } = user
+            const payload = { id, username, email }
+            const token = jwt.sign(payload, secret, {
+                expiresIn: '4h'
             })
-            .then((user) => {
-                if(!user) {
-                    return res.status(404).send({
-                        authName,
-                        success: false,
-                        message: 'User not found'
-                        })
-                } else {
-                    const { id, username, email, password } = user
-                    const payload = { id, username, email }
-                    const token = jwt.sign(payload, secret, {
-                        expiresIn: '4h'
-                    })
-                    if(bcrypt.compareSync(req.body.password, password)) {
-                        return res.status(200).send({
-                            success: true,
-                            message: 'Signin successfuly',
-                            user,
-                            token
-                        })
-                    } else {
-                        return res.status(400).send({
-                            msg: 'Incorrect password'
-                        })
-                    }
-                }
-            })
-        .catch((/*error*/) => {
-                res.status(500).send({
-                    success: false,
-                    message: 'internal server Error '
+            const confirmedPass = await bcrypt.compareSync(req.body.password, password);
+            if(confirmedPass) {
+                return res.status(200).send({
+                    success: true, message: 'Signin successfuly',
+                    user,token
                 })
+            }
+            return res.status(400).send({
+                msg: 'Incorrect password'
             })
         }
+        return res.status(500).send({
+            success: false,
+            message: 'internal server Error '
+        })
+    }
     /**
      * @description Get A User details
      * @param {object} req - Request
