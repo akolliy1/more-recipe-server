@@ -159,70 +159,44 @@ class Users {
      * @param {object} res - Response
      * @returns {object} about User
      */
-    static listAUser(req, res) {
+    static async listAUser(req, res) {
         const userId = req.params.userId;
-        console.log(userId)
-        const promise = new Promise((resolve, reject) => {
-            User
-            .findOne({
-                attributes: ['id', 'name', 'username', 'email', 'imageUrl'],
-                where: { id: userId }
-            })
-            .then((user) => {
-                if (!user) {
-                    reject(
-                        res.status(400).send({
-                            success: false,
-                            message: 'User not found'
-                        })
-                    )
-                } else {
-                    const { id, name, username, email, imageUrl } = user;
-                    const userInfo = {userId: id, name, username, email, imageUrl};
-                    Recipe
-                    .count({where: {userId}})
-                    .then((recipeCount) => {
-
-                        userInfo.recipeCount = recipeCount;
-
-                        Review.count({where: {userId}})
-
-                        .then((reviewCount) => {
-                            userInfo.reviewCount = reviewCount;
-
-                            Favorite.count({where: {userId}})
-                            .then((favoriteCount) => {
-                                userInfo.favoriteCount = favoriteCount;
-                                resolve(
-                                    res.status(200).send({
+        try {
+            const user = await User.findOne({ attributes: ['id', 'name', 'username', 'email', 'imageUrl'], where: { id: userId } });
+            if(user){
+                const { id, name, username, email, imageUrl } = user;
+                const userInfo = { userId: id, name, username, email, imageUrl };
+                const recipeCount = await Recipe.count({where: {userId}});
+                console.log(`this is recipe count ${recipeCount}`);
+                if(recipeCount >= 0){
+                    console.log(`this is recipe count ${recipeCount}`)
+                    userInfo.recipeCount = recipeCount;
+                    const reviewCount = await Review.count({ where: {userId} });
+                    if(reviewCount >= 0){
+                        userInfo.reviewCount = reviewCount;
+                        const favoriteCount = await Favorite.count({ where: {userId} });
+                        if(favoriteCount >= 0){
+                            userInfo.favoriteCount = favoriteCount;
+                            return res.status(200).send({
                                         success: true,
                                         userInfo,
                                         message: 'User found and counts succesful '
                                     })
-                                )
-                            })
-                        })
-                    })
-                    .catch(() => {
-                        reject(
-                            res.status(404).send({
-                                success: false,
-                                message: 'No user details found'
-                            })
-                        )
-                    })
+                        }
+                        throw new Error('cannot count favorites')
+                    }
+                    throw new Error('cannot count reviews')
                 }
+                throw new Error('no recipe for count')
+            }
+            throw new Error('User not found');
+        } catch (err) {
+            let message = err.message;
+            res.status(404).send({
+                success: false,
+                message: message
             })
-            .catch(()=> {
-                reject(
-                    res.status(400).send({
-                        success: false,
-                        message: 'Error fetching user details'
-                    })
-                )
-            })
-        })
-        return promise
+        }
     }
     static destroy(req, res) {
         return User

@@ -1,0 +1,83 @@
+
+                        success: true,
+                        message: "Recipe successfuly added!",
+                        recipe: {
+                          createdAt: Date.now(utc),
+                          description: "Just that",
+                          downvotes: 0,
+                          id: 1,
+                          imageId: null,
+                          imageUrl: null,
+                          ingredients: "water,salt , rice",
+                          name: "Fried Rice",
+                          procedure: "Put the rice in water wash it well and have it in your plate",
+                          updatedAt: "2018-05-01T21:36:37.200Z",
+                          upvotes: 0,
+                          userId: null,
+                          viewCount: 0,
+
+
+
+        
+        console.log(userId)
+        const promise = new Promise((resolve, reject) => {
+            User
+            .findOne({
+                attributes: ['id', 'name', 'username', 'email', 'imageUrl'],
+                where: { id: userId }
+            })
+            .then((user) => {
+                if (!user) {
+                    reject(
+                        res.status(404).send({
+                            success: false,
+                            message: 'User not found'
+                        })
+                    )
+                } else {
+                    const { id, name, username, email, imageUrl } = user;
+                    const userInfo = {userId: id, name, username, email, imageUrl};
+                    Recipe
+                    .count({where: {userId}})
+                    .then((recipeCount) => {
+
+                        userInfo.recipeCount = recipeCount;
+
+                        Review.count({where: {userId}})
+
+                        .then((reviewCount) => {
+                            userInfo.reviewCount = reviewCount;
+
+                            Favorite.count({where: {userId}})
+                            .then((favoriteCount) => {
+                                userInfo.favoriteCount = favoriteCount;
+                                resolve(
+                                    res.status(200).send({
+                                        success: true,
+                                        userInfo,
+                                        message: 'User found and counts succesful '
+                                    })
+                                )
+                            })
+                        })
+                    })
+                    .catch(() => {
+                        reject(
+                            res.status(404).send({
+                                success: false,
+                                message: 'No user details found'
+                            })
+                        )
+                    })
+                }
+            })
+            .catch(()=> {
+                reject(
+                    res.status(400).send({
+                        success: false,
+                        message: 'Error fetching user details'
+                    })
+                )
+            })
+        })
+        return promise
