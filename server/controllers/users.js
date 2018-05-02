@@ -107,6 +107,7 @@ class Users {
    * @memberof Users
    */
 static async signIn(req,res) {
+        const Op = Sequelize.Op;
         const password = trimUserData(req.body.password, '');
         const authName = trimUserData(req.body.authName,'');
         const user = await User.find({
