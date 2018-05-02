@@ -5,6 +5,7 @@ import trimUserData from "../utility/trimUserData";
 import { inputValidation } from "../middlewares/inputValidation";;
 import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models';
 const secret = process.env.JWT_SECRET;
+const Op = Sequelize.Op;
 
 /**
  * @description Validate username and Email
@@ -14,7 +15,6 @@ const secret = process.env.JWT_SECRET;
  */
 const userNameAndEmailValidation = (username, email) => {
     const promise = new Promise((resolve, reject) => {
-        const Op = Sequelize.Op;
         User
             .findOne({
                 attributes: ['email', 'username'],
@@ -107,7 +107,6 @@ class Users {
    * @memberof Users
    */
 static async signIn(req,res) {
-        const Op = Sequelize.Op;
         const password = trimUserData(req.body.password, '');
         const authName = trimUserData(req.body.authName,'');
         const user = await User.find({
