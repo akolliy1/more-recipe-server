@@ -107,21 +107,16 @@ class Users {
    * @memberof Users
    */
 static async signIn(req,res) {
-        const Op = Sequelize.Op;
         const password = trimUserData(req.body.password, '');
         const authName = trimUserData(req.body.authName,'');
         const user = await User.find({
             attributes: ['id', 'name', 'username', 'email', 'password'],
-            where: {
-                [Op.or]: [{ username: authName }, { email: authName }],
-            }
+            where: { [Op.or]: [{ username: authName }, { email: authName }] }
         })
         if(user) {
-            const { id, username, email, password } = user
-            const payload = { id, username, email }
-            const token = jwt.sign(payload, secret, {
-                expiresIn: '4h'
-            })
+            const { id, username, email, password } = user;
+            const payload = { id, username, email };
+            const token = jwt.sign(payload, secret, { expiresIn: '4h' })
             const confirmedPass = await bcrypt.compareSync(req.body.password, password);
             if(confirmedPass) {
                 return res.status(200).send({
