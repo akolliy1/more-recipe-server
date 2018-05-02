@@ -167,27 +167,19 @@ class Users {
                 const { id, name, username, email, imageUrl } = user;
                 const userInfo = { userId: id, name, username, email, imageUrl };
                 const recipeCount = await Recipe.count({where: {userId}});
-                console.log(`this is recipe count ${recipeCount}`);
-                if(recipeCount >= 0){
-                    console.log(`this is recipe count ${recipeCount}`)
+                const reviewCount = await Review.count({ where: { userId } });
+                const favoriteCount = await Favorite.count({ where: { userId } });
+                if (recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
                     userInfo.recipeCount = recipeCount;
-                    const reviewCount = await Review.count({ where: {userId} });
-                    if(reviewCount >= 0){
-                        userInfo.reviewCount = reviewCount;
-                        const favoriteCount = await Favorite.count({ where: {userId} });
-                        if(favoriteCount >= 0){
-                            userInfo.favoriteCount = favoriteCount;
-                            return res.status(200).send({
-                                        success: true,
-                                        userInfo,
-                                        message: 'User found and counts succesful '
-                                    })
-                        }
-                        throw new Error('cannot count favorites');
-                    }
-                    throw new Error('cannot count reviews');
+                    userInfo.reviewCount = reviewCount;
+                    userInfo.favoriteCount = favoriteCount;
+                    return res.status(200).send({
+                        success: true,
+                        userInfo,
+                        message: 'User and counts succesful'
+                    })
                 }
-                throw new Error('no recipe for count')
+                throw new Error('Error: cannot count various recipes and others');
             }
             throw new Error('User not found');
         } catch (err) {
