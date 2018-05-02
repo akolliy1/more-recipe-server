@@ -163,25 +163,21 @@ class Users {
         const userId = req.params.userId;
         try {
             const user = await User.findOne({ attributes: ['id', 'name', 'username', 'email', 'imageUrl'], where: { id: userId } });
-            if(user){
-                const { id, name, username, email, imageUrl } = user;
-                const userInfo = { userId: id, name, username, email, imageUrl };
-                const recipeCount = await Recipe.count({where: {userId}});
-                const reviewCount = await Review.count({ where: { userId } });
-                const favoriteCount = await Favorite.count({ where: { userId } });
-                if (recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
-                    userInfo.recipeCount = recipeCount;
-                    userInfo.reviewCount = reviewCount;
-                    userInfo.favoriteCount = favoriteCount;
-                    return res.status(200).send({
-                        success: true,
-                        userInfo,
-                        message: 'User and counts succesful'
-                    })
-                }
-                throw new Error('Error: cannot count various recipes and others');
+            const recipeCount = await Recipe.count({ where: { userId } });
+            const reviewCount = await Review.count({ where: { userId } });
+            const favoriteCount = await Favorite.count({ where: { userId } });
+            if ( user && recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
+                const userInfo = { userId: user.id, name: user.name, username: user.username, email: user.email, imageUrl: user.imageUrl };
+                userInfo.recipeCount = recipeCount;
+                userInfo.reviewCount = reviewCount;
+                userInfo.favoriteCount = favoriteCount;
+                return res.status(200).send({
+                    success: true,
+                    userInfo,
+                    message: 'User and counts succesful'
+                })
             }
-            throw new Error('User not found');
+            throw new Error('Failed to find User and the recipes');
         } catch (err) {
             let message = err.message;
             res.status(404).send({
