@@ -169,7 +169,8 @@ class Users {
                 const recipeCount = await Recipe.count({where: {userId}});
                 const reviewCount = await Review.count({ where: { userId } });
                 const favoriteCount = await Favorite.count({ where: { userId } });
-                if (recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
+                if (user && recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
+                    const userInfo = { userId: user.id, name: user.name, username: user.username, email: user.email, imageUrl: user.imageUrl };
                     userInfo.recipeCount = recipeCount;
                     userInfo.reviewCount = reviewCount;
                     userInfo.favoriteCount = favoriteCount;
