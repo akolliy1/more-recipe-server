@@ -1,6 +1,7 @@
-import trimData from "../utility/trimUserData";
-import jwt from "jsonwebtoken";
-import model from "../models";
+import trimData from '../utility/trimUserData'
+import jwt from 'jsonwebtoken'
+import model from '../models'
+// jshint esnext:true
 /**
  * @description Validate User data
  * @param req -  request
@@ -9,6 +10,8 @@ import model from "../models";
  * @returns { object } json object
  */
 class Validations {
+  static async validUserSign (req, res) {
     
+  }
 }
 export default Validations
