@@ -49,39 +49,49 @@ class Users {
    *
    * @returns {object} object
    */
-  static async signUp (req, res) {
-    const name = req.body.name
-    const username = req.body.username
-    const email = req.body.email
-    const imageUrl = req.body.imageUrl
-    let password = trimUserData(req.body.password, '')
+  static signUp (req, res) {
+    // console.log(req)
+    const { name, username, email } = req.body
+    let password = req.body.password
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-    const errors = await inputValidation(req, res)
+    const errors = inputValidation(req, res)
     if (errors) {
       return res.status(400).send(errors)
+    } else {
+      userNameAndEmailValidation(username, email).then(() => {
+        User
+          .create({
+            name,
+            username,
+            email,
+            imageUrl: '',
+            password
+          })
+          .then((user) => {
+            const payload = { id: user.id, username: user.username, email: user.email }
+            const token = jwt.sign(payload, secret, {
+              expiresIn: '3h'
+            })
+            res.status(201).json({
+              success: true,
+              message: 'User created successfully',
+              user
+            })
+          })
+          .catch(error => res.status(500).json({
+            success: false,
+            message: `Error creating user ${error.message}`
+          }))
+      })
+        .catch(error =>
+          res.status(409).json({
+            success: false,
+            message: error
+          })
+        )
     }
-    const check = await userNameAndEmailValidation(username, email)
-    if (check) {
-      const user = await User.create({name, username, email, imageUrl, password})
-      if (user) {
-        const payload = { id: user.id, username: user.username, email: user.email }
-        const token = jwt.sign(payload, secret, {
-          expiresIn: '4h'
-        })
-        return res.status(201).json({
-          success: true,
-          message: 'User created successfully',
-          user,
-          token
-        })
-      }
-    }
-    return res.status(500).json({
-      success: false,
-      message: `Error creating user ${error.message}`
-    })
+    return this
   }
-
   /**
    * @description - Sign In a user (Search for user)
    *
@@ -94,34 +104,23 @@ class Users {
    * @memberof Users
    */
   static async signIn (req, res) {
-    const Op = Sequelize.Op
-    const authName = trimUserData(req.body.authName, '')
-    const checkPass = trimUserData(req.body.password, '')
-    const user = await User.findOne({
-      where: { [Op.or]: [{ username: authName }, { email: authName }] }
-    })
-    if (user) {
-      const { id, username, email, password } = user
-      const payload = { id, username, email }
-      console.log(payload)
-      const token = await jwt.sign(payload, secret, { expiresIn: '4h' })
-      const confirmedPass = await bcrypt.compareSync(checkPass, password)
-      if (confirmedPass) {
-        return res.status(200).send({
-          success: true,
-          user,
-          token
-        })
+    const findUserdetails = await User.findOne({
+      where: {
+        username: req.body.username
       }
-      return res.status(409).send({
-        success: false,
-        message: 'Incorrect password'
+    })
+    if (findUserdetails) {
+      const payload = {
+        id: findUserdetails.id, username: findUserdetails.username, email: findUserdetails.email
+      }
+      const token = jwt.sign(payload, secret, {
+        expiresIn: '3h'
+      })
+      res.status(200).send({
+        message: 'Signin successful',
+        token
       })
     }
-    return res.status(404).send({
-      success: false,
-      message: 'User not found'
-    })
   }
   /**
      * @description Get A User details
