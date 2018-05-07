@@ -72,7 +72,7 @@ class Users {
                     .then((user) => {
                         const payload = { id: user.id, username: user.username, email: user.email };
                         const token = jwt.sign(payload, secret, {
-                            expiresIn: '24h'
+                            expiresIn: '3h'
                         });
                         res.status(201).json({
                             success: true,
@@ -106,53 +106,25 @@ class Users {
    *
    * @memberof Users
    */
-    static signIn(req,res) {
-        const Op = Sequelize.Op;
-        let authName = req.body.authName;
-        let password = req.body.password;
-            password = trimUserData(password, '');
-            authName = trimUserData(authName,'');
-
-            return User.find({
-                attributes: ['id', 'name', 'username', 'email', 'password'],
-                where: {
-                    [Op.or]: [{ username: authName }, { email: authName}],
-                }
-            })
-            .then((user) => {
-                if(!user) {
-                    return res.status(404).send({
-                        authName,
-                        success: false,
-                        message: 'User not found'
-                        })
-                } else {
-                    const { id, username, email, password } = user
-                    const payload = { id, username, email }
-                    const token = jwt.sign(payload, secret, {
-                        expiresIn: '4h'
-                    })
-                    if(bcrypt.compareSync(req.body.password, password)) {
-                        return res.status(200).send({
-                            success: true,
-                            message: 'Signin successfuly',
-                            user,
-                            token
-                        })
-                    } else {
-                        return res.status(400).send({
-                            msg: 'Incorrect password'
-                        })
-                    }
-                }
-            })
-        .catch((/*error*/) => {
-                res.status(500).send({
-                    success: false,
-                    message: 'internal server Error '
-                })
-            })
+    static async signIn(req, res) {
+        const findUserdetails = await User.findOne({
+            where: {
+                username: req.body.username
+            }
+        });
+        if (findUserdetails) {
+            const payload = {
+                id: findUserdetails.id, username: findUserdetails.username, email: findUserdetails.email
+            };
+            const token = jwt.sign(payload, secret, {
+                expiresIn: '3h',
+            });
+            res.status(200).send({
+                message: 'Signin successful',
+                token,
+            });
         }
+    }
     /**
      * @description Get A User details
      * @param {object} req - Request
