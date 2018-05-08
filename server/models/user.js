@@ -61,26 +61,26 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Password must be atmost 50'
         }
       }
-    },
-  });
+    }
+  })
   User.associate = (models) => {
     // associations can be defined here
     User.hasMany(models.Recipe, {
       foreignKey: 'userId'
-    });
+    })
     User.hasMany(models.Review, {
       foreignKey: 'userId',
-      constraints: false,
-    });
+      constraints: false
+    })
     User.hasMany(models.Favorite, {
       foreignKey: 'userId'
-    });
+    })
     User.hasMany(models.Upvote, {
       foreignKey: 'userId'
-    });
+    })
     User.hasMany(models.Downvote, {
       foreignKey: 'userId'
-    });
-  };
-  return User;
-};
+    })
+  }
+  return User
+}
