@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,107 +10,212 @@
     <link href="https://fonts.googleapis.com/css?family=Bitter|Dosis" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
         crossorigin="anonymous">
-    <!-- jQuery library -->
+    <!-- bulma stylesheet cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <!-- jQuery framework -->
+    <!-- uikit framework -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Document</title>
     <style>
-    /* nav div ul li {color: green;padding: 0 10px} */
-    nav div ul li a span{padding-right: 10px !important;color: rgb(166, 226, 203)}
-    nav div ul li a{text-transform: uppercase}
-    nav form button span{color: green !important}
-    nav div .navbar-brand,nav div ul li a i{color: rgb(166, 226, 203) !important}
-    nav form input{border-color: green !important}
-    .collapse ul li .nav-text{color: green !important}
-    nav div div a{text-transform: uppercase}
-    div div div div i{color: rgb(166, 226, 203) !important;padding-left: 10px}
-    /* nav .collapse .justify{display: flex !important;text-align: start !important} */
-    .subject{display: block;text-align: center;padding-top: 50px;color: rgb(166, 226, 203)}
-    .nxt-subject{display: block;text-align: center;padding-top: 20px;color: rgb(166, 226, 203)}
-    .footer .color {color: rgb(166, 226, 203)}
-    /* for search inner icon but not yet implemented */
-    .collapse .center form.move-in{position: relative !important;left: -90% !important}
-    @media (max-width: 992px) {
-        .collapse .hide{display: none !important}
-        .collapse .clear{ clear:both !important}
-        
-    }
-    @media (min-width: 992px){
-        .collapse{display: flex}
-        .collapse .center{flex-basis: 35%}
-    }
-    
+        /* nav div ul li {color: green;padding: 0 10px} */
+
+        nav div ul li a span {
+            padding-right: 10px !important;
+            color: rgb(166, 226, 203)
+        }
+
+        nav div ul li a {
+            text-transform: uppercase
+        }
+
+        nav form button span {
+            color: green !important
+        }
+
+        nav div .navbar-brand,
+        nav div ul li a i {
+            color: rgb(166, 226, 203) !important
+        }
+
+        nav form input {
+            border-color: green !important
+        }
+
+        .collapse ul li .nav-text {
+            color: green !important
+        }
+
+        nav div div a {
+            text-transform: uppercase
+        }
+
+        div div div div i {
+            color: rgb(166, 226, 203) !important;
+            padding-left: 10px
+        }
+
+        /* nav .collapse .justify{display: flex !important;text-align: start !important} */
+
+        .subject {
+            display: block;
+            text-align: center;
+            padding-top: 50px;
+            color: rgb(166, 226, 203)
+        }
+
+        .nxt-subject {
+            display: block;
+            text-align: center;
+            padding-top: 20px;
+            color: rgb(166, 226, 203)
+        }
+
+        .color {
+            color: rgb(166, 226, 203)
+        }
+
+        /* for search inner icon but not yet implemented */
+
+        .collapse .center form.move-in {
+            position: relative !important;
+            left: -90% !important
+        }
+        .justify-content-center h2 {text-align: center}
+        .justify-space-between {
+            display: flex;
+            justify-content: space-between
+        }
+        @media (max-width: 992px) {
+            .collapse .hide {
+                display: none !important
+            }
+            .collapse .clear {
+                clear: both !important
+            }
+            .container .justify-content-center {
+                flex-basis: 40%;
+                width: 40% !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .collapse .hide {
+                display: none !important
+            }
+            .collapse .clear {
+                clear: both !important
+            }
+            .container .justify-content-center {
+                flex-basis: 60%;
+                width: 60% !important;
+            }
+        }
+        @media (max-width: 500px) {
+            .container .justify-content-center {
+                flex-basis: 60%;
+                width: 80% !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .collapse {
+                display: flex
+            }
+            .collapse .center {
+                flex-basis: 35%
+            }
+        }
+        .justify{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            justify-content: space-around;
+        }
+        .container .justify-content-center {
+            flex-basis: 30%;
+            width: 30%;
+        }
     </style>
 </head>
+
 <body>
-    <div class="jumbotron">
-        <div class="container justify-content-center">
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam neque cupiditate deleniti, accusamus officiis alias repellendus.
-            Asperiores debitis harum natus veniam minus impedit provident ex animi? Ea quas voluptate eius.
+    <div class="container justify mt-4">
+        <div class="justify-content-center">
+            <div class="card mt-2">
+                <div class="field card-body">
+                    <h2>More recipe-server</h2>
+                    <hr>
+                    <form action="" method="post">
+                        <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-success" type="text" placeholder=" e.g Baptista" minlength="3" required>
+                                <span class="icon is-small is-left">
+                                    <i class="far fa-user-circle fa-1.5x"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                            <p class="help is-success"></p>
+                            <p class="help is-danger"></p>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-success" type="text" placeholder=" e.g johndoe12345" minlength="8" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                            <p class="help is-success"></p>
+                            <p class="help is-danger"></p>
+                        </div>
+                        <div class="field justify-space-between">
+                            <a class="btn btn-primary" href="#" role="button">Sign in with <span class="fab fa-facebook-f"></span></a>
+                            <a class="btn btn-primary" href="#" role="button">Sign in with <span class="fab fa-google-plus-g"></span></a>
+                        </div>
+                        <div class="field">
+                            <button type="submit" class="btn btn-primary col-md-12 mt-2">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-2">
+                <div class="field card-body">
+                    <p>New to Recipe? <a href=""> Create an account.</a></p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container-fluid">
-        
-        <form action="" method="post">
-            <div class="form-row align-items-center">
-                <div class="col-lg-4  col-sm-2"></div>
-
-                <div class="col-lg-4  col-sm-8">
-                    
-                    <div class="col-md-12 mb-2">
-                        <label for="validation2">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="far fa-user-circle"></i>
-                                </div>
-                            </div>
-                            <input name="name" type="text" id="validation2" class="form-control" placeholder="Username" required>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mb-2">
-                        <label for="validation4">Password</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-key"></i>
-                                </div>
-                            </div>
-                            <input name="name" type="text" id="validation4" class="form-control" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row container">
-                            <div class="col-md-4 card mr-3">
-                                <a href="">
-                                    <div class="">
-                                        Signin
-                                        <i class="fab fa-facebook-f"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 card ml-3">
-                                <div class="">
-                                    Signin
-                                    <i class="fab fa-google-plus-g"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-12">
-                        
-                        <button type="submit" class="btn btn-primary col-md-12 mt-2">Sign in</button>
-                    </div>
-                </div>
-                    
-                    
-                </div>
-                <div class="col-lg-4 col-sm-2"></div>
-                
-        </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <footer>
+        <div class="container-fluid mt-4">
+            <div class="text-center">
+                <strong class="copyright color">More-recipe-server © 2018, All Rights Reserved, Design &amp; Developed By: Akolliy</strong>
+            </div>
+            <div class="text-center">
+                <a href="" class="pr-2">Terms</a>
+                <a href="" class="pr-2">Privacy</a>
+                <a href="" class="pr-2">Security</a> 
+                <a href="" class="pr-2">Contact Akolliy</a>
+            </div>
+        </div>
+    </footer>
+    <!-- uikit js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit-icons.min.js"></script>
+    <!-- end of uikit js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

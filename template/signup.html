@@ -71,7 +71,7 @@
             color: rgb(166, 226, 203)
         }
 
-        .footer .color {
+        .color {
             color: rgb(166, 226, 203)
         }
 
@@ -110,6 +110,12 @@
                 width: 60% !important;
             }
         }
+        @media (max-width: 500px) {
+            .container .justify-content-center {
+                flex-basis: 60%;
+                width: 80% !important;
+            }
+        }
 
         @media (min-width: 992px) {
             .collapse {
@@ -134,86 +140,98 @@
 </head>
 
 <body>
-    <div class="jumbotron">
-        <div class="container justify-content-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam neque cupiditate deleniti, accusamus officiis alias repellendus.
-            Asperiores debitis harum natus veniam minus impedit provident ex animi? Ea quas voluptate eius.
-        </div>
-    </div>
-    <div class="container justify">
+    <div class="container justify mt-4">
         <div class="justify-content-center">
-            <h2>More recipe-server</h2>
-            <hr>
-            <form action="" method="post">
-                <div class="field">
-                    <label class="label">Name</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input is-success" type="text" placeholder=" e.g John Doe" required>
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
-                        </span>
+                <div class="card mt-2">
+                    <div class="field card-body">
+                            <h2>More recipe-server</h2>
+                            <hr>
+                            <form action="" method="post">
+                                <div class="field">
+                                    <label class="label">Name</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        <input class="input is-success" type="text" placeholder=" e.g John Doe" minlength="3" required>
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <span class="icon is-small is-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </div>
+                                    <p class="help is-success"></p>
+                                    <p class="help is-danger"></p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Username</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        <input class="input is-success" type="text" placeholder=" e.g Baptista" minlength="3" required>
+                                        <span class="icon is-small is-left">
+                                            <i class="far fa-user-circle fa-1.5x"></i>
+                                        </span>
+                                        <span class="icon is-small is-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </div>
+                                    <p class="help is-success"></p>
+                                    <p class="help is-danger"></p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Email</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        <input class="input is-success" type="email" placeholder=" e.g JohnDoe@yahoo.com" required>
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                        <span class="icon is-small is-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </div>
+                                    <p class="help is-success"></p>
+                                    <p class="help is-danger"></p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Password</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        <input class="input is-success" type="text" placeholder=" e.g johndoe12345" minlength="8" required>
+                                        <span class="icon is-small is-left">
+                                            <i class="fa fa-key"></i>
+                                        </span>
+                                        <span class="icon is-small is-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </div>
+                                    <p class="help is-success"></p>
+                                    <p class="help is-danger"></p>
+                                </div>
+                                <div class="field">
+                                    <label><input class="uk-checkbox" type="checkbox" checked required> By clicking Means you agreed to our terms and Conditions</label>
+                                </div>
+                                <div class="field justify-space-between">
+                                    <a class="btn btn-primary" href="#" role="button">Sign up with <span class="fab fa-facebook-f"></span></a>
+                                    <a class="btn btn-primary" href="#" role="button">Sign up with <span class="fab fa-google-plus-g"></span></a>
+                                </div>
+                                <div class="field">
+                                    <button type="submit" class="btn btn-primary col-md-12 mt-2">Create Account</button>
+                                </div>
+                            </form>
                     </div>
-                    <p class="help is-success"></p>
-                    <p class="help is-danger"></p>
                 </div>
-                <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input is-success" type="text" placeholder=" e.g Baptista" required>
-                        <span class="icon is-small is-left">
-                            <i class="far fa-user-circle fa-1.5x"></i>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
-                        </span>
-                    </div>
-                    <p class="help is-success"></p>
-                    <p class="help is-danger"></p>
-                </div>
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input is-success" type="email" placeholder=" e.g JohnDoe@yahoo.com" required>
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
-                        </span>
-                    </div>
-                    <p class="help is-success"></p>
-                    <p class="help is-danger"></p>
-                </div>
-                <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input is-success" type="text" placeholder=" e.g johndoe12345" required>
-                        <span class="icon is-small is-left">
-                            <i class="fa fa-key"></i>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
-                        </span>
-                    </div>
-                    <p class="help is-success"></p>
-                    <p class="help is-danger"></p>
-                </div>
-                <div class="field">
-                    <label><input class="uk-checkbox" type="checkbox" checked required> By clicking Means you agreed to our terms and Conditions</label>
-                </div>
-                <div class="field justify-space-between">
-                    <a class="btn btn-primary" href="#" role="button">Sign up with <span class="fab fa-facebook-f"></span></a>
-                    <a class="btn btn-primary" href="#" role="button">Sign up with <span class="fab fa-google-plus-g"></span></a>
-                </div>
-                <div class="field">
-                    <button type="submit" class="btn btn-primary col-md-12 mt-2">Create Account</button>
-                </div>
-            </form>
+            
         </div>
     </div>
+    <footer>
+        <div class="container-fluid mt-4">
+            <div class="text-center">
+                <strong class="copyright color">More-recipe-server © 2018, All Rights Reserved, Design &amp; Developed By: Akolliy</strong>
+            </div>
+            <div class="text-center">
+                <a href="" class="pr-2">Terms</a>
+                <a href="" class="pr-2">Privacy</a>
+                <a href="" class="pr-2">Security</a> 
+                <a href="" class="pr-2">Contact Akolliy</a>
+            </div>
+        </div>
+    </footer>
     <!-- uikit js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit-icons.min.js"></script>
