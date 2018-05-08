@@ -32,3 +32,6 @@ or cdn
 
     ``` for implentation of user profile view using modal method of semantic ui ```
     https://semantic-ui.com/modules/modal.html#/definition
+
+    font/icon download on
+https://icons8.com/icon/set/admin/metro

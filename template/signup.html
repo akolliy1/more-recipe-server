@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Bitter|Dosis" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
         crossorigin="anonymous">
+    <!-- bulma stylesheet cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Document</title>
@@ -96,6 +98,17 @@
                 flex-basis: 35%
             }
         }
+        .justify{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            justify-content: space-around;
+        }
+        .container .justify-content-center {
+            flex-basis: 30%;
+            width: 30%;
+        }
     </style>
 </head>
 
@@ -106,89 +119,68 @@
             Asperiores debitis harum natus veniam minus impedit provident ex animi? Ea quas voluptate eius.
         </div>
     </div>
-    <div class="container-fluid">
-
-        <form action="" method="post">
-            <div class="form-row align-items-center">
-                <div class="col-lg-4  col-sm-2"></div>
-
-                <div class="col-lg-4  col-sm-8">
-
-                    <div class="col-sm-12 col-md-12 mb-2">
-                        <label class="validation1" for="validation1">Name</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </div>
-                            <input name="name" type="text" id="validation1" class="form-control" placeholder="full name" required>
-                        </div>
+    <div class="container justify">
+        <div class="justify-content-center">
+            <form action="" method="post">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="text" placeholder=" e.g John Doe" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                        </span>
                     </div>
-                    <div class="col-md-12 mb-2">
-                        <label for="validation2">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="far fa-user-circle"></i>
-                                </div>
-                            </div>
-                            <input name="name" type="text" id="validation2" class="form-control" placeholder="Username" required>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mb-2">
-                        <label for="validation3">Email</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                            </div>
-                            <input name="name" type="email" id="validation3" class="form-control" placeholder="Email" required>
-                        </div>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="col-md-12 mb-2">
-                        <label for="validation4">Password</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-key"></i>
-                                </div>
-                            </div>
-                            <input name="name" type="text" id="validation4" class="form-control" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row container">
-                            <div class="col-md-4 card mr-3">
-                                <a href="">
-                                    <div class="">
-                                        Signin
-                                        <i class="fab fa-facebook-f"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 card ml-3">
-                                <div class="">
-                                    Signin
-                                    <i class="fab fa-google-plus-g"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-12">
-
-                        <button type="submit" class="btn btn-primary col-md-12 mt-2">Create Account</button>
-                    </div>
+                    <p class="help is-success"></p>
+                    <p class="help is-danger"></p>
                 </div>
-
-
-            </div>
-            <div class="col-lg-4 col-sm-2"></div>
-
-        </form>
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="text" placeholder=" e.g Baptista" required>
+                        <span class="icon is-small is-left">
+                            <i class="far fa-user-circle fa-1.5x"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </div>
+                    <p class="help is-success"></p>
+                    <p class="help is-danger"></p>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="email" placeholder=" e.g JohnDoe@yahoo.com" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </div>
+                    <p class="help is-success"></p>
+                    <p class="help is-danger"></p>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="text" placeholder=" e.g johndoe12345" required>
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-key"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </div>
+                    <p class="help is-success"></p>
+                    <p class="help is-danger"></p>
+                </div>
+                <button type="submit" class="btn btn-primary col-md-12 mt-2">Create Account</button>
+            </form>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

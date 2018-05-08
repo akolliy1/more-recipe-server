@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bitter|Dosis" rel="stylesheet">
+    <!-- Semantic ui -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
         crossorigin="anonymous">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Document</title>
     <style>
     /* nav div ul li {color: green;padding: 0 10px} */
@@ -36,7 +36,24 @@
         .collapse{display: flex}
         .collapse .center{flex-basis: 35%}
     }
-    
+    /* css for search bar */
+    .animated-search-form[type=search] {
+        width: 10rem;
+        border: 0.125rem solid #e6e6e6;
+        box-shadow: 0 0 3.125rem rgba(0, 0, 0, 0.18);
+        border-radius: 0;
+        background-image: url("./images/search-2.png");
+        background-position: 5px 0.625rem;
+        background-size: 22px;
+        background-repeat: no-repeat;
+        padding: 0.75rem 1.25rem 0.75rem 2rem;
+        transition: width 0.4s ease-in-out;
+    }
+    .animated-search-form[type=search]:focus {
+    width: 100%;
+    }
+    /* End of css for search bar */
+    .container-fluid section div div div img{max-height: none !important;height: 130px !important;}
     </style>
 </head>
 <body>
@@ -58,7 +75,7 @@
                 </ul>
                 <div class="navbar-nav center">
                     <form action="" method="get" class="form-inline my-2 my-lg-0" id="search">
-                        <input type="search" class="form-control mr-sm-2" name="search-recipe" placeholder="Search" aria-label="Search">
+                        <input type="search" class="form-control mr-sm-2 animated-search-form" name="search-recipe" placeholder="Search" aria-label="Search">
                         <!-- <button class="btn btn-light my-2 my-sm-0" type="submit"><span class="fa fa-search"></span></button> -->
                         <!-- <i class="fa fa-search move-in"></i> -->
                     </form>
@@ -386,8 +403,13 @@
     <footer class="footer text-center">
         <strong class="copyright color">More-Recipes © 2017, All Rights Reserved, Design &amp; Developed By: Akolliy</strong>
     </footer>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- semantic ui dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
 </body>
 </html>
