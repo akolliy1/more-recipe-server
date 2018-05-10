@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "for Food recipe",
   "main": "index.js",
-  "keywords": [],
+  "keywords": [
+    "more-recipe-server",
+    "heroku",
+    "express"
+  ],
   "author": "akolade adesanmi",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akolliy1/more-recipe-server"
+  },
   "dependencies": {
     "babel-preset-env": "^1.6.1",
     "bcrypt": "^1.0.3",

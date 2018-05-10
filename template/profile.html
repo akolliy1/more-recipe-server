@@ -20,6 +20,7 @@
     .media{box-sizing: border-box}
     .media-content{position: relative;left: -20%;top: 26px}
     figcaption .small-profile-pic {height: 70px;width: 40%;border-radius: 10px}
+    .color {color: rgb(166, 226, 203)!important}
     .note{position: relative;font-size: 10px;left: -12px;color: white;padding: 2px;border-radius: 10px;top: -12px;background: rgb(233, 24, 24)}
     @media (max-width: 768px) {
         .media-content{left: 32%;top: -80px}
@@ -31,7 +32,7 @@
     
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a href="" class="navbar-brand">Akool</a>
+            <a href="" class="navbar-brand color">Akool</a>
             <button class="navbar-toggler" type="button" data-toggle='collapse' data-target='#navbarProfile' aria-controls="navbarProfile" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,25 +40,26 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><a href="" class="nav-link">
                         <div class="menu" title="profile">
-                            <div class="item" data-value="jenny">
+                            <div class="item color" data-value="jenny">
                                 <img class="ui mini avatar image" src="./images/person-1.jpg">
-                                    Jenny Hess
+                                    <span>Jenny Hess</span>
                             </div>
                         </div>
                         <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <div class="navbar-nav navbar-right">
-                    <!-- <li class="nav-item"><a href="" class="nav-link">Home</a></li> -->
-                    <li class="nav-item" title="Messages"><a href="" class="nav-link"><span class="far fa-comment size"></span></a></li>
+                    <li class="nav-item mr-5"><a href="" class="nav-link color">Home</a></li>
+                    <li class="nav-item" title="friends"><a href="" class="nav-link"><span class="fas fa-user-friends size color"></span></a></li>
+                    <li class="nav-item" title="Messages"><a href="" class="nav-link"><span class="far fa-comment size color"></span></a></li>
                     <li class="nav-item" title="Notifications">
                         <a href="" class="nav-link">
-                            <span class="far fa-dot-circle size"></span>
+                            <span class="far fa-dot-circle size color"></span>
                             <span class="note">242</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sign Out
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -68,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"> Log Out</a>
+                                <a class="dropdown-item" href="./signout.html"> Log Out</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">  Help</a>
                                 <a class="dropdown-item" href="#">  Favorite</a>
@@ -104,18 +106,110 @@
                 
             </div>
         </div>
-        <section class="row">
+        <!-- <section class="row">
             <aside class="col-md-3">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem ea laudantium magnam commodi exercitationem pariatur dolorum necessitatibus? Unde reprehenderit mollitia quisquam quidem. Sit autem aliquam libero, illum ea dolor debitis?</p>
             </aside>
             <section class="col-md-6">
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo esse vel in iste ipsum reprehenderit animi cum excepturi expedita rerum nemo, minus possimus ad sequi a architecto perspiciatis id dolor.</p>
             </section>
-        </section>
-        <!-- <div class="ui segment">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis tenetur ipsa dolores aut quos illum, aliquam magni dicta, quod pariatur veritatis corrupti inventore nemo neque? Exercitationem quas perspiciatis veritatis doloribus!</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit hic repellat dolorum modi culpa, tempora labore dolores corporis pariatur sequi eos reprehenderit illo ex nihil, enim accusantium minus cumque recusandae!</p>
-        </div> -->
+        </section> -->
+        <div class="ui segment">
+            <section class="row">
+                <aside class="col-md-4 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div><span class="click fas fa-globe color"></span> Intro</div>
+                            <div class="status">hard working persionate very good all the best blah blah <span class="ml-2 click fas fa-pen-square color"></span></div>
+                            <hr>
+                            <div class="far fa-thumbs-up color"></div>
+                            <div>i like cooking ,Infact it's my hobby. <span class="ml-2 click fas fa-pen-square color"></span></div>
+                        </div>
+                    </div>
+                </aside>
+                <article class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <a href="" class="col-md-3" data-toggle="modal" data-target="#exampleModal"><span class="pr-2 click fas fa-pen-square color"></span>message</a>
+                                <a href="" class="col-md-3" data-toggle="modal" data-target="#exampleModal"><span class="pr-2 click fas fa-pen-square color"></span>photos</a>
+                                <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>tag</a>
+                                <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>Event</a>
+                            </div>
+                            <hr>
+                            <div class="ui form">
+                                <div class="field">
+                                    <label>Post</label>
+                                    <textarea rows="2" data-toggle="modal" data-target="#exampleModal" placeholder="what's your Recipe for today?"></textarea>
+                                    <!-- the recipe post pop up box -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Post Recipe</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>message</a>
+                                                        <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>photos</a>
+                                                        <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>tag</a>
+                                                        <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>Event</a>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="ui form">
+                                                        <div class="field">
+                                                            <label>Post</label>
+                                                            <textarea rows="4" placeholder="what's your Recipe for today?"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis quibusdam saepe ratione molestias voluptatem doloribus ducimus rem! Magni vitae, repellat perferendis iste provident, ipsa unde omnis molestias alias animi iusto!</p>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div class="menu">
+                                <div class="item" data-value="jenny">
+                                    <img class="ui mini avatar image" src="./images/person-1.jpg">
+                                    <a href="" class="user">Jenny Hess</a href="">
+                                    <span class="p-1">and</span>
+                                    <a href="" class="second-user">akolliy</a>
+                                    <span class="color" style="float:right;cursor:pointer">...</span>
+                                    <div class="meta">
+                                        <span class="date mt-2">29 April at 07:29 </span>
+                                    </div>
+                                    <div class="description mt-4">
+                                        <p>Kristy is an art director living in New York.</p>
+                                    </div>
+                                    <div class="image mt-3">
+                                        <img src="./img/Fast-food-img-1.jpg" alt="" class="card-img-top">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <img src="./img/banner-img-2.jpg" alt="" class="card-images"> -->
+                        </div>
+                    </div>
+                </article>
+            </section>
+                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis tenetur ipsa dolores aut quos illum, aliquam magni dicta, quod pariatur veritatis corrupti inventore nemo neque? Exercitationem quas perspiciatis veritatis doloribus!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit hic repellat dolorum modi culpa, tempora labore dolores corporis pariatur sequi eos reprehenderit illo ex nihil, enim accusantium minus cumque recusandae!</p> -->
+        </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
