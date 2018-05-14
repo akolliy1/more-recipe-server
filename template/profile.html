@@ -21,6 +21,15 @@
     .media-content{position: relative;left: -20%;top: 26px}
     figcaption .small-profile-pic {height: 70px;width: 40%;border-radius: 10px}
     .color {color: rgb(166, 226, 203)!important}
+    .justify-center{display: flex;text-align: center}
+    .turn{transform: rotate(180deg);}
+    .disappear-comment{display: none;}
+    .untransit{opacity: 0;visibility: hidden;}
+    .transit{opacity: 1;visibility: visible;transition: opacity 600ms,visibility 600ms;}
+    .appear{display: block ;}
+    .active{background: rgb(95, 95, 243);color: white !important;}
+    .comment-show-btn:active .disappear-comment{ display: block}
+    .flip {-moz-transform: scaleX(-1);-o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH;-ms-filter: "FlipH";}
     .note{position: relative;font-size: 10px;left: -12px;color: white;padding: 2px;border-radius: 10px;top: -12px;background: rgb(233, 24, 24)}
     @media (max-width: 768px) {
         .media-content{left: 32%;top: -80px}
@@ -49,7 +58,7 @@
                     </li>
                 </ul>
                 <div class="navbar-nav navbar-right">
-                    <li class="nav-item mr-5"><a href="" class="nav-link color">Home</a></li>
+                    <li class="nav-item mr-5"><a href="./recipe.html" class="nav-link color">Home</a></li>
                     <li class="nav-item" title="friends"><a href="" class="nav-link"><span class="fas fa-user-friends size color"></span></a></li>
                     <li class="nav-item" title="Messages"><a href="" class="nav-link"><span class="far fa-comment size color"></span></a></li>
                     <li class="nav-item" title="Notifications">
@@ -62,7 +71,7 @@
                         <a class="nav-link dropdown-toggle color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sign Out
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="top">
                                 <div class="menu">
                                     <div class="item" data-value="jenny">
                                         <img class="ui mini avatar image" src="./images/person-1.jpg">
@@ -119,11 +128,32 @@
                 <aside class="col-md-4 mb-2">
                     <div class="card">
                         <div class="card-body">
-                            <div><span class="click fas fa-globe color"></span> Intro</div>
-                            <div class="status">hard working persionate very good all the best blah blah <span class="ml-2 click fas fa-pen-square color"></span></div>
-                            <hr>
-                            <div class="far fa-thumbs-up color"></div>
-                            <div>i like cooking ,Infact it's my hobby. <span class="ml-2 click fas fa-pen-square color"></span></div>
+                            <div>    
+                                <div><span class="click fas fa-globe color"></span> Intro</div>
+                                <div class="status">hard working persionate very good all the best blah blah <span class="ml-2 click fas fa-pen-square color"></span></div>
+                                <hr>
+                            </div>
+                            <div>
+                                <div class="far fa-thumbs-up color"></div>
+                                <div>i like cooking ,Infact it's my hobby. <span class="ml-2 click fas fa-pen-square color"></span></div>
+                                <hr>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary">
+                                    Favorites
+                                    <span class="badge badge-light">9</span>
+                                    <span class="sr-only">unread messages</span>
+                                </button>
+                                <hr>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary">
+                                    ALL RECIPES
+                                    <span class="badge badge-light">9</span>
+                                    <span class="sr-only">unread messages</span>
+                                </button>
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 </aside>
@@ -131,10 +161,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <a href="" class="col-md-3" data-toggle="modal" data-target="#exampleModal"><span class="pr-2 click fas fa-pen-square color"></span>message</a>
-                                <a href="" class="col-md-3" data-toggle="modal" data-target="#exampleModal"><span class="pr-2 click fas fa-pen-square color"></span>photos</a>
-                                <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>tag</a>
-                                <a href="" class="col-md-3"><span class="pr-2 click fas fa-pen-square color"></span>Event</a>
+                                <a href="" class="col-md-3 col" data-toggle="modal" data-target="#exampleModal"><span class="pr-2 click fas fa-pen-square color"></span>message</a>
+                                <a href="" class="col-md-3 col" data-toggle="modal" data-target="#exampleModal"><span class="pr-2 click fas fa-pen-square color"></span>photos</a>
+                                <a href="" class="col-md-3 col"><span class="pr-2 click fas fa-pen-square color"></span>tag</a>
+                                <a href="" class="col-md-3 col"><span class="pr-2 click fas fa-pen-square color"></span>Event</a>
                             </div>
                             <hr>
                             <div class="ui form">
@@ -200,11 +230,235 @@
                                     <div class="image mt-3">
                                         <img src="./img/Fast-food-img-1.jpg" alt="" class="card-img-top">
                                     </div>
+                                    <div class="card-footer">
+                                        <div class="row justify-center">
+                                            <a href="#" class="card-footer-item col-md-3"><span class="far fa-thumbs-down pl-2 turn color"></span> Hit</a>
+                                            <a href="#" class="card-footer-item col-md-3"><span class="far fa-comment-alt pl-2 color flip"></span> Comment</a>
+                                            <a href="#" class="card-footer-item col-md-3"><span class="far fa-eye pl-2 turn color"></span>100k</a>
+                                            <a href="#" class="card-footer-item col-md-3"><span class="far fa-hand-rock pl-2 turn color"></span>Knock</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="badge badge-light">500k</span>
+                                                <span class="sr-only">unread messages</span>
+                                                Hits
+                                            </button>
+                                            <button type="button" class="btn btn-light">
+                                                <span class="badge badge-light">0</span>
+                                                <span class="sr-only">unread messages</span>
+                                                Knock
+                                            </button>
+                                            <!-- button to display comment -->
+                                            <button type="button" class="btn btn-light">
+                                                <span class="badge badge-light">30</span>
+                                                <span class="sr-only">unread messages</span>
+                                                comments
+                                            </button>
+                                        </div>
+                                        <!-- the commentary -->
+                                        <div class="ui feed">
+                                            <div class="event">
+                                                <div class="label">
+                                                    <img src="./img/Fast-food-img-1.jpg">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="summary">
+                                                        <a class="user">
+                                                            Elliot Fu
+                                                        </a> added you as a friend
+                                                        <div class="date">
+                                                            1 Hour Ago
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <a class="like">
+                                                            <i class="like icon"></i> 4 Likes
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="event">
+                                                <div class="label">
+                                                    <img src="./img/sitttin-img-1.jpg">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="summary">
+                                                        <a>Joe Henderson</a> posted on his page
+                                                        <div class="date">
+                                                            3 days ago
+                                                        </div>
+                                                    </div>
+                                                    <div class="extra text">
+                                                        Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even
+                                                        if we don't run extra laps that day, we surely will come back for more of the same another day soon.
+                                                    </div>
+                                                    <div class="meta">
+                                                        <a class="like">
+                                                            <i class="like icon"></i> 5 Likes
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="event">
+                                                <div class="label">
+                                                    <img src="./img/udemy-img.jpg">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="summary">
+                                                        <a>Helen Troy</a> added
+                                                        <a>2 new illustrations</a>
+                                                        <div class="date">
+                                                            4 days ago
+                                                        </div>
+                                                    </div>
+                                                    <div class="extra images">
+                                                        <a><img src="./img/banner-img-3.jpg"></a>
+                                                        <a><img src="./img/banner-img-4.jpg"></a>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <a class="like"><i class="like icon"></i> 1 Like</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <img src="./img/banner-img-2.jpg" alt="" class="card-images"> -->
                         </div>
                     </div>
+                    <!-- End here -->
+
+                    <!-- user card start -->
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div class="menu">
+                                <div class="item" data-value="jenny">
+                                    <img class="ui mini avatar image" src="./images/person-1.jpg">
+                                    <a href="" class="user">Jenny Hess</a href="">
+                                    <span class="p-1">and</span>
+                                    <a href="" class="second-user">akolliy</a>
+                                    <span class="color" style="float:right;cursor:pointer">...</span>
+                                    <div class="meta">
+                                        <span class="date mt-2">29 April at 07:29 </span>
+                                    </div>
+                                    <div class="description mt-4">
+                                        <p>Kristy is an art director living in New York.</p>
+                                    </div>
+                                    <div class="image mt-3">
+                                        <img src="./img/Fast-food-img-1.jpg" alt="" class="card-img-top">
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row justify-center">
+                                            <a href="#" class="card-footer-item col-md-3">
+                                                <span class="far fa-thumbs-down pl-2 turn color"></span> Hit</a>
+                                            <a href="#" class="card-footer-item col-md-3">
+                                                <span class="far fa-comment-alt pl-2 color flip"></span> Comment</a>
+                                            <a href="#" class="card-footer-item col-md-3">
+                                                <span class="far fa-eye pl-2 turn color"></span>100k</a>
+                                            <a href="#" class="card-footer-item col-md-3">
+                                                <span class="far fa-hand-rock pl-2 turn color"></span>Knock</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="">
+                                            <button type="button" class="btn btn-default">
+                                                <span class="badge badge-light">500k</span>
+                                                <span class="sr-only">unread messages</span>
+                                                Hits
+                                            </button>
+                                            <button type="button" class="btn btn-light">
+                                                <span class="badge badge-light">0</span>
+                                                <span class="sr-only">unread messages</span>
+                                                Knock
+                                            </button>
+                                            <button type="button" class="btn btn-light">
+                                                <span class="badge badge-light">30</span>
+                                                <span class="sr-only">unread messages</span>
+                                                comments
+                                            </button>
+                                        </div>
+                                        <div class="ui feed">
+                                            <div class="event">
+                                                <div class="label">
+                                                    <img src="./img/Fast-food-img-1.jpg">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="summary">
+                                                        <a class="user">
+                                                            Elliot Fu
+                                                        </a> added you as a friend
+                                                        <div class="date">
+                                                            1 Hour Ago
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <a class="like">
+                                                            <i class="like icon"></i> 4 Likes
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="event">
+                                                <div class="label">
+                                                    <img src="./img/sitttin-img-1.jpg">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="summary">
+                                                        <a>Joe Henderson</a> posted on his page
+                                                        <div class="date">
+                                                            3 days ago
+                                                        </div>
+                                                    </div>
+                                                    <div class="extra text">
+                                                        Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even
+                                                        if we don't run extra laps that day, we surely will come back for more of the same another
+                                                        day soon.
+                                                    </div>
+                                                    <div class="meta">
+                                                        <a class="like">
+                                                            <i class="like icon"></i> 5 Likes
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="event">
+                                                <div class="label">
+                                                    <img src="./img/udemy-img.jpg">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="summary">
+                                                        <a>Helen Troy</a> added
+                                                        <a>2 new illustrations</a>
+                                                        <div class="date">
+                                                            4 days ago
+                                                        </div>
+                                                    </div>
+                                                    <div class="extra images">
+                                                        <a>
+                                                            <img src="./img/banner-img-3.jpg">
+                                                        </a>
+                                                        <a>
+                                                            <img src="./img/banner-img-4.jpg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <a class="like">
+                                                            <i class="like icon"></i> 1 Like</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <img src="./img/banner-img-2.jpg" alt="" class="card-images"> -->
+                        </div>
+                    </div>
+                    <!-- End here user card -->
+
                 </article>
             </section>
                 <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis tenetur ipsa dolores aut quos illum, aliquam magni dicta, quod pariatur veritatis corrupti inventore nemo neque? Exercitationem quas perspiciatis veritatis doloribus!</p>
@@ -212,6 +466,32 @@
         </div>
     </div>
     <!-- Optional JavaScript -->
+    <script>
+        // const showIt = document.getElementsByClassName('comment-show-btn');
+        // const displayIt = document.getElementsByClassName('disappear-comment');
+        // for(let i = 0; i < showIt.length;i++){
+        //     showIt[i].addEventListener('click',true,function () {
+        //         let x = 0;
+        //         while(x < displayIt.length) {
+        //             displayIt[x].classList.remove('disappear-comment')
+        //             displayIt[x].classList.add('untransit');
+        //             displayIt[x].classList.add('transit');
+        //             X++
+        //         }
+        //     })
+        // }
+
+        // var selClass = 'selected';
+
+        //     $('showIt').click(function () {
+        //         // Remove the defined class name in the `selClass` variable on any sibling that has it set
+        //         $(this).parents('.displayIt').find('.' + disappear-comment).removeClass("disappear-comment");
+
+        //         // Add the selected class to the button that was clicked
+        //         // $(this).addClass(selClass);
+        //     });
+        
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
