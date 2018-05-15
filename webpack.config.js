@@ -17,11 +17,6 @@ module.exports = {
     publicPath: '/',
     path: path.resolve(__dirname, 'client/dist/')
   },
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      title: 'Development'
-    })
   ],
   watchOptions: {
     poll: 1000,
