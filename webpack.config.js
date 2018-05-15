@@ -14,7 +14,6 @@ import CleanWebpackPlugin from 'clean-webpack-plugin'
 // import WebpackDevServer from 'webpack-dev-server'
 
 module.exports = {
-  devtool: 'eval-source-map',
   entry: {
     app: './client/index.jsx',
     home: './client/index.jsx'
@@ -23,9 +22,6 @@ module.exports = {
     filename: '[name].bundle.js',
     publicPath: '/',
     path: path.resolve(__dirname, 'client/dist/')
-  },
-  devServer: {
-    contentBase: './dist'
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -66,7 +62,8 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env']
           }
-        }
+        },
+        include: path.join(__dirname, '/client')
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
