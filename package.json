@@ -73,6 +73,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "scripts": {
+    "build:webpack": "webpack --config webpack.prod.js",
     "start:dev": "nodemon --exec babel-node -- ./bin/www",
     "babel-node": "babel-node ./src/app.js --presets=env",
     "test": "nyc mocha src/test/allTest.js --compilers js:babel-core/register --require babel-polyfill --reporter nyan --timeout 15000 --exit",

@@ -25,8 +25,7 @@ module.exports = {
     path: path.resolve(__dirname, 'client/dist/')
   },
   devServer: {
-    contentBase: './dist',
-    colors: true
+    contentBase: './dist'
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -40,6 +39,7 @@ module.exports = {
       safe: true
     })
   ],
+  watch: true,
   watchOptions: {
     poll: 1000,
     aggregateTimeout: 1000,
