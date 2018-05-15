@@ -6,16 +6,15 @@ import Dotenv from 'dotenv-webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 // to clean the /dist folder before each build,
 import CleanWebpackPlugin from 'clean-webpack-plugin'
+// eval-source-map is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped
+// alternative is cheap-eval-source-map - it only maps line numbers
 // poll is reloading every seconds the files is change
 // aggregateTimeout Add a delay before rebuilding once the first file changed.
-import WebpackDevServer from 'webpack-dev-server'
+// webpackDevServer is meant for create server it has built-in https
+// import WebpackDevServer from 'webpack-dev-server'
 
-const Option = {
-  poll: 1000,
-  aggregateTimeout: 1000,
-  ignored: /node_modules/
-}
 module.exports = {
+  devtool: 'eval-source-map',
   entry: {
     app: './client/index.jsx',
     home: './client/index.jsx'
@@ -39,16 +38,21 @@ module.exports = {
     new Dotenv({
       path: './.env',
       safe: true
-    }),
-    new WebpackDevServer({
-      watch: Option
     })
   ],
+  watchOptions: {
+    poll: 1000,
+    aggregateTimeout: 1000,
+    ignored: /node_modules/
+  },
+  resolve: {
+    extensions: ['.jsx', '.js']
+  },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.s?css$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|gif|jpe?g|svg)$/i,
@@ -71,12 +75,6 @@ module.exports = {
     ]
   }
 }
-
-// watchOptions: {
-//   poll: 1000,
-//     aggregateTimeout: 1000,
-//       ignored: /node_modules/
-// },
 
 // plugin options for babel-loader
 // plugins: [require('@babel/plugin-proposal-object-rest-spread')]

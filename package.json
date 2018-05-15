@@ -64,6 +64,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "mock-local-storage": "^1.0.5",
     "nodemon": "^1.17.3",
+    "sass-loader": "^7.0.1",
     "sequelize": "^4.37.6",
     "should": "^13.2.1",
     "style-loader": "^0.21.0",
