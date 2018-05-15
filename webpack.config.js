@@ -77,3 +77,6 @@ module.exports = {
 //     aggregateTimeout: 1000,
 //       ignored: /node_modules/
 // },
+
+// plugin options for babel-loader
+// plugins: [require('@babel/plugin-proposal-object-rest-spread')]
