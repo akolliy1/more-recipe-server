@@ -1,12 +1,32 @@
 import webpack from 'webpack'
 import path from 'path'
+// to build different html template by replacing default html template
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+// to clean the /dist folder before each build,
+import CleanWebpackPlugin from 'clean-webpack-plugin'
+// poll is reloading every seconds the files is change
+// aggregateTimeout Add a delay before rebuilding once the first file changed.
 
 module.exports = {
-  entry: './client/index.jsx',
+  entry: {
+    app: './client/index.jsx',
+    home: './client/index.jsx'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: '/',
     path: path.resolve(__dirname, 'client/dist/')
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Development'
+    })
+  ],
+  watchOptions: {
+    poll: 1000,
+    aggregateTimeout: 1000,
+    ignored: /node_modules/
   },
   module: {
     rules: [
