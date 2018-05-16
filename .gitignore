@@ -3,3 +3,14 @@ node_modules
 obj
 dist
 views
+/build
+/coverage
+/build-server
+npm-debug.log
+.vs
+.nyc_output
+.vscode
+.DS_Store
+*.log
+/e2ereports
+/screenshots
