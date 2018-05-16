@@ -1,3 +1,0 @@
-C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Release\more_recipe_server.Resources.resources
-C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Release\more-recipe-server.vbproj.GenerateResource.Cache
-C:\Users\duntu\Desktop\more-recipe-server\obj\x86\Release\more-recipe-server.vbproj.CoreCompileInputs.cache
