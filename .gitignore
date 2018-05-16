@@ -1,5 +1,7 @@
 node_modules
 .env
+/bin/debug
+/bin/Release
 obj
 dist
 views
