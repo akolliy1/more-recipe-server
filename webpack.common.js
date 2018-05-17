@@ -14,12 +14,9 @@ import CleanWebpackPlugin from 'clean-webpack-plugin'
 // import WebpackDevServer from 'webpack-dev-server'
 
 module.exports = {
-  entry: {
-    app: './client/index.jsx',
-    home: './client/index.jsx'
-  },
+  entry: [path.join(__dirname, 'client/index.jsx')],
   output: {
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
     publicPath: '/',
     path: path.resolve(__dirname, 'client/dist/')
   },
@@ -75,3 +72,7 @@ module.exports = {
 
 // plugin options for babel-loader
 // plugins: [require('@babel/plugin-proposal-object-rest-spread')]
+// entry: {
+//   app: './client/index.jsx',
+//   home: './client/index.jsx'
+// },
