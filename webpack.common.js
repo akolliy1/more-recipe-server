@@ -52,10 +52,13 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
+          query: {
+            plugins: ['transform-class-properties', 'transform-object-rest-spread']
+          },
           options: {
             presets: ['@babel/preset-env']
           }

@@ -82,7 +82,7 @@
   "scripts": {
     "start:dev": "nodemon --exec babel-node -- ./bin/www",
     "start": "webpack-dev-server --mode development --open",
-    "start:dev:webpack": "webpack-dev-server --open --config webpack.config.js",
+    "start:webpack": "webpack-dev-server --open --config webpack.dev.js",
     "dev:client": "webpack --config webpack.dev.js --watch",
     "prod:server": "babel -d ./build-server ./server -s",
     "prod:client": "webpack --config webpack.prod.js",
