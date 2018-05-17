@@ -1,11 +1,16 @@
-import webpack from 'webpack'
-import path from 'path'
+// import webpack from 'webpack'
+const webpack = require('webpack')
+// import path from 'path'
+const path = require('path')
 // to allow Dotenv files
-import Dotenv from 'dotenv-webpack'
+// import Dotenv from 'dotenv-webpack'
+const Dotenv = require('dotenv-webpack')
 // to build different html template by replacing default html template
-import HtmlWebpackPlugin from 'html-webpack-plugin'
+// import HtmlWebpackPlugin from 'html-webpack-plugin'
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 // to clean the /dist folder before each build,
-import CleanWebpackPlugin from 'clean-webpack-plugin'
+// import CleanWebpackPlugin from 'clean-webpack-plugin'
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 // eval-source-map is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped
 // alternative is cheap-eval-source-map - it only maps line numbers
 // poll is reloading every seconds the files is change
