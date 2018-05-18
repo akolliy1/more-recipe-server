@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "for Food recipe",
   "private": true,
-  "main": "index.js",
   "keywords": [
     "more-recipe-server",
     "heroku",
