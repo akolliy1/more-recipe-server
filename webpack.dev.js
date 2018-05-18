@@ -22,6 +22,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = merge(common, {
   devtool: 'eval-source-map',
+  mode: 'development',
   devServer: {
     contentBase: './client/dist'
   },

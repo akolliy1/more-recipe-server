@@ -3,11 +3,13 @@ const path = require('path')
 // to allow Dotenv files
 
 module.exports = {
-  entry: [path.join(__dirname, 'client/index.jsx')],
+  entry: {
+    app: './src/index.js'
+  },
   output: {
     filename: 'bundle.js',
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist/')
+    path: path.resolve(__dirname, 'dist')
   },
   watch: true,
   watchOptions: {
