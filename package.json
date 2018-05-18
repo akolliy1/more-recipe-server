@@ -80,6 +80,7 @@
   },
   "scripts": {
     "start:dev": "nodemon --exec babel-node -- ./bin/www",
+    "build": "webpack",
     "start": "webpack-dev-server --mode development --open",
     "start:webpack": "webpack-dev-server --open --config webpack.dev.js",
     "dev:client": "webpack --config webpack.dev.js --watch",
@@ -90,7 +91,7 @@
     "test:server": "mocha --timeout 500000 --compilers js:babel-core/register src/test/controllers/*",
     "dev-migrate": "sequelize db:migrate:undo:all&& sequelize db:migrate",
     "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate&& npm run test",
-    "build": "babel src -d dist",
+    "build:src": "babel src -d dist",
     "start:src": "node src/app.js",
     "test:coverage": "npm run coveralls",
     "coveralls": "npm test&& nyc report --reporter=text-lcov | coveralls"

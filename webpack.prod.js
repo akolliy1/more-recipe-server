@@ -5,6 +5,7 @@ import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
 
 module.exports = merge(config, {
   devtool: 'source-map',
+  mode: 'production',
   plugins: [
     new UglifyJSPlugin({
       sourceMap: true
