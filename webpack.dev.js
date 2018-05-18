@@ -1,8 +1,11 @@
+import merge from 'webpack-merge'
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const common = require('./webpack.common.js')
 
-module.exports = {
+module.exports = merge(common,{
   entry: {
     app: './src/index.js',
     print: './client/index.jsx'
@@ -14,7 +17,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
+      template: './client/index.html',
+      filename: 'index.html',
+      inject: 'body'
     })
   ],
   output: {
@@ -22,4 +27,4 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   }
-}
+})

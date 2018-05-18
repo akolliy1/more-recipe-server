@@ -3,14 +3,6 @@ const path = require('path')
 // to allow Dotenv files
 
 module.exports = {
-  entry: {
-    app: './src/index.js'
-  },
-  output: {
-    filename: 'bundle.js',
-    publicPath: '/',
-    path: path.resolve(__dirname, 'dist')
-  },
   watch: true,
   watchOptions: {
     poll: 1000,
@@ -31,6 +23,19 @@ module.exports = {
         use: ['file-loader']
       },
       {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            plugins: ['transform-class-properties', 'transform-object-rest-spread']
+          },
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        },
+        include: path.join(__dirname, '/client')
+      }, {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
