@@ -1,6 +1,7 @@
 // import path from 'path'
 const path = require('path')
 // to allow Dotenv files
+import webpack from 'webpack'
 
 module.exports = {
   watch: true,
