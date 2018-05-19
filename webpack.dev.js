@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const common = require('./webpack.common.js')
 
-module.exports = merge(common,{
+module.exports = merge(common, {
   entry: {
     app: './src/index.js',
     print: './client/index.jsx'
