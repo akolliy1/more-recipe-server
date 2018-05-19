@@ -32,7 +32,7 @@ module.exports = {
             plugins: ['transform-class-properties', 'transform-object-rest-spread']
           },
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env','react','env']
           }
         },
         include: path.join(__dirname, '/client')
