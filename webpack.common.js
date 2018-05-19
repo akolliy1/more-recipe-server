@@ -1,7 +1,6 @@
 // import path from 'path'
 const path = require('path')
 // to allow Dotenv files
-import webpack from 'webpack'
 
 module.exports = {
   watch: true,
@@ -24,7 +23,7 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        test: /\.js$/,
+        test: /\.js?x$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -32,20 +31,7 @@ module.exports = {
             plugins: ['transform-class-properties', 'transform-object-rest-spread']
           },
           options: {
-            presets: ['@babel/preset-env','react','env']
-          }
-        },
-        include: path.join(__dirname, '/client')
-      }, {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            plugins: ['transform-class-properties', 'transform-object-rest-spread']
-          },
-          options: {
-            presets: ['@babel/preset-env']
+            presets: ['react', 'env']
           }
         },
         include: path.join(__dirname, '/client')
