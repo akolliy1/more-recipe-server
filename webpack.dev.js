@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
+  mode: 'development',
   entry: {
     app: './src/index.js',
     print: './client/index.jsx'
