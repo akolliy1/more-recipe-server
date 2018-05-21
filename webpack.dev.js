@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const common = require('./webpack.common.js')
 // to allow Dotenv files
 const Dotenv = require('dotenv-webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(common, {
   mode: 'development',
@@ -29,6 +30,10 @@ module.exports = merge(common, {
       template: './client/index.html',
       filename: 'index.html',
       inject: 'body'
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   stats: {
