@@ -23,6 +23,9 @@ module.exports = merge(common, {
       inject: 'body'
     })
   ],
+  stats: {
+    colors: true
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
