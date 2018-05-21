@@ -18,3 +18,19 @@ store.subscribe(() => console.log('Look ma, Rex!!'))
 store.dispatch(addArticle({ name: 'React Redux for Beginners', id: 2 }))
 
 window.addArticle = addArticle
+
+
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2,
+          minSize: 0
+        }
+      }
+    },
+    occurrenceOrder: true // To keep filename consistent between different modes (for example building only)
+  },
