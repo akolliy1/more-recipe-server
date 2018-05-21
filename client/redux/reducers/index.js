@@ -3,7 +3,7 @@ import { ADD_ARTICLE } from '../constants/action-types'
 const initialState = {
   articles: []
 }
-const rootReducer = (state = initialState, action) => {
+const index = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ARTICLE:
       return {
@@ -14,4 +14,4 @@ const rootReducer = (state = initialState, action) => {
       return state
   }
 }
-export default rootReducer
+export default index
