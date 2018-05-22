@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import minitoastr from 'mini-toastr';
+import minitoastr from 'mini-toastr'
 
 class signupComponent extends Component {
   constructor () {
@@ -15,6 +15,11 @@ class signupComponent extends Component {
   handleChange (event) {
     const {name, value} = event.target
     this.setState({name: value})
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.isAutheticated) {
+      const check = this.props.children
+    }
   }
   handleSubmit (event) {
     event.preventDefault()
@@ -32,5 +37,10 @@ class signupComponent extends Component {
       minitoastr.init()
       minitoastr.showMessage('pls make sure password mathch')
     }
+  }
+  render () {
+    return (
+      <f
+    )
   }
 }
