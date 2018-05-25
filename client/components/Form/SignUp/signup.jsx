@@ -40,7 +40,7 @@ class signupComponent extends Component {
   }
   render () {
     return (
-      <f
+      
     )
   }
 }
