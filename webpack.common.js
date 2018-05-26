@@ -37,9 +37,9 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: './images/[hash].[name].[ext]',
-          },
-        },
+            name: './images/[hash].[ext]'
+          }
+        }
       },
       {
         test: /.jsx?$/,
