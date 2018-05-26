@@ -1,34 +1,15 @@
 // import path from 'path'
 const path = require('path')
-// to allow Dotenv files
-const merge = require('webpack-merge')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const common = require('./webpack.common.js')
-const Dotenv = require('dotenv-webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: {
-    app: './src/index.js',
-    print: './client/index.jsx'
-  },
-  devtool: 'cheap-eval-source-map',
   devServer: {
-    contentBase: './client/dist'
+    contentBase: './dist'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new Dotenv({
-      path: './.env',
-      safe: false
-    }),
-    new HtmlWebpackPlugin({
-      template: './client/index.html',
-      filename: 'index.html',
-      inject: 'body'
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   output: {
@@ -49,18 +30,25 @@ module.exports = {
     rules: [
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|gif|jpe?g|svg)$/i,
-        use: ['file-loader']
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: './images/[hash].[ext]'
+          }
+        }
       },
       {
-        test: /\.js?x$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader'
-        },
+        test: /.jsx?$/,
+        enforce: 'pre',
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ],
         include: path.join(__dirname, '/client')
       },
       {
@@ -77,3 +65,4 @@ module.exports = {
 //   app: './client/index.jsx',
 //   home: './client/index.jsx'
 // },
+// use: ['file-loader']
