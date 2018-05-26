@@ -125,6 +125,12 @@ class Users {
         msg: 'Incorrect password'
       })
     }
+    else if(!user){
+      return res.status(404).send({
+        success: false,
+        message: 'User not found'
+      })
+    }
     return res.status(500).send({
       success: false,
       message: 'internal server Error '
