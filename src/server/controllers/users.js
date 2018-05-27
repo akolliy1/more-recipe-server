@@ -5,7 +5,6 @@ import trimUserData from '../utility/trimUserData'
 import { inputValidation } from '../middlewares/inputValidation'
 import { User, Recipe, Review, Favorite } from '../models'
 const secret = process.env.JWT_SECRET
-const that
 const Op = Sequelize.Op
 
 /**
@@ -31,7 +30,8 @@ const userNameAndEmailValidation = (username, email) => {
           } else {
             field = 'Email'
           }
-          reject(`${field} already exist`)
+          const error = `${field} already exist`
+          reject(error)
         }
         resolve()
       })
@@ -74,7 +74,8 @@ class Users {
             res.status(201).json({
               success: true,
               message: 'User created successfully',
-              user
+              user,
+              token
             })
           })
           .catch(error => res.status(500).json({
@@ -103,33 +104,25 @@ class Users {
    * @memberof Users
    */
   static async signIn (req, res) {
-    const password = trimUserData(req.body.password, '')
-    const authName = trimUserData(req.body.authName, '')
-    const user = await User.find({
-      attributes: ['id', 'name', 'username', 'email', 'password'],
-      where: { [Op.or]: [{ username: authName }, { email: authName }] }
-    })
+    const username = trimUserData(req.body.authName)
+    const email = trimUserData(req.body.authName)
+    const Op = Sequelize.Op
+    const user = await User
+      .findOne({ where: { [Op.or]: { username: username, email: email } } })
     if (user) {
-      const { id, username, email, password } = user
-      const payload = { id, username, email }
-      const token = jwt.sign(payload, secret, { expiresIn: '4h' })
-      const confirmedPass = await bcrypt.compareSync(req.body.password, password)
-      if (confirmedPass) {
-        return res.status(200).send({
-          success: true,
-          message: 'Signin successfuly',
-          user, 
-          token
-        })
+      const password = user.password
+      const compared = await bcrypt.compareSync(trimUserData(req.body.password), password)
+      if (compared) {
+        const { id, username, email } = user
+        const payload = { id: id, username: username, email: email }
+        const token = jwt.sign(payload, secret, { expiresIn: '6h' })
+        return res.status(200).send({success: true, token})
+      } else {
+        return res.status(400).send({success: false, message: 'Incorrect pasword'})
       }
-      return res.status(400).send({
-        msg: 'Incorrect password'
-      })
+    } else {
+      return res.status(404).send({success: false, message: 'user not found'})
     }
-    return res.status(500).send({
-      success: false,
-      message: 'internal server Error '
-    })
   }
   /**
      * @description Get A User details
@@ -164,6 +157,12 @@ class Users {
       })
     }
   }
+  /**
+   * @description delete User
+   * @param {req} request
+   * @param {res} response
+   * @returns {object} deleted
+   */
   static destroy (req, res) {
     return User
       .findById(req.params.userId)

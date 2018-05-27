@@ -1,7 +1,7 @@
 import User from '../controllers/users'
 import recipes from '../controllers/recipes'
 import reviews from '../controllers/reviews'
-import Validation from '../middlewares/userValidations'
+import Validations from '../middlewares/userValidations'
 
 /**
  * @description Invoking Object Data as new object
@@ -14,7 +14,7 @@ module.exports = (app) => {
   }))
 
   app.post('/api/v1/users/signup', User.signUp)
-  app.post('/api/users/signin', Validation.validateUserSignin, User.signIn)
+  app.post('/api/users/signin', Validations.validateUserSignin, User.signIn)
   app.get('/api/users/:userId/profile', User.listAUser)
   // route to create recipes
   app.post('/recipes', recipes.createRecipes)

@@ -1,11 +1,11 @@
-const merge = require('webpack-merge')
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const common = require('./webpack.common.js')
+import merge from 'webpack-merge'
+import path from 'path'
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
+import common from './webpack.common.js'
 // to allow Dotenv files
-const Dotenv = require('dotenv-webpack')
+import Dotenv from 'dotenv-webpack'
 
 module.exports = merge(common, {
   mode: 'development',
