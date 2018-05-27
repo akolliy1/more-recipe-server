@@ -15,18 +15,16 @@ const { User } = model
 class Validations {
   static async validateUserSignin (req, res, next) {
     const { authName, password } = req.body
-    if (!authName) {
+    if (!authName || authName.length < 3) {
       return res.status(400).send({
-        errors: [{
-          message: 'Username field cannot be empty'
-        }]
+        success: false,
+        message: 'Username field cannot be empty'
       })
     }
-    if (!password) {
+    if (!password || password.length < 3) {
       return res.status(400).send({
-        errors: [{
-          message: 'Password field cannot be empty'
-        }]
+        success: false,
+        message: 'Password field cannot be empty'
       })
     }
     next()

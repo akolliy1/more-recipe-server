@@ -226,7 +226,7 @@ describe('Users', () => {
           expect(res.body.message).to.equal('User created successfully')
           expect(res.body.success).to.equal(true)
           expect(res.body).to.have.deep.keys(
-            'success', 'message', 'user'
+            'success', 'message', 'user', 'token'
           )
           setImmediate(done)
         })
@@ -284,9 +284,10 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(404)
             expect(res.body.success).to.equal(false)
-            expect(res.body.message).to.equal('User not found')
+            expect(res.body.message).to.equal('user not found')
             expect(res.body.authName).to.equal('ak')
             setImmediate(done)
           })
@@ -301,15 +302,15 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
-            expect(res.statusCode).to.equal(404)
+            expect(err)
+            expect(res.statusCode).to.equal(400)
             expect(res.body.success).to.equal(false)
-            expect(res.body.authName).to.equal('ak')
-            expect(res.body.message).to.equal('User not found')
+            expect(res.body.message).to.equal('Username field cannot be empty')
             setImmediate(done)
           })
       })
 
-      it('should return User not found when field is empty', (done) => {
+      it('should return User field cannot be empty', (done) => {
         chai.request(server)
           .post('/api/users/signin')
           .set('Accept', 'application/json')
@@ -318,9 +319,10 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
-            expect(res.statusCode).to.equal(404)
+            expect(err)
+            expect(res.statusCode).to.equal(400)
             expect(res.body.success).to.equal(false)
-            expect(res.body.message).to.equal('User not found')
+            expect(res.body.message).to.equal('Username field cannot be empty')
             setImmediate(done)
           })
       })
@@ -334,9 +336,10 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(404)
             expect(res.body.success).to.equal(false)
-            expect(res.body.message).to.equal('User not found')
+            expect(res.body.message).to.equal('user not found')
             setImmediate(done)
           })
       })
@@ -350,6 +353,7 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(200)
             expect(res.body.success).to.equal(true)
             expect(res.body.user.email).to.equal('akolade@example.com')
@@ -369,10 +373,10 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(404)
-            expect(res.body.authName).to.equal('akoladeexample.com')
             expect(res.body.success).to.equal(false)
-            expect(res.body.message).to.equal('User not found')
+            expect(res.body.message).to.equal('user not found')
             setImmediate(done)
           })
       })
@@ -386,6 +390,7 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(200)
             expect(res.body.user.username).to.equal('akolliys')
             expect(res.body).to.have.all.deep.keys(
@@ -404,6 +409,7 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(200)
             expect(res.body).to.have.all.deep.keys(
               'success', 'message', 'token', 'user'

@@ -116,7 +116,7 @@ class Users {
         const { id, username, email } = user
         const payload = { id: id, username: username, email: email }
         const token = jwt.sign(payload, secret, { expiresIn: '6h' })
-        return res.status(200).send({success: true, token})
+        return res.status(200).send({success: true, message: 'successfuly signin', user, token})
       } else {
         return res.status(400).send({success: false, message: 'Incorrect pasword'})
       }
