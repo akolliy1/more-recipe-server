@@ -5,6 +5,7 @@ import trimUserData from '../utility/trimUserData'
 import { inputValidation } from '../middlewares/inputValidation'
 import { User, Recipe, Review, Favorite } from '../models'
 const secret = process.env.JWT_SECRET
+const that
 const Op = Sequelize.Op
 
 /**
