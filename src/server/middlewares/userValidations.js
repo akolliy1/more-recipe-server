@@ -29,5 +29,23 @@ class Validations {
     }
     next()
   }
+  /**
+   * @description validate user input if already existed
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} validated response
+   */
+  static async ValidateUserUpdate (req, res, next) {
+    const userId = req.params.userId
+    const name = req.body.name
+    const email = trimUserData(req.body.email)
+    const user = await User.findById(userId)
+    const check = await function () {
+      if (name === user.name && email === user.email) {
+        return res.status(200).send({message: 'already up-to-date'})
+      } else { next() }
+    }
+    check()
+  }
 }
 export default Validations
