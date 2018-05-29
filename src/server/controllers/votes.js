@@ -8,6 +8,20 @@ export default class votes {
      * @param {*} res
      * @returns {Promise} promise
      */
+  static unlike (req, res) {
+    const { userId, recipeId } = req.body
+    const promise = new Promise((resolve, reject) => {
+
+    })
+    return promise
+    // const downvote =
+  }
+  /**
+     * @description like - Recipe like
+     * @param {*} req
+     * @param {*} res
+     * @returns {Promise} promise
+     */
   static like (req, res) {
     const promise = new Promise((resolve, reject) => {
       const { userId, recipeId } = req.body
@@ -17,9 +31,7 @@ export default class votes {
             if (liked) {
               Recipe.findById(recipeId).then((recipe) => {
                 recipe.increment('upvotes')
-                  .then(() => {
-                    resolve(res.status(201).send({success: true, message: 'Recipe liked'}))
-                  })
+                resolve(res.status(201).send({success: true, message: 'Recipe liked'}))
               })
             }
             reject(res.status(409).send({success: false, message: 'you\'ve liked'}))
