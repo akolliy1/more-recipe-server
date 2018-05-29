@@ -158,6 +158,26 @@ class Users {
     }
   }
   /**
+   * @description User Update
+   * @param {req} request
+   * @param {res} response
+   * @return {object} user Update feedback
+   */
+  static async updateUser (req, res) {
+    const userId = req.params.userId
+    const {name, email, imageUrl} = req.body
+    const user = await User.findById(userId)
+    if (user) {
+      const update = await user.update({
+        name: name || user.name,
+        email: email || user.email,
+        username: user.username,
+        imageUrl: imageUrl || user.imageUrl
+      })
+      return res.status(201).send({success: true, message: 'updated successfully', update: update})
+    }
+  }
+  /**
    * @description delete User
    * @param {req} request
    * @param {res} response
