@@ -2,6 +2,7 @@ import User from '../controllers/users'
 import favorites from '../controllers/favorites'
 import recipes from '../controllers/recipes'
 import reviews from '../controllers/reviews'
+import votes from '../controllers/votes'
 import Validations from '../middlewares/userValidations'
 /**
  * @description Invoking Object Data as new object
@@ -27,6 +28,8 @@ module.exports = (app) => {
   // review route
   app.post('/:recipeId/review', reviews.addReview)
 
+  // votes route
+  app.post('/:userId/:recipeId/votes', votes.like)
   // favorites
   app.route('/:userId/:recipeId/favorite')
     .post(favorites.newFavorite)
