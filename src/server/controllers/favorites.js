@@ -5,8 +5,7 @@ const {Favorite} = models
 
 export default class favorite {
   static async newFavorite (req, res) {
-    const {userId} = req.params.userId
-    const recipeId = req.params.recipeId
+    const {userId, recipeId} = req.params
     const Op = Sequelize.Op
     console.log(req.decoded)
     const myFavorite = await Favorite.find({
@@ -47,16 +46,9 @@ export default class favorite {
   }
   static async unfavorite (req, res) {
     const Op = Sequelize.and
-    const userId = req.params.userId
-    const recipeId = req.params.recipeId
-    const deleted = Favorite.destroy({
-      where: {
-        [Op]: [{userId}, {recipeId}]
-      }
-    })
-    if (deleted) {
-      return res.status(200).send({success: true, message: 'favorites deleted'})
-    }
+    const {userId, recipeId} = req.params
+    const deleted = await Favorite.destroy({where: {[Op]: [{userId}, {recipeId}]}})
+    if (deleted) return res.status(200).send({success: true, message: 'favorites deleted'})
     return res.status(500).send({ success: false, message: 'favorites not deleted' })
   }
 }
