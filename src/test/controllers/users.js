@@ -29,8 +29,9 @@ describe('Users', () => {
           .get('/')
           .set('Accept', 'application/json')
           .end((err, res) => {
-            if (err) done(err)
-            else { expect(res.statusCode).to.equal(200) }
+            expect(err)
+            expect(res.body).to.be.an('object')
+            expect(res.statusCode).to.equal(200)
             setImmediate(done)
           })
       })
@@ -43,8 +44,9 @@ describe('Users', () => {
           .get('/api')
           .set('Accept', 'application/json')
           .end((err, res) => {
-            if (err) done(err)
-            else { expect(res.statusCode).to.equal(200) }
+            expect(err)
+            expect(res.body).to.be.an('object')
+            expect(res.statusCode).to.equal(200)
             expect(res.body.message).to.be.a('string')
             setImmediate(done)
           })
@@ -64,6 +66,8 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
+            expect(res.body).to.be.an('array')
             expect(res.statusCode).to.equal(400)
             expect(res.body[0]).deep.equal({
               message: 'Name should be atleast 3 character',
@@ -85,7 +89,9 @@ describe('Users', () => {
               password: 'akooooool'
             })
             .end((err, res) => {
+              expect(err)
               expect(res.statusCode).to.equal(400)
+              expect(res.body).to.be.an('array')
               expect(res.body[0]).deep.equal({
                 message: 'Invalid name, ensure you name contain only alphabets and no illegal spacing',
                 field: 'name'
@@ -107,7 +113,9 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(400)
+            expect(res.body).to.be.an('array')
             expect(res.body[0].message).to.equal('Username should be atleast 3 characters')
             expect(res.body[0].field).to.equal('username')
             setImmediate(done)
@@ -125,6 +133,8 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
+            expect(res.body).to.be.an('array')
             expect(res.statusCode).to.equal(400)
             expect(res.body[0]).deep.equal({
               message: 'Invalid Username, kindly ensure your username is alphanumeric and no spacing',
@@ -147,6 +157,8 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
+            expect(res.body).to.be.an('array')
             expect(res.statusCode).to.equal(400)
             expect(res.body[0].message).to.equal('Please input a valid Email Adrress')
             expect(res.body[0].field).to.equal('email')
@@ -165,6 +177,8 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
+            expect(res.body).to.be.an('array')
             expect(res.statusCode).to.equal(400)
             expect(res.body[0].message).to.equal('Please input a valid Email Adrress')
             expect(res.body[0].field).to.equal('email')
@@ -185,6 +199,8 @@ describe('Users', () => {
             password: 'akool'
           })
           .end((err, res) => {
+            expect(err)
+            expect(res.body).to.be.an('array')
             expect(res.statusCode).to.equal(400)
             expect(res.body[0].message).to.equal('Please input a valid password with atleast 8 characters')
             expect(res.body[0].field).to.equal('password')
@@ -203,7 +219,9 @@ describe('Users', () => {
             password: ' akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(400)
+            expect(res.body).to.be.an('array')
             expect(res.body[0].message).to.equal('Invalid password, ensure your password contain only uppercase, lowercase or any special character')
             expect(res.body[0].field).to.equal('password')
             setImmediate(done)
@@ -287,8 +305,8 @@ describe('Users', () => {
             expect(err)
             expect(res.statusCode).to.equal(404)
             expect(res.body.success).to.equal(false)
+            expect(res.body).to.be.an('object')
             expect(res.body.message).to.equal('user not found')
-            expect(res.body.authName).to.equal('ak')
             setImmediate(done)
           })
       })
@@ -304,6 +322,7 @@ describe('Users', () => {
           .end((err, res) => {
             expect(err)
             expect(res.statusCode).to.equal(400)
+            expect(res.body).to.be.an('object')
             expect(res.body.success).to.equal(false)
             expect(res.body.message).to.equal('Username field cannot be empty')
             setImmediate(done)
@@ -321,6 +340,7 @@ describe('Users', () => {
           .end((err, res) => {
             expect(err)
             expect(res.statusCode).to.equal(400)
+            expect(res.body).to.be.an('object')
             expect(res.body.success).to.equal(false)
             expect(res.body.message).to.equal('Username field cannot be empty')
             setImmediate(done)
@@ -338,6 +358,7 @@ describe('Users', () => {
           .end((err, res) => {
             expect(err)
             expect(res.statusCode).to.equal(404)
+            expect(res.body).to.be.an('object')
             expect(res.body.success).to.equal(false)
             expect(res.body.message).to.equal('user not found')
             setImmediate(done)
@@ -376,6 +397,7 @@ describe('Users', () => {
             expect(err)
             expect(res.statusCode).to.equal(404)
             expect(res.body.success).to.equal(false)
+            expect(res.body).to.be.an('object')
             expect(res.body.message).to.equal('user not found')
             setImmediate(done)
           })
@@ -427,6 +449,7 @@ describe('Users', () => {
             password: 'akooooool'
           })
           .end((err, res) => {
+            expect(err)
             expect(res.statusCode).to.equal(200)
             expect(res.body).to.have.all.deep.keys(
               'success', 'message', 'token', 'user'
