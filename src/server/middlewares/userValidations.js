@@ -1,8 +1,7 @@
 import trimUserData from '../utility/trimUserData'
 import dotenv from 'dotenv'
-import bcrypt from 'bcrypt'
 import model from '../models'
-import Sequelize from 'sequelize'
+// import Sequelize from 'sequelize'
 dotenv.config()
 /**
  * @description Validate User data
