@@ -74,8 +74,8 @@ class Users {
             res.status(201).json({
               success: true,
               message: 'User created successfully',
-              user,
-              token
+              user: user,
+              token: token
             })
           })
           .catch(error => res.status(500).json({
@@ -116,7 +116,7 @@ class Users {
         const { id, username, email } = user
         const payload = { id: id, username: username, email: email }
         const token = jwt.sign(payload, secret, { expiresIn: '6h' })
-        return res.status(200).send({success: true, message: 'successfuly signin', user, token})
+        return res.status(200).send({success: true, message: 'successfuly signin', user: user, token})
       } else {
         return res.status(400).send({success: false, message: 'Incorrect pasword'})
       }
@@ -144,7 +144,7 @@ class Users {
         userInfo.favoriteCount = favoriteCount
         return res.status(200).send({
           success: true,
-          userInfo,
+          user: userInfo,
           message: 'User and counts succesful'
         })
       }
