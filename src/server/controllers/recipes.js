@@ -1,4 +1,4 @@
-import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models'
+import {User, Recipe, Review} from '../models'
 import { Recipevalidation } from '../middlewares/recipeValidation'
 import Sequelize from 'sequelize'
 /**
@@ -8,14 +8,14 @@ import Sequelize from 'sequelize'
  * @returns {promise} return promise
  */
 export default class recipes {
+  /**
+   * @description Recipe validation
+   * @param {*} req request
+   * @param {*} res Response
+   * @returns {object}
+   */
   static async createRecipes (req, res) {
     const {name, description, procedure, ingredients, imageUrl, imageId, userId} = req.body
-    /**
-   * @description Recipe validation
-   * @param {object} userId
-   * @param {object} name -Recipe name
-   * @returns {async}
-   */
     const errors = Recipevalidation({name, procedure, ingredients})
     if (errors.length > 0) {
       return res.status(400).send(errors)
@@ -73,7 +73,12 @@ export default class recipes {
     }
     RecipeNameAndIdCheck(userId, name)
   };
-
+  /**
+   * @description getAllRecipes - get all user recipes
+   * @param {*} req request
+   * @param {*} res response
+   * @returns {object}
+   */
   static async getAllRecipes (req, res) {
     const recipes = await Recipe.findAll({})
     if (recipes.length > 0) {
@@ -88,7 +93,12 @@ export default class recipes {
       })
     }
   };
-
+  /**
+   * @description getSingleRecipes - get a single recipe
+   * @param {*} req request
+   * @param {*} res response
+   * @returns {object}
+   */
   static async getSingleRecipe (req, res) {
     const recipeId = req.params.recipeId
     try {
