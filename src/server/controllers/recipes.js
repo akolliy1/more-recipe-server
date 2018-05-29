@@ -1,5 +1,5 @@
-import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models';
-import { Recipevalidation } from '../middlewares/recipeValidation';
+import { User, Recipe, Review, Favorite, Upvote, Downvote } from '../models'
+import { Recipevalidation } from '../middlewares/recipeValidation'
 import Sequelize from 'sequelize'
 /**
  * @description Create Recipes
@@ -9,36 +9,25 @@ import Sequelize from 'sequelize'
  */
 export default class recipes {
   static async createRecipes (req, res) {
-    const name = req.body.name,
-      description = req.body.description,
-      procedure = req.body.procedure,
-      ingredients = req.body.ingredients,
-      imageUrl = req.body.imageUrl,
-      imageId = req.body.imageId,
-      count = req.body.count,
-      viewCount = req.body.viewCount,
-      upvotes = req.body.upvotes,
-      downvotes = req.body.downvotes,
-      userId = req.body.userId
-
- /**
- * @description Recipe validation
- * @param {object} userId
- * @param {object} name -Recipe name
- * @returns {async}
- */
-        const errors = Recipevalidation({name, procedure, ingredients})
-        if (errors.length > 0) {
+    const {name, description, procedure, ingredients, imageUrl, imageId, userId} = req.body
+    /**
+   * @description Recipe validation
+   * @param {object} userId
+   * @param {object} name -Recipe name
+   * @returns {async}
+   */
+    const errors = Recipevalidation({name, procedure, ingredients})
+    if (errors.length > 0) {
       return res.status(400).send(errors)
     }
     const RecipeNameAndIdCheck = async function (userId, name) {
       const Op = Sequelize.Op
-            const recipe = await Recipe.findOne({
+      const recipe = await Recipe.findOne({
         where: {
           [Op.and]: [{ userId }, { name }]
         }
       })
-            if (recipe) {
+      if (recipe) {
         return res.status(401).send({
           success: false,
           message: `sorry ${name} recipe name had already been added by you choose another name`
@@ -82,12 +71,12 @@ export default class recipes {
       })
       return promise
     }
-        RecipeNameAndIdCheck(userId, name)
+    RecipeNameAndIdCheck(userId, name)
   };
 
   static async getAllRecipes (req, res) {
     const recipes = await Recipe.findAll({})
-        if (recipes.length > 0) {
+    if (recipes.length > 0) {
       return res.status(200).send({
         success: true,
         recipes
@@ -98,28 +87,26 @@ export default class recipes {
         message: 'You have not added recipes'
       })
     }
-
   };
 
   static async getSingleRecipe (req, res) {
     const recipeId = req.params.recipeId
-        try {
+    try {
       const recipe = await Recipe.findOne({
         where: {id: recipeId},
         include: [{
           model: User, attributes: ['name']
         }, { model: Review, attributes: ['content', 'userId', 'name', 'imageUrl'] }]
       })
-            if (recipe) {
+      if (recipe) {
         const recipeIncre = await recipe.increment('viewCount')
-                if (recipeIncre) {
+        if (recipeIncre) {
           return res.status(200).send({
             success: true,
             message: 'Recipe found',
             recipe
           })
-                    
-                }
+        }
         // i want recipe comment to have image and name display
 
         throw new Error('Unable to Increment view')
@@ -127,7 +114,7 @@ export default class recipes {
       throw new Error('can\'t find Recipe')
     } catch (err) {
       let message = err.message
-            return res.status(404).send({
+      return res.status(404).send({
         success: false,
         message
       })
