@@ -15,7 +15,8 @@ module.exports = (app) => {
 
   app.post('/api/v1/users/signup', User.signUp)
   app.post('/api/users/signin', Validations.validateUserSignin, User.signIn)
-  app.get('/api/users/:userId/profile', User.listAUser)
+  app.get('/api/user/:userId/profile', User.listAUser)
+  app.put('/api/user/:userId/update', Validations.ValidateUserUpdate, User.updateUser)
   // route to create recipes
   app.route('/recipes')
     .post(recipes.createRecipes)
