@@ -1,5 +1,5 @@
 import User from '../controllers/users'
-import favorites from "../controllers/favorites";
+import favorites from '../controllers/favorites'
 import recipes from '../controllers/recipes'
 import reviews from '../controllers/reviews'
 import Validations from '../middlewares/userValidations'
@@ -28,8 +28,8 @@ module.exports = (app) => {
   app.post('/:recipeId/review', reviews.addReview)
 
   // favorites
-  app.route('/:recipeId/favorite')
+  app.route('/:userId/:recipeId/favorite')
     .post(favorites.newFavorite)
-  app.delete('/:favoriteId', favorites.unfavorite)
-  app.get('/favorite', favorites.myFavorite)
+    .delete(favorites.unfavorite)
+  app.get('/:userId/favorite', favorites.myFavorite)
 }
