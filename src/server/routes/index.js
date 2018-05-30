@@ -30,6 +30,8 @@ module.exports = (app) => {
 
   // votes route
   app.post('/:userId/:recipeId/votes', votes.like)
+  app.post('/:userId/:recipeId/unlike', votes.unlike)
+
   // favorites
   app.route('/:userId/:recipeId/favorite')
     .post(favorites.newFavorite)
