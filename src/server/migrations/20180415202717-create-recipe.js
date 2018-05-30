@@ -33,7 +33,7 @@ module.exports = {
       upvotes: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: 0,
+        defaultValue: 0
       },
       downvotes: {
         type: Sequelize.INTEGER,
@@ -54,12 +54,12 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
-          as: 'userId',
+          as: 'userId'
         }
       }
-    });
+    })
   },
-  down: (queryInterface, /* Sequelize*/) => {
-    return queryInterface.dropTable('Recipes');
+  down: (queryInterface /* Sequelize */) => {
+    return queryInterface.dropTable('Recipes')
   }
-};
+}
