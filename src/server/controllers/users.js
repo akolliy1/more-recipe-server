@@ -13,30 +13,15 @@ const Op = Sequelize.Op
  * @param {object} Email
  * @returns {Promise} if validated
  */
-const userNameAndEmailValidation = (username, email) => {
-  const promise = new Promise((resolve, reject) => {
-    User
-      .findOne({
-        attributes: ['email', 'username'],
-        where: {
-          [Op.or]: [{ username: username }, { email: email }]
-        }
-      })
-      .then((user) => {
-        if (user) {
-          let field
-          if (user.username.toUpperCase() === username.toUpperCase()) {
-            field = 'Username'
-          } else {
-            field = 'Email'
-          }
-          const error = `${field} already exist`
-          reject(error)
-        }
-        resolve()
-      })
-  })
-  return promise
+const userNameAndEmailValidation = async (username, email) => {
+  const checkUser = await User.find({where: {[Op.or]: [{ username: username }, { email: email }]}})
+  let error, field
+  if (checkUser) {
+    if (checkUser.username.toUpperCase() === username.toUpperCase()) field = 'Username'
+    else field = 'Email'
+    error = `${field} already exist`
+  }
+  return error
 }
 
 class Users {
@@ -45,52 +30,25 @@ class Users {
    *
    * @param {object} req HTTP request object
    * @param {object} res HTTP response object
-   *
-   * @returns {object} object
+   * @returns object
    */
-  static signUp (req, res) {
+  static async signUp (req, res) {
     // console.log(req)
     const { name, username, email } = req.body
     let password = req.body.password
     password = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-    const errors = inputValidation(req, res)
-    if (errors) {
-      return res.status(400).send(errors)
-    } else {
-      userNameAndEmailValidation(username, email).then(() => {
-        User
-          .create({
-            name,
-            username,
-            email,
-            imageUrl: '',
-            password
-          })
-          .then((user) => {
-            const payload = { id: user.id, username: user.username, email: user.email }
-            const token = jwt.sign(payload, secret, {
-              expiresIn: '3h'
-            })
-            res.status(201).json({
-              success: true,
-              message: 'User created successfully',
-              user: user,
-              token: token
-            })
-          })
-          .catch(error => res.status(500).json({
-            success: false,
-            message: `Error creating user ${error.message}`
-          }))
+    const errors = await inputValidation(req, res)
+    if (errors) return res.status(400).send(errors)
+    const isUser = await userNameAndEmailValidation(username, email)
+    if (isUser) return res.status(409).send({success: false, message: isUser})
+    const newUser = await User.create({name, username, email, imageUrl: '', password})
+    if (newUser) {
+      const payload = { id: newUser.id, username: newUser.username, email: newUser.email }
+      const token = await jwt.sign(payload, secret, {
+        expiresIn: '3h'
       })
-        .catch(error =>
-          res.status(409).json({
-            success: false,
-            message: error
-          })
-        )
-    }
-    return this
+      return res.status(201).send({success: true, message: 'User created successfully', user: newUser, token: token})
+    } else return res.status(500).send({success: false, message: `Error creating new user`})
   }
   /**
    * @description - Sign In a user (Search for user)
@@ -132,30 +90,17 @@ class Users {
      */
   static async listAUser (req, res) {
     const userId = req.params.userId
-    try {
-      const user = await User.findOne({ attributes: ['id', 'name', 'username', 'email', 'imageUrl'], where: { id: userId } })
-      const recipeCount = await Recipe.count({ where: { userId } })
-      const reviewCount = await Review.count({ where: { userId } })
-      const favoriteCount = await Favorite.count({ where: { userId } })
-      if (user && recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
-        const userInfo = { userId: user.id, name: user.name, username: user.username, email: user.email, imageUrl: user.imageUrl }
-        userInfo.recipeCount = recipeCount
-        userInfo.reviewCount = reviewCount
-        userInfo.favoriteCount = favoriteCount
-        return res.status(200).send({
-          success: true,
-          user: userInfo,
-          message: 'User and counts succesful'
-        })
-      }
-      throw new Error('Failed to find User and the recipes')
-    } catch (err) {
-      let message = err.message
-      res.status(404).send({
-        success: false,
-        message: message
-      })
-    }
+    const user = await User.findOne({ attributes: ['id', 'name', 'username', 'email', 'imageUrl'], where: { id: userId } })
+    const recipeCount = await Recipe.count({ where: { userId } })
+    const reviewCount = await Review.count({ where: { userId } })
+    const favoriteCount = await Favorite.count({ where: { userId } })
+    if (user && recipeCount >= 0 && reviewCount >= 0 && favoriteCount >= 0) {
+      const userInfo = { user }
+      userInfo.recipeCount = recipeCount
+      userInfo.reviewCount = reviewCount
+      userInfo.favoriteCount = favoriteCount
+      return res.status(200).send({ success: true, user: userInfo, message: 'User and counts succesful' })
+    } else return res.status(404).send({ success: false, message: 'Failed to find User and the recipes' })
   }
   /**
    * @description User Update
