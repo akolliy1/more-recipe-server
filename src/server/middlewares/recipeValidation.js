@@ -21,3 +21,11 @@ export const Recipevalidation = ({name, procedure, ingredients}) => {
   }
   return errors
 }
+
+export const reviewValidation = ({userId, recipeId, content}) => {
+  let errors
+  if (!content || content.length < 2) {
+    errors = 'make sure recipe is not empty and less than 2'
+  }
+  return errors
+}
