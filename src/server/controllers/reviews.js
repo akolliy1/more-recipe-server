@@ -1,5 +1,5 @@
-import { User, Recipe, Review } from '../models'
-import { reviewValidation } from '../middlewares/inputValidation'
+import { User, Review } from '../models'
+import { reviewValidation } from '../middlewares/recipeValidation'
 
 export default class reviews {
   /**
@@ -14,7 +14,7 @@ export default class reviews {
     const userId = req.body.userId
     const recipeId = req.params.recipeId
     try {
-      const reviewErr = await reviewValidation(req, res)
+      const reviewErr = await reviewValidation({userId, recipeId, content})
       let message
       if (reviewErr) {
         message = reviewErr
