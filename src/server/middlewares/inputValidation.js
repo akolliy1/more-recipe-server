@@ -75,15 +75,3 @@ export const inputValidation = (req, res) => {
     return allErrors
   }
 }
-
-export const reviewValidation = (req, res) => {
-  let errors
-  const content = req.body.content
-  const userId = req.body.userId
-  const recipeId = req.params.recipeId
-  if (!content || content.length < 2) {
-    errors = 'make sure recipe is not empty and less than 2'
-  }
-
-  return errors
-}
