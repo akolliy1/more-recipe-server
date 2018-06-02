@@ -13,6 +13,6 @@ before_script:
   - createdb test -U postgres
   - sequelize db:migrate
 after_success:
-  - npm run coveralls
+  - travis_wait npm run coveralls
 env:
   - NODE_ENV=test
