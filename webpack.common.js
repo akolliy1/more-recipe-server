@@ -1,35 +1,29 @@
-import path from 'path'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import path from 'path';
 
 module.exports = {
   devServer: {
     contentBase: './dist'
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
-    })
-  ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
-  watch: true,
-  watchOptions: {
-    poll: 1000,
-    aggregateTimeout: 1000,
-    ignored: /node_modules/
-  },
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: ['.jsx', '.js', 'web.js']
   },
   module: {
     rules: [
       {
         test: /\.s?css$/,
-        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', {
+          loader: require.resolve('css-loader'),
+          options: {
+            importLoaders: 1,
+            modules: true,
+            localIdentName: '[name]__[local]__[hash:base64:5]'
+          }
+        }]
       },
       {
         test: /\.(png|gif|jpe?g|svg)$/i,
@@ -41,7 +35,7 @@ module.exports = {
         }
       },
       {
-        test: /.jsx?$/,
+        test: /\.jsx?$/,
         enforce: 'pre',
         use: [
           {
@@ -55,13 +49,10 @@ module.exports = {
         use: ['file-loader']
       }
     ]
+  },
+  node: {
+    dns: 'empty',
+    net: 'empty',
+    fs: 'empty'
   }
-}
-
-// plugin options for babel-loader
-// plugins: [require('@babel/plugin-proposal-object-rest-spread')]
-// entry: {
-//   app: './client/index.jsx',
-//   home: './client/index.jsx'
-// },
-// use: ['file-loader']
+};

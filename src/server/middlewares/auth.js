@@ -1,33 +1,54 @@
-/** This is basic authetication for route/controllers
- *@param { object } - req
- *@param { object } - res
- *@param { object } - next
- *@returns { object } - verifications success
+import jwt from 'jsonwebtoken';
+/**
+ * @description This is basic authetication for route/controllers
+ * @class auth
  */
-import jwt from 'jsonwebtoken'
+class Auth {
+  /**
+   * @description - Verify JWT token
+   *
+   * @method This
+   *
+   * @param {*} req
+   *
+   * @param {*} res
+   *
+   * @param {*} next
+   *
+   * @returns {object} this - class instance
+   */
+  verify(req, res, next) {
+    const token = req.headers['x-access-token']
+      || req.query.token
+      || req.headers.token
+      || req.body.token;
 
-class auth {
-  verify (req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token']
-    if (token) {
-      const jwtSecret = process.env.JWT_SECRET
-      jwt.verify(token, jwtSecret, (err, decoded) => {
-        if (err) {
-          return res.status(401).json({
-            success: false,
-            message: 'Failed to authenticate token'
-          })
-        } else {
-          // token is working fine
-          req.decoded = decoded
-        }
-      })
-    } else {
-      return res.status(406).json({
+    if (!token) {
+      return res.status(403).json({
         success: false,
-        message: 'Invalid authentication'
-      })
+        message: 'No token provided'
+      });
     }
+    const jwtSecret = process.env.JWT_SECRET;
+    jwt.verify(token, jwtSecret, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({
+          success: false,
+          message: 'Failed to authenticate token'
+        });
+      }
+      if (decoded.exp < new Date().getTime() / 1000) {
+        return res.status(401).json({
+          success: false,
+          message: 'Token has expired, please sign in again'
+        });
+      }
+      // token is working fine
+      req.decoded = decoded;
+      next();
+    });
+
+    return this;
   }
 }
-export default auth
+export default Auth;

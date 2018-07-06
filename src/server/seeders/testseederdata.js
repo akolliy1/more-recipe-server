@@ -1,5 +1,6 @@
-import jwt from "jsonwebtoken";
-import { User, Review, Favorite } from "../models";
+import jwt from 'jsonwebtoken';
+import { User, Review, Recipe } from '../models';
+
 const users = [
   {
     name: 'John Doe',
@@ -82,36 +83,36 @@ const reviews = [
 ];
 /**
  * @description insert seed data in user model
- * 
+ *
  * @returns {void} Nothing
  */
 export const insertUserSeed = () => {
-  User.bulkCreate(users,{validate: true}).catch(errors => {
-    console.log(errors.path)
+  User.bulkCreate(users, { validate: true }).catch((errors) => {
+    console.log(errors.path);
   });
 };
 
 /**
  * @description insert seed data in recipe model
- * 
+ *
  * @returns {void} Nothing
  */
 export const insertRecipeSeed = () => {
-  Recipe.bulkCreate(recipes)
-}
+  Recipe.bulkCreate(recipes);
+};
 
 /**
  * @description insert seed data in review model
- * 
+ *
  * @returns {void} Nothing
  */
 export const insertReviewSeed = () => {
-  Review.bulkCreate(reviews)
-}
+  Review.bulkCreate(reviews);
+};
 
 /**
  * @description Generates token from seed data
- * 
+ *
  * @param {Number} id - User Id
  * @param {String} username - username in seed data
  * @param {string} email - user email
@@ -122,19 +123,19 @@ const generateToken = (id, username, email) => {
   const payload = { id, username, email };
   const token = jwt.sign(payload, secret, {
     expiresIn: '4h'
-  })
-  return token
-}
-export const user1token = generateToken(1, users[0].username, users[0].email)
+  });
+  return token;
+};
+export const user1token = generateToken(1, users[0].username, users[0].email);
 
-export const user2token = generateToken(2, users[1].username, users[1].email)
+export const user2token = generateToken(2, users[1].username, users[1].email);
 
 export const validUser = {
   name: 'akolliy bobo',
   email: 'akolliy@example.com',
   username: 'akolliiy',
   password: 'akooooool'
-}
+};
 
 export const validRecipe = {
   name: 'Fried Rice',
@@ -142,4 +143,4 @@ export const validRecipe = {
   description: 'Just the way you like it',
   ingredients: 'water;;salt;;rice',
   userId: 1
-}
+};

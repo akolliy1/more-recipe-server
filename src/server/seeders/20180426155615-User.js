@@ -14,12 +14,12 @@ module.exports = {
     */
     return queryInterface.bulkInsert('User', [
       {
-      name: 'John Doe',
-      email: 'adex@example.com',
-      username: 'iamuser',
-      password: 'ampassword',
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+        name: 'John Doe',
+        email: 'adex@example.com',
+        username: 'iamuser',
+        password: 'ampassword',
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
       },
       {
         name: 'akolade',
@@ -29,7 +29,7 @@ module.exports = {
         createdAt: Date.now(),
         updatedAt: Date.now(),
       }
-  ], {});
+    ], {});
   },
 
   down: (queryInterface/*, Sequelize*/) => {

@@ -6,6 +6,7 @@ obj
 dist
 views
 /build
+/client/hoc/Auxs
 /coverage
 /build-server
 npm-debug.log
@@ -16,3 +17,4 @@ npm-debug.log
 *.log
 /e2ereports
 /screenshots
+/public/css/util

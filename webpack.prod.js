@@ -1,7 +1,7 @@
-import * as common from './webpack.common.js'
 import merge from 'webpack-merge'
 import webpack from 'webpack'
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
+import * as common from './webpack.common.js'
 
 module.exports = merge(common, {
   devtool: 'source-map',
