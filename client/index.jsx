@@ -1,8 +1,19 @@
-import App from './components/App'
-import index from './redux/index'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store/index';
+import './index.css';
+import App from './App';
+// import registerServiceWorker from './registerServiceWorker';
 
-console.log(`I'm a silly entry point`)
+const app = (
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
 
-const arr = [1, 2, 3]
-const iAmJavascriptES6 = () => console.log(...arr)
-window.iAmJavascriptES6 = iAmJavascriptES6
+ReactDOM.render(app, document.getElementById('root'));
+// registerServiceWorker();
