@@ -1,21 +1,18 @@
-import merge from 'webpack-merge'
-import path from 'path'
-import webpack from 'webpack'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CleanWebpackPlugin from 'clean-webpack-plugin'
-import common from './webpack.common.js'
-// to allow Dotenv files
-import Dotenv from 'dotenv-webpack'
+import merge from 'webpack-merge';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
+import common from './webpack.common';
 
 module.exports = merge(common, {
   mode: 'development',
   entry: {
+    reload: 'webpack-hot-middleware/client?reload=true',
     app: './src/index.js',
     print: './client/index.jsx'
   },
   devtool: 'cheap-eval-source-map',
   plugins: [
-    new CleanWebpackPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new Dotenv({
@@ -30,10 +27,5 @@ module.exports = merge(common, {
   ],
   stats: {
     colors: true
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
   }
-})
+});
