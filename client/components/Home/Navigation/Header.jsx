@@ -1,0 +1,52 @@
+import React from 'react';
+import classes from './Header.css';
+
+/**
+ * @description Header component
+ * @function Header
+ * @returns {JSX} jsx
+ */
+const navigation = () => (
+  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="container">
+      <div className="navbar-header">
+        <a href="/" className={['navbar-brand', classes.Uppercase].join(' ')}>Akool</a>
+      </div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        /* eslint-disable */
+        aria-controls="navbarSupportedContent"
+        /* eslint-enable */
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+
+      <div className={['collapse navbar-collapse', classes.TopDivContainer].join(' ')} id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item"><a href="/" className="nav-link active nav-text">Recipes</a></li>
+          <li className="nav-item"><a href="/" className="nav-link nav-text"><i className="fa fa-bold " />log</a></li>
+          <li className="nav-item"><a href="/" className="nav-link nav-text"><span className="fas fa-th " />categories</a></li>
+        </ul>
+        <div className={['navbar-nav center', classes.SearchFormDiv].join(' ')}>
+          <form action="" method="get" className="form-inline my-2 my-lg-0" id="search">
+            <input type="search" className={['form-control mr-sm-2', classes.SearchInput].join(' ')} name="search-recipe" placeholder="Search" aria-label="Search" />
+            {/* <button class="btn btn-light my-2 my-sm-0" type="submit"><span class="fa fa-search"></span></button> */}
+          </form>
+        </div>
+        <ul className="nav navbar-nav navbar-right clear">
+          <li className="nav-item"><a href="/create" className="nav-link nav-text"><span className="far fa-user" />create</a></li>
+          <li className="nav-item"><a href="/checkin" className="nav-link nav-text"><span className="fas fa-sign-in-alt" />signin</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+);
+
+
+export default navigation;
