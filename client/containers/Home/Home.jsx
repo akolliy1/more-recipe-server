@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Auxs/Aux';
+import Aux from '../../hoc/Auxs/Auxs';
 import Header from '../../components/Home/Navigation/Header';
 import Footer from '../../components/Home/Navigation/Footer';
 import Carousel from '../../components/UI/carousel/carousel';

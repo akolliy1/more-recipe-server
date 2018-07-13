@@ -3,7 +3,7 @@ import SignUpForm from '../../components/UI/Input/InputForm';
 import HeaderForm from '../../components/UI/Input/HeaderForm';
 import SocialContainer from '../../components/UI/SocialSignin/SocialContainer';
 import CustomButton from '../../components/UI/CustomButton/CustomButton';
-import Aux from '../../hoc/Auxs/Aux';
+import Aux from '../../hoc/Auxs/Auxs';
 
 /**
  * @description Sign in component
