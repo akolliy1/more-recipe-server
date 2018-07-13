@@ -1,0 +1,17 @@
+import React from 'react';
+
+/**
+ * @description custom Button
+ * @function customButton
+ * @param {*} props
+ * @returns {JSX} jsx
+ */
+const customButton = props => (
+  <div className="field">
+    {/* eslint-disable */}
+    <button type="submit" className="btn btn-primary col-md-12 mt-2">{props.children}</button>
+    {/* eslint-enable */}
+  </div>
+);
+
+export default customButton;
