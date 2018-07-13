@@ -1,0 +1,80 @@
+div div div div i {
+    color: rgb(166, 226, 203) !important;
+    padding-left: 10px
+}
+.subject {
+    display: block;
+    text-align: center;
+    padding-top: 50px;
+    color: rgb(166, 226, 203)
+}
+.nxt-subject {
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    color: rgb(166, 226, 203)
+}
+.color {
+    color: rgb(166, 226, 203)
+}
+
+        /* for search inner icon but not yet implemented */
+.collapse .center form.move-in {
+    position: relative !important;
+    left: -90% !important
+}
+.justify-content-center h2 {text-align: center}
+.justify-space-between {
+    display: flex;
+    justify-content: space-between
+}
+@media (max-width: 992px) {
+.collapse .hide {
+    display: none !important
+}
+.collapse .clear {
+    clear: both !important
+}
+.container .justify-content-center {
+    flex-basis: 40%;
+    width: 40% !important;
+}
+}
+@media (max-width: 768px) {
+    .collapse .hide {
+        display: none !important
+    }
+    .collapse .clear {
+        clear: both !important
+    }
+    .container .justify-content-center {
+        flex-basis: 60%;
+        width: 60% !important;
+    }
+}
+@media (max-width: 500px) {
+    .container .justify-content-center {
+        flex-basis: 60%;
+        width: 80% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .collapse {
+        display: flex
+    }
+    .collapse .center {
+        flex-basis: 35%
+    }
+}
+.justify{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+.container .justify-content-center {
+    flex-basis: 30%;
+    width: 30%;
+}
