@@ -1,0 +1,13 @@
+// plugin options for babel-loader
+// plugins: [require('@babel/plugin-proposal-object-rest-spread')]
+// entry: {
+//   app: './client/index.jsx',
+//   home: './client/index.jsx'
+// },
+// use: ['file-loader']
+  // plugins: [
+  //   new MiniCssExtractPlugin({
+  //     filename: '[name].css',
+  //     chunkFilename: '[id].css'
+  //   })
+  // ],
