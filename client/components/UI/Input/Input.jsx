@@ -15,7 +15,7 @@ const inputForm = (props) => {
   }
   let Input = null;
   switch (props.attributeType) {
-    case 'Cinput':
+    case 'Custominput':
       Input = (
         <input
           className={classes.Input}
