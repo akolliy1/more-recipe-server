@@ -1,0 +1,16 @@
+.HeaderSize {
+     font-size: 22px
+}.Color {
+     color: rgb(166, 226, 203)!important
+}
+.HeaderNotification {
+     position: relative;
+     font-size: 10px;
+     left: -12px;
+     color: white;
+     padding: 2px;
+     border-radius: 10px;
+     top: -12px;
+     background: rgb(233, 24, 24)
+}
+.HeaderActive{background: rgb(95, 95, 243);color: white !important;}
