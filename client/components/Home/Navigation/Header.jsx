@@ -10,7 +10,7 @@ const navigation = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <div className="container">
       <div className="navbar-header">
-        <a href="/" className={['navbar-brand', classes.Uppercase].join(' ')}>Akool</a>
+        <a href="/" className={[classes.Navbrand, classes.Uppercase].join(' ')}>Akool</a>
       </div>
       <button
         className="navbar-toggler"
@@ -28,9 +28,9 @@ const navigation = () => (
 
       <div className={['collapse navbar-collapse', classes.TopDivContainer].join(' ')} id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item"><a href="/" className="nav-link active nav-text">Recipes</a></li>
-          <li className="nav-item"><a href="/" className="nav-link nav-text"><i className="fa fa-bold " />log</a></li>
-          <li className="nav-item"><a href="/" className="nav-link nav-text"><span className="fas fa-th " />categories</a></li>
+          <li className="nav-item"><a href="/" className={['nav-link active nav-text', classes.HeaderLinkSpace, classes.Uppercase].join(' ')}>Recipes</a></li>
+          <li className="nav-item"><a href="/" className={['nav-link nav-text', classes.HeaderLinkSpace, classes.Uppercase].join(' ')}><i className={['fa fa-bold ', classes.NavIcon].join(' ')} />log</a></li>
+          <li className="nav-item"><a href="/" className={['nav-link nav-text', classes.HeaderLinkSpace, classes.Uppercase].join(' ')}><span className="fas fa-th " />categories</a></li>
         </ul>
         <div className={['navbar-nav center', classes.SearchFormDiv].join(' ')}>
           <form action="" method="get" className="form-inline my-2 my-lg-0" id="search">
@@ -39,8 +39,8 @@ const navigation = () => (
           </form>
         </div>
         <ul className="nav navbar-nav navbar-right clear">
-          <li className="nav-item"><a href="/create" className="nav-link nav-text"><span className="far fa-user" />create</a></li>
-          <li className="nav-item"><a href="/checkin" className="nav-link nav-text"><span className="fas fa-sign-in-alt" />signin</a></li>
+          <li className="nav-item"><a href="/create" className={['nav-link nav-text', classes.HeaderLinkSpace, classes.Uppercase].join(' ')}><span className="far fa-user" />create</a></li>
+          <li className="nav-item"><a href="/checkin" className={['nav-link nav-text', classes.HeaderLinkSpace, classes.Uppercase].join(' ')}><span className="fas fa-sign-in-alt" />signin</a></li>
         </ul>
       </div>
 

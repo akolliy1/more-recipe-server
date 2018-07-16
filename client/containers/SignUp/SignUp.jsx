@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import SignUpForm from '../../components/UI/Input/InputForm';
-import HeaderForm from '../../components/UI/Input/HeaderForm';
-import SocialContainer from '../../components/UI/SocialSignin/SocialContainer';
-import CustomButton from '../../components/UI/CustomButton/CustomButton';
+import SignUpForm from '../../components/UI/Input/Input';
+import FormHeader from '../../components/UI/Input/FormH';
+import BtnContainer from '../../components/UI/Social/Container';
+import CButton from '../../components/UI/CButton/CButton';
 import Aux from '../../hoc/Auxs/Auxs';
+import * as Regex from '../../validations/Regex';
 
 /**
  * @description Sign in component
@@ -33,8 +34,9 @@ class SignUp extends Component {
         isSuccess: false,
         validation: {
           isValid: true,
-          validMsg: 'no spacing character eg Sir kool',
-          InvalidMsg: 'Your name must be atleast 3 characters'
+          validMsg: 'At most a whitespace eg John Doe',
+          InvalidMsg: 'Must be atleast 3 characters',
+          fallbackMsg: 'Must be atleast 3 characters'
         }
       },
       username: {
@@ -50,8 +52,9 @@ class SignUp extends Component {
         isSuccess: false,
         validation: {
           isValid: true,
-          validMsg: 'no spacing character eg Sirkool',
-          InvalidMsg: 'Your Username must be atleast 3 characters'
+          validMsg: 'No whitespace eg JohnDoe',
+          InvalidMsg: 'Must be Atleast 3 characters',
+          fallbackMsg: 'Must be Atleast 3 characters'
         }
       },
       email: {
@@ -67,8 +70,9 @@ class SignUp extends Component {
         isSuccess: false,
         validation: {
           isValid: true,
-          validMsg: 'no spacing character eg johnDoe@gmail',
-          InvalidMsg: 'Your Username must be atleast 3 characters'
+          validMsg: 'Must be standard eg johnDoe@gmail',
+          InvalidMsg: 'Must be standard',
+          fallbackMsg: 'Must be standard'
         }
       },
       password: {
@@ -84,8 +88,9 @@ class SignUp extends Component {
         isSuccess: false,
         validation: {
           isValid: true,
-          validMsg: 'no spacing character eg sirkolliy12',
-          InvalidMsg: 'Your password must be atleast 8 characters'
+          validMsg: 'No whitespace eg kenturkey1',
+          InvalidMsg: 'Must be Atleast 8 characters',
+          fallbackMsg: 'Must be Atleast 8 characters'
         }
       }
     }
@@ -114,19 +119,30 @@ class SignUp extends Component {
   validSignin = (validate) => {
     const [id, eventHandler] = [...validate];
     let regex, test = /\s/gi;
-    if (id === 'name') { regex = /^[A-Za-z][^ ]+( [a-z]+)*$/gi; test = /\d/gi; }
-    if (id === 'username') { regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:[a-z])/ig; }
-    if (id === 'email') { regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; }
+    if (id === 'name') { regex = Regex.validName; test = Regex.nameTest; }
+    if (id === 'username') { regex = Regex.validUsername; }
+    if (id === 'email') { regex = Regex.validMail; }
     if (id === 'password') { regex = /[a-z][0-9]/gi; }
-    if (eventHandler[id].touched && eventHandler[id][id].length < eventHandler[id].elementConfig.minLength) {
+    const whiteSpace = (test).test(eventHandler[id][id]);
+    if (whiteSpace) {
+      eventHandler[id]
+        .validation.InvalidMsg = eventHandler[id].validation.validMsg;
+    } else {
+      eventHandler[id]
+        .validation.InvalidMsg = eventHandler[id].validation.fallbackMsg;
+    }
+    if (eventHandler[id].touched
+      && eventHandler[id][id].length
+      < eventHandler[id].elementConfig.minLength) {
       eventHandler[id].validation.isValid = false;
       eventHandler[id].isSuccess = false;
     }
-    if (eventHandler[id].touched && eventHandler[id][id].length >= eventHandler[id].elementConfig.minLength) {
+    if (eventHandler[id].touched
+      && eventHandler[id][id].length
+      >= eventHandler[id].elementConfig.minLength) {
       eventHandler[id].validation.isValid = true;
       eventHandler[id].isSuccess = true;
       const boleanValue = eventHandler[id][id].match(regex);
-      const whiteSpace = (test).test(eventHandler[id][id]);
       if (boleanValue && !whiteSpace) {
         eventHandler[id].validation.isValid = true;
         eventHandler[id].match = true;
@@ -134,7 +150,6 @@ class SignUp extends Component {
       } else {
         eventHandler[id].validation.isValid = false;
         eventHandler[id].isSuccess = false;
-        eventHandler[id].validation.InvalidMsg = eventHandler[id].validation.validMsg;
       }
     }
   };
@@ -152,7 +167,7 @@ class SignUp extends Component {
       });
     };
     const form = (
-      <HeaderForm 
+      <FormHeader 
       footerLink='/checkin' 
       footerAction='Login Account'
       footerStatus='Already a member'>
@@ -161,6 +176,7 @@ class SignUp extends Component {
             <SignUpForm
               key={el.id}
               label={el.id}
+              name={el.id}
               attributeType={el.config.type}
               attributeConfig={el.config.elementConfig}
               icon={el.config.icon}
@@ -169,9 +185,9 @@ class SignUp extends Component {
               changed={(event) => this.onChangeHandler(event, el.id)} />
           ))
         }
-        <SocialContainer socialStatus='Sign up with'/>
-        <CustomButton>Create Account</CustomButton>
-      </HeaderForm>
+        <BtnContainer socialStatus='Sign up with'/>
+        <CButton>Create Account</CButton>
+      </FormHeader>
     )
     return (
       <Aux>

@@ -1,14 +1,11 @@
-nav div ul li a span{padding-right: 10px !important;color: rgb(166, 226, 203)}
+ .HeaderLinkSpace{padding-right: 10px !important;color: rgb(166, 226, 203)}
     .Uppercase{text-transform: uppercase}
-    nav form button span{color: green !important}
-    nav div .navbar-brand,nav div ul li a i{color: rgb(166, 226, 203) !important}
+    .Navbrand,.NavIcon{color: rgb(166, 226, 203) !important}
     nav form input{border-color: green !important}
     .TopDivContainer ul li .nav-text{color: green !important}
-    nav div div a{text-transform: uppercase}
     /* nav .collapse .justify{display: flex !important;text-align: start !important} */
     .subject{display: block;text-align: center;padding-top: 50px;color: rgb(166, 226, 203)}
     .nxt-subject{display: block;text-align: center;padding-top: 20px;color: rgb(166, 226, 203)}
-    .color {color: rgb(166, 226, 203)}
     /* for search inner icon but not yet implemented */
     .SearchForm{position: relative !important;left: -90% !important}
     @media (max-width: 992px) {

@@ -1,15 +1,14 @@
-import models from '../models'
+import models from '../models';
+
+
+const { Review } = models;
 /**
  * @description User input data for email and username
- * @memberOf Users
  * @param { object } req -request
  * @param { object } res - respond
  * @returns {object} promise
  */
-
-const { Review } = models
-
-export const inputValidation = (req, res) => {
+const inputValidation = (req, res) => {
   req.checkBody({
     name: {
       notEmpty: {
@@ -62,16 +61,19 @@ export const inputValidation = (req, res) => {
         errorMessage: 'Invalid password, ensure your password contain only uppercase, lowercase or any special character'
       }
     }
-  })
-  const errors = req.validationErrors()
+  });
+  const errors = req.validationErrors();
   if (errors) {
-    const allErrors = []
+    const allErrors = [];
     errors.forEach((error) => {
       allErrors.push({
         message: error.msg,
         field: error.param
-      })
-    })
-    return allErrors
+      });
+    });
+    return allErrors;
   }
-}
+};
+
+export default inputValidation;
+
