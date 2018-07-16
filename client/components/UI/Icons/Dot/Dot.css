@@ -1,0 +1,13 @@
+.Dot {
+    display: flex;
+    font-weight: 800;
+    flex-direction: column;
+    /* padding: 0.5;
+    margin: 0.6 */
+}
+.Dot div {
+    height: 2px;
+    width: 10px;
+    color: black;
+    padding: 2px
+}
