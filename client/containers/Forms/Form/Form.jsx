@@ -29,6 +29,7 @@ const Form = (props) => {
       {
           formElementsArray.map(el => (
             <Input
+              hasIcon
               key={el.id}
               label={el.id}
               name={el.id}

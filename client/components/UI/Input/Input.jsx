@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './Input.css';
+import Tips from '../Tips/Btn';
+import Aux from '../../../hoc/Auxs/Auxs';
 
 /**
  * @description input Sign in form
@@ -14,6 +16,8 @@ const inputForm = (props) => {
     color = classes.IsSuccess
   }
   let Input = null;
+  let inputColor = props.hasIcon ? "input is-success" : classes.Input
+
   switch (props.attributeType) {
     case 'Cinput':
       Input = (
@@ -32,6 +36,7 @@ const inputForm = (props) => {
           name={props.name}
           {...props.attributeConfig}
           onChange={props.changed}
+          onClick={props.clicked}
         />
       );
       break;
@@ -47,10 +52,9 @@ const inputForm = (props) => {
     default:
       Input = (
         <input
-          className="input is-success"
+          className={inputColor}
           type="text"
           {...props.attributeConfig}
-          onChange={props.changed}
           required
         />
       );
@@ -58,18 +62,30 @@ const inputForm = (props) => {
   }
   return (
     <div className="field">
-      <label className={["label", classes.Capitalize].join(' ')}>{props.label}</label> {/* props expected on label and input below */}
+
+      <label
+        className={["label", classes.Capitalize].join(' ')}>
+        {props.label}
+        {props.important? <Tips />: null}
+      </label> {/* props expected on label and input below */}
+
       <div className="control has-icons-left has-icons-right">
         {Input} {/* this is the dynamic input element */}
-        <span className="icon is-small is-left">
-          <i className={[color, props.icon].join(' ')} /> {/* props expected */}
-        </span>
-        <span className="icon is-small is-right">
-          <i className={["fas fa-check", color].join(' ')} />
-        </span>
+        {
+          props.hasIcon? <Aux>
+           <span className="icon is-small is-left">
+             <i className={[color, props.icon].join(' ')} /> {/* props expected */}
+           </span>
+           <span className="icon is-small is-right">
+             <i className={["fas fa-check", color].join(' ')} />
+           </span>
+          </Aux>: null
+        }
       </div>
+
       <p className="help is-success" />
       <p className="help is-danger">{props.feedback}</p>
+
     </div>
   );
 };

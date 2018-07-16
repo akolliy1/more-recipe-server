@@ -1,13 +1,19 @@
 .Dot {
     display: flex;
     font-weight: 800;
+    width: 5px;
+    box-sizing: border-box;
     flex-direction: column;
     /* padding: 0.5;
     margin: 0.6 */
 }
 .Dot div {
     height: 2px;
-    width: 10px;
-    color: black;
-    padding: 2px
+    width: 2px;
+    color: rgb(165, 159, 159);
+    border: 1px solid green;
+    padding: 2px;
+    margin-bottom: 1px;
+    background: rgb(184, 184, 204);
+    z-index: -1;
 }

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Search from './containers/Search/Search';
 import SignIn from './containers/Forms/SignIn';
 import SignUp from './containers/Forms/Signup';
-import Form from './components/UI/Icons/Dot/Dot';
+import Form from './components/UI/Recipe/Recipe';
 /**
  * @class App
  * @extends Component

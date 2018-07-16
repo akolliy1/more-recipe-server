@@ -7,7 +7,7 @@ import FormValidator from '../../validations/FormValidator';
  * @class SignIn
  * @extends Component
  */
-class SignIn extends Component {
+class Signup extends Component {
   state = {
     userForm: {
       name: {
@@ -124,4 +124,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default Signup;
