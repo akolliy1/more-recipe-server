@@ -1,5 +1,6 @@
 import React from 'react';
-import classes from './inputForm.css';
+import classes from './Input.css';
+
 /**
  * @description input Sign in form
  * @function inputForm
@@ -14,7 +15,36 @@ const inputForm = (props) => {
   }
   let Input = null;
   switch (props.attributeType) {
-    case ('text'):
+    case 'Cinput':
+      Input = (
+        <input
+          className={classes.Input}
+          name={props.name}
+          {...props.attributeConfig}
+          onChange={props.changed}
+          required
+        />
+      );
+      break;
+    case 'textarea':
+      Input = (
+        <textarea
+          name={props.name}
+          {...props.attributeConfig}
+          onChange={props.changed}
+        />
+      );
+      break;
+    case 'file':
+      Input = (
+        <input
+          name={props.name}
+          {...props.attributeConfig}
+          onClick={props.changed}
+        />
+      );
+      break;
+    default:
       Input = (
         <input
           className="input is-success"
@@ -25,32 +55,10 @@ const inputForm = (props) => {
         />
       );
       break;
-    case ('password'):
-      Input = (
-        <input
-          className="input is-success"
-          type="password"
-          {...props.attributeConfig}
-          onChange={props.changed}
-          required
-        />
-      );
-      break;
-    default:
-      Input = (
-        <input
-          className="input is-success"
-          type="password"
-          {...props.attributeConfig}
-          onChange={props.changed}
-          required
-        />
-      );
-      break;
   }
   return (
     <div className="field">
-      <label className="label">{props.label}</label> {/* props expected on label and input below */}
+      <label className={["label", classes.Capitalize].join(' ')}>{props.label}</label> {/* props expected on label and input below */}
       <div className="control has-icons-left has-icons-right">
         {Input} {/* this is the dynamic input element */}
         <span className="icon is-small is-left">

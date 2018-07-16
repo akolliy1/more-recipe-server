@@ -1,0 +1,19 @@
+.InputIcon {
+    color: rgb(166, 226, 174) !important;
+    padding-left: 10px;
+}
+.IsSuccess {
+    color: rgb(63, 223, 84) !important;
+    padding-left: 10px
+}
+.Capitalize {
+    text-transform: capitalize
+}
+.Input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    outline-color: rgb(25, 196, 25);
+    border: 1px solid rgb(61, 57, 57)
+}

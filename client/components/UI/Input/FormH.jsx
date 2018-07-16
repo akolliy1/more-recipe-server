@@ -1,6 +1,6 @@
 import React from 'react';
 import Aux from '../../../hoc/Auxs/Auxs';
-import classes from './HeaderForm.css';
+import classes from './FormH.css';
 import bgImage from '../../../assets/Images/sitttin-img-1.jpg';
 /**
  * @description Header form
@@ -19,7 +19,7 @@ const HeaderForm = props => (
           <div className="field card-body">
             <h2>More-recipe-server</h2>
             <hr />
-            <form action="/api/v1/users/signup" method="post">
+            <form action="" method="post">
               {/* eslint-disable */}
               {props.children}
               {/* eslint-enable */}
