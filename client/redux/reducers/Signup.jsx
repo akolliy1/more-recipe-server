@@ -8,8 +8,7 @@ const initialState = {
   },
   isAuthenticated: false,
   responseMessage: '',
-  errorMessage: '',
-  loading: false
+  errorMessage: ''
 };
 
 /**
@@ -18,27 +17,25 @@ const initialState = {
  * @param {*} action
  * @returns {object} object
  */
-const signinRequest = (state, action) => {
+const signupRequest = (state, action) => {
   const userInput = { ...action.data };
 
   const userUpdate = updated(state.userData, userInput);
 
   const userAuth = { isAuthenticated: action.isAuth };
 
-  const loader = { loading: action.loading };
-
-  const userState = updated(userUpdate, userAuth, loader);
+  const userState = updated(userUpdate, userAuth);
 
   return updated(state, userState);
 };
 
 /**
- * @function signinSuccess
+ * @function signupSuccess
  * @param {*} state
  * @param {*} action
  * @returns {object} object
  */
-const signinSuccess = (state, action) => {
+const signupSuccess = (state, action) => {
   const userInput = { ...action.data };
 
   const userUpdate = updated(state.userData, userInput);
@@ -47,39 +44,31 @@ const signinSuccess = (state, action) => {
 
   const userAuth = { isAuthenticated: action.isAuth };
 
-  const loader = { loading: action.loading };
+  const userState = updated(userUpdate, userAuth, response);
 
-  const userState = updated(userUpdate, response, userAuth);
-
-  const reSetState = updated(loader, userState);
-
-  return updated(state, reSetState);
+  return updated(state, userState);
 };
 
 /**
- * @function signinFail
+ * @function signupFail
  * @param {*} state
  * @param {*} action
  * @returns {object} object
  */
-const signinFail = (state, action) => {
+const signupFail = (state, action) => {
   const userInput = { userData: {} };
 
   const userUpdate = updated(state.userData, userInput);
-
-  const userAuth = { isAuthenticated: action.isAuth };
 
   const response = { responseMessage: '' };
 
   const error = { errorMessage: action.errorMsg };
 
-  const loader = { loading: action.loading };
+  const userAuth = { isAuthenticated: action.isAuth };
 
   const userState = updated(userUpdate, userAuth, response);
 
-  const reSetState = updated(error, loader, userState);
-
-  return updated(state, reSetState);
+  return updated(state, userState, error);
 };
 
 /**
@@ -90,14 +79,14 @@ const signinFail = (state, action) => {
  */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SIGNIN_REQUEST:
-      return signinRequest(state, action);
+    case actionTypes.SIGNUP_REQUEST:
+      return signupRequest(state, action);
 
-    case actionTypes.SIGNIN_SUCCESS:
-      return signinSuccess(state, action);
+    case actionTypes.SIGNUP_SUCCESS:
+      return signupSuccess(state, action);
 
-    case actionTypes.SIGNIN_FAIL:
-      return signinFail(state, action);
+    case actionTypes.SIGNUP_FAIL:
+      return signupFail(state, action);
 
     default:
       return state;
