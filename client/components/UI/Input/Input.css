@@ -10,10 +10,15 @@
     text-transform: capitalize
 }
 .Input {
+    padding: 10px
+}
+.Input, textarea {
     width: 100%;
-    padding: 10px;
     box-sizing: border-box;
     border-radius: 2px;
     outline-color: rgb(25, 196, 25);
     border: 1px solid rgb(61, 57, 57)
+}
+textarea {
+    padding: 20px
 }
