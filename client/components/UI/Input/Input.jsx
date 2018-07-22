@@ -53,8 +53,10 @@ const inputForm = (props) => {
       Input = (
         <input
           className={inputColor}
-          type="text"
+          name={props.name}
+          value={props.value}
           {...props.attributeConfig}
+          onChange={props.changed}
           required
         />
       );
@@ -66,10 +68,11 @@ const inputForm = (props) => {
       <label
         className={["label", classes.Capitalize].join(' ')}>
         {props.label}
-        {props.important? <Tips />: null}
+        {props.tips? <Tips />: null}
       </label> {/* props expected on label and input below */}
 
-      <div className="control has-icons-left has-icons-right">
+      {
+      props.important? <div className="control has-icons-left has-icons-right">
         {Input} {/* this is the dynamic input element */}
         {
           props.hasIcon? <Aux>
@@ -81,7 +84,8 @@ const inputForm = (props) => {
            </span>
           </Aux>: null
         }
-      </div>
+      </div> : Input
+      }
 
       <p className="help is-success" />
       <p className="help is-danger">{props.feedback}</p>
