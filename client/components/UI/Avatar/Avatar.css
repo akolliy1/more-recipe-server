@@ -1,0 +1,17 @@
+.Avatar {
+    width: 35px;
+    height: auto;
+    background: rgb(166, 226, 203)
+}
+.Color {color: rgb(166, 226, 203)!important}
+.AvatarRow {
+    width: 100%;
+    display: flex
+}
+.AvatarCol1 {
+    flex-basis: 93%
+}
+.AvatarCol2 {
+    padding-top: 2px;
+    flex-grow: 1;
+}
