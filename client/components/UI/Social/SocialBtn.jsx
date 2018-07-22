@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from './SocialBtn.css';
 
 /**
  * @description input Checkbox
@@ -8,7 +9,7 @@ import React from 'react';
  */
 const SocialSignin = props => (
   /* eslint-disable */
-  <a className="btn btn-primary mr-1" href="/" role="button">
+  <a className={[classes.SocialBtn, "mr-1"].join(' ')} href="/" role="button">
     {props.children}
     <span className={['fab', props.socialSymbol].join(' ')} />
   </a>

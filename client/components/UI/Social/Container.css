@@ -2,3 +2,18 @@
     display: flex;
     justify-content: space-between
 }
+.JustifySpaceBtw a {
+    flex-basis: 50%
+}
+@media(max-width: 390px) {
+    .JustifySpaceBtw a {
+        flex-basis: 40%;
+        padding: 2%;
+        align-self: center;
+    }
+}
+@media(max-width: 430px) {
+    .JustifySpaceBtw a {
+        padding: 1.5px
+    }
+}

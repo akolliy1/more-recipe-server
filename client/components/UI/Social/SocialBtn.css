@@ -1,0 +1,12 @@
+.SocialBtn {
+    padding: 2%;
+    border-radius: 5px;
+    text-align: center;
+    background: #007bff;
+    color: aliceblue
+}
+.SocialBtn:hover {
+    text-decoration: none;
+    background-color: #07D;
+    color: aliceblue;
+}
