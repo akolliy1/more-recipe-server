@@ -1,5 +1,5 @@
 import React from 'react';
-
+import classes from './Header.css';
 /**
  * @description search footer
  * @function searchFooter
@@ -9,7 +9,12 @@ const searchFooter = () => (
   <footer>
     <div className="container-fluid mt-3">
       <div className="text-center">
-        <strong className="copyright color">More-recipe-server © 2018, All Rights Reserved, Design &amp; Developed By: Akolliy</strong>
+        <strong className={['copyright',
+        classes.Color].join(' ')}
+        >
+          More-recipe-server © 2018, All Rights Reserved,
+          Design &amp; Developed By: ADESANMI AKOLADE DOTUN
+        </strong>
       </div>
       <div className="text-center">
         <a href="/" className="pr-2">Terms</a>
