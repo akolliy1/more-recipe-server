@@ -1,0 +1,7 @@
+.DropBtn {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    line-height: 40px;
+    height: 40px;
+}
