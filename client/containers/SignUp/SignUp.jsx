@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import propTypes, { any } from 'prop-types';
 import Form from '../../components/Form/Form';
 import FormValidator from '../../validations/FormValidator';
-import { signupAction } from '../../redux/actions/index';
+import { signUpAction } from '../../redux/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Auxs/Auxs';
 
@@ -161,7 +161,7 @@ class Signup extends Component {
       password: this.state.userForm.password.password
     };
 
-    this.props.signupAction(data);
+    this.props.signUpAction(data);
   }
 
   /**
@@ -195,7 +195,7 @@ class Signup extends Component {
 
 
 Signup.propTypes = {
-  signupAction: propTypes.func.isRequired,
+  signUpAction: propTypes.func.isRequired,
   isAuthenticated: propTypes.bool.isRequired,
   history: propTypes.objectOf(any).isRequired,
   errorMsg: propTypes.string.isRequired,
@@ -223,7 +223,7 @@ const mapStateToProps = state => ({
  * @return {props} Props
  */
 const mapDispatchToProps = dispatch => ({
-  signupAction: data => dispatch(signupAction(data))
+  signUpAction: data => dispatch(signUpAction(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import propTypes, { any } from 'prop-types';
 import Form from '../../components/Form/Form';
 import FormValidator from '../../validations/FormValidator';
-import { signinAction } from '../../redux/actions/index';
+import { signInAction } from '../../redux/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Auxs/Auxs';
 
@@ -131,7 +131,7 @@ class SignIn extends Component {
       password: this.state.userForm.password.password
     };
 
-    this.props.signinAction(data);
+    this.props.signInAction(data);
   }
 
   /**
@@ -149,7 +149,7 @@ class SignIn extends Component {
           username: this.state.userForm.username.username,
           password: this.state.userForm.password.password
         };
-        this.props.signinAction(data);
+        this.props.signInAction(data);
       }
     }
     if (this.props.isAuthenticated) {
@@ -187,7 +187,7 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  signinAction: propTypes.func.isRequired,
+  signInAction: propTypes.func.isRequired,
   isAuthenticated: propTypes.bool.isRequired,
   history: propTypes.objectOf(any).isRequired,
   errorMsg: propTypes.string.isRequired,
@@ -215,7 +215,7 @@ const mapStateToProps = state => ({
  * @return {props} Props
  */
 const mapDispatchToProps = dispatch => ({
-  signinAction: data => dispatch(signinAction(data))
+  signInAction: data => dispatch(signInAction(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

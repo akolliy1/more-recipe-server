@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import Signup from './Signup';
-import Signin from './Signin';
 import Recipe from './Recipe';
+import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
-  signin: Signin,
-  signup: Signup,
+  authReducer,
   recipe: Recipe
 });
 

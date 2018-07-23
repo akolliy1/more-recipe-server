@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/SignIn';
+import * as actionTypes from '../constants/authConst';
 import updated from '../helper';
 
 const initialState = {
@@ -13,12 +13,12 @@ const initialState = {
 };
 
 /**
- * @function signinRequest
+ * @function requestCurrentUser
  * @param {*} state
  * @param {*} action
  * @returns {object} object
  */
-const signinRequest = (state, action) => {
+const requestCurrentUser = (state, action) => {
   const userInput = { ...action.data };
 
   const userUpdate = updated(state.userData, userInput);
@@ -33,12 +33,12 @@ const signinRequest = (state, action) => {
 };
 
 /**
- * @function signinSuccess
+ * @function setCurrentUser
  * @param {*} state
  * @param {*} action
  * @returns {object} object
  */
-const signinSuccess = (state, action) => {
+const setCurrentUser = (state, action) => {
   const userInput = { ...action.data };
 
   const userUpdate = updated(state.userData, userInput);
@@ -57,12 +57,12 @@ const signinSuccess = (state, action) => {
 };
 
 /**
- * @function signinFail
+ * @function removeCurrentUser
  * @param {*} state
  * @param {*} action
  * @returns {object} object
  */
-const signinFail = (state, action) => {
+const removeCurrentUser = (state, action) => {
   const userInput = { userData: {} };
 
   const userUpdate = updated(state.userData, userInput);
@@ -91,13 +91,13 @@ const signinFail = (state, action) => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGNIN_REQUEST:
-      return signinRequest(state, action);
+      return requestCurrentUser(state, action);
 
     case actionTypes.SIGNIN_SUCCESS:
-      return signinSuccess(state, action);
+      return setCurrentUser(state, action);
 
     case actionTypes.SIGNIN_FAIL:
-      return signinFail(state, action);
+      return removeCurrentUser(state, action);
 
     default:
       return state;

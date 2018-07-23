@@ -1,9 +1,7 @@
 export {
-  signinAction,
-  signinRequest,
-  onSigninSuccess,
-  onSigninFail
-} from './Signin';
+  signUpAction,
+  signInAction
+} from './authAction';
 
 export {
   signupAction,

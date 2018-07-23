@@ -15,7 +15,7 @@ module.exports = (app) => {
     message: 'Welcome to the Users API!'
   }));
   app.post('/api/v1/users/signup', User.signUp);
-  app.post('/api/users/signin', Validations.validateUserSignin, User.signIn);
+  app.post('/api/v1/users/signin', Validations.validateUserSignin, User.signIn);
   app.get('/api/user/:userId/profile', authetication.verify, User.listAUser);
   app.put(
     '/api/user/:userId/update', authetication.verify,
