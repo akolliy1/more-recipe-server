@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Toastr from 'toastr';
 
 /**
  * @description - Sets token for subsequent axios calls
@@ -13,7 +12,6 @@ import Toastr from 'toastr';
 export default function setToken(token) {
   if (token) {
     axios.defaults.headers.common['x-access-token'] = token;
-    Toastr.options.positionClass = 'toast-bottom-left';
   } else {
     delete axios.defaults.headers.common['x-access-token'];
   }

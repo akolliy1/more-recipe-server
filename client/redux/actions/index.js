@@ -4,8 +4,8 @@ export {
 } from './authAction';
 
 export {
-  signupAction,
-  signupRequest,
-  onSignupSuccess,
-  onSignupFail
-} from './Signup';
+  recipeRequest,
+  recipeSuccess,
+  recipeFail,
+  onRecipeAction
+} from './Recipe';

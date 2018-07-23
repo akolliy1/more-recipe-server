@@ -61,7 +61,7 @@ export const signInAction = data =>
         const userInfo = jwt.decode(token);
         dispatch(setCurrentUser(userInfo, message));
       }).catch((err) => {
-        const errData = err.response.data;
+        const errData = err;
         dispatch(removeCurrentUser(errData));
       });
   };
@@ -83,7 +83,7 @@ export const signUpAction = data =>
         const userInfo = jwt.decode(token);
         dispatch(setCurrentUser(userInfo, message));
       }).catch((err) => {
-        const errData = err.response.data;
+        const errData = err;
         dispatch(removeCurrentUser(errData));
       });
   };

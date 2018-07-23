@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducers from '../reducers/rootReducers';
-import tokenExp from '../Middleware/tokenExp';
 
 /**
  * @function logger

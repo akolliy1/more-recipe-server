@@ -202,9 +202,9 @@ SignIn.propTypes = {
  * @return {props} Props
  */
 const mapStateToProps = state => ({
-  isAuthenticated: state.signin.isAuthenticated,
-  errorMsg: state.signin.errorMessage,
-  loading: state.signin.loading
+  isAuthenticated: state.authReducer.isAuthenticated,
+  errorMsg: state.authReducer.errorMessage,
+  loading: state.authReducer.loading
 });
 
 /**
