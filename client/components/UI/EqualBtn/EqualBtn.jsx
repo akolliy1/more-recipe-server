@@ -14,9 +14,9 @@ const equalBtn = props => (
     data-toggle="modal"
     data-target="#recipeModal"
   >
-    <span className="pr-2 click fas fa-pen-square color" />
+    <span className={["pr-2 click fas fa-pen-square", classes.Color].join(' ')} />
 
-    { props.children }
+    { props.title }
 
     {/* eslint-enable */}
   </a>

@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import Form from './index';
-import * as Regex from '../../../validations/Regex';
+import recipeValidator from '../../../validations/FormValidator';
+import ModalBtn from '../ModalBtn/ModalBtn';
+import AModalBtn from '../ModalBtn/AModalBtn';
+import ModalH from '../ModalH/ModalH';
+import EqualBtn from '../EqualBtn/EqualBtn';
+// import {  } from "module";
+
 /**
  * @description Sign in component
- * @class SignIn
- * @extends Component
+ * @class RecipeForm
+ * @param {*} props
+ * @return {class} JSX
  */
 class RecipeForm extends Component {
   state = {
     clicked: false,
-    userForm: {
+    showModal: true,
+    recipeForm: {
       'Recipe name': {
         recipe: '',
         type: 'input',
@@ -111,6 +119,22 @@ class RecipeForm extends Component {
       }
     }
   }
+  /**
+   * @method shouldComponentUpdate
+   * @param {*} nextProps
+   * @param {*} nextState
+   * @return {Event} Change State on event
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    const boleanValue = this.props !== nextProps || this.state !== nextState;
+    return boleanValue;
+  }
+  onOpenCloseModalHandler = () => {
+    this.setState(prevState => ({
+      clicked: !prevState.clicked,
+      show: !prevState.showModal
+    }));
+  }
   onClickedHandler = () => {
     this.setState(prevState => ({ clicked: !prevState.clicked }));
   }
@@ -121,67 +145,65 @@ class RecipeForm extends Component {
    * @return {Event} Change State on event
    */
   onChangeHandler = (event, id) => {
-    const stateEventChange = { ...this.state.userForm };
+    const stateEventChange = { ...this.state.recipeForm };
     stateEventChange[id][id] = event.target.value;
     stateEventChange[id].touched = true;
     // validate
-    this.validSignin([id, stateEventChange]);
+    recipeValidator([id, stateEventChange]);
     // change state
-    this.setState({ userForm: stateEventChange });
-    // console.log(this.state.userForm);
+    this.setState({ recipeForm: stateEventChange });
+    // console.log(this.state.recipeForm);
   }
-  /**
- * @method validSignin
- * @param {Array} validate
- * @returns {js} validation
- */
-  validSignin = (validate) => {
-    const [id, eventHandler] = [...validate];
-    let regex; const test = /\s/gi;
-    if (id === 'username') { regex = Regex.validUsername; }
-    if (id === 'password') { regex = /[a-z][0-9]/gi; }
-    const whiteSpace = (test).test(eventHandler[id][id]);
-    if (whiteSpace) {
-      eventHandler[id]
-        .validation.InvalidMsg = eventHandler[id].validation.validMsg;
-    } else {
-      eventHandler[id]
-        .validation.InvalidMsg = eventHandler[id].validation.fallbackMsg;
-    }
-    if (eventHandler[id].touched
-      && eventHandler[id][id].length
-      < eventHandler[id].elementConfig.minLength) {
-      eventHandler[id].validation.isValid = false;
-      eventHandler[id].isSuccess = false;
-    }
-    if (eventHandler[id].touched
-      && eventHandler[id][id].length
-      >= eventHandler[id].elementConfig.minLength) {
-      eventHandler[id].validation.isValid = true;
-      eventHandler[id].isSuccess = true;
-      const boleanValue = eventHandler[id][id].match(regex);
-      if (boleanValue && !whiteSpace) {
-        eventHandler[id].validation.isValid = true;
-        eventHandler[id].match = true;
-        eventHandler[id].isSuccess = true;
-      } else {
-        eventHandler[id].validation.isValid = false;
-        eventHandler[id].isSuccess = false;
-      }
-    }
-  };
   /**
      * @description render Component
      * @return {jsx} jsx
      */
   render() {
+    const form = window.innerWidth && !this.state.clicked ?
+      (
+        <form action="" method="post">
+          <div className="ui form">
+            <Form
+              recipeForm={this.state.recipeForm}
+              changed={this.onChangeHandler}
+              clicked={this.onClickedHandler}
+              isClicked={this.state.clicked}
+            />
+          </div>
+          <AModalBtn />
+        </form>
+      ) :
+      (
+        <ModalH
+          show={this.state.clicked}
+          title="Post Recipe"
+          modalClosed={this.onOpenCloseModalHandler}
+        >
+          <form action="" method="post">
+            <div className="ui form">
+              <Form
+                recipeForm={this.state.recipeForm}
+                changed={this.onChangeHandler}
+                clicked={this.onClickedHandler}
+                isClicked={this.state.clicked}
+              />
+            </div>
+            <ModalBtn closed={this.onOpenCloseModalHandler} />
+          </form>
+        </ModalH>
+      );
     return (
-      <Form
-        userForm={this.state.userForm}
-        changed={this.onChangeHandler}
-        clicked={this.onClickedHandler}
-        isClicked={this.state.clicked}
-      />
+      <div className="card">
+        <div className="card-body">
+          <div className="row">
+            <EqualBtn href="/" title="Recipe" />
+            <EqualBtn href="/" title="Photos" />
+          </div>
+          <hr />
+          {form}
+        </div>
+      </div>
+
     );
   }
 }

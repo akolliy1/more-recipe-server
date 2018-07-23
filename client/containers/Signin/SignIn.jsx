@@ -17,6 +17,7 @@ import Aux from '../../hoc/Auxs/Auxs';
 class SignIn extends Component {
   state = {
     responseMsg: '',
+    formIsValid: false,
     userForm: {
       username: {
         username: '',
@@ -58,6 +59,7 @@ class SignIn extends Component {
       }
     }
   }
+
   /**
    * @function componentWillReceiveProps
    *
@@ -90,15 +92,25 @@ class SignIn extends Component {
    * @return {Event} Change State on event
    */
   onChangeHandler = (event, id) => {
-    const stateEventChange = { ...this.state.userForm };
-    stateEventChange[id][id] = event.target.value;
-    stateEventChange[id].touched = true;
+    const updatedOrderForm = { ...this.state.userForm };
+    updatedOrderForm[id][id] = event.target.value;
+    updatedOrderForm[id].touched = true;
     // validate
-    FormValidator([id, stateEventChange]);
+    FormValidator([id, updatedOrderForm]);
     // change state
+    let formIsValid = true;
+    /* eslint-disable */
+    for (let id in updatedOrderForm) {
+      formIsValid = updatedOrderForm[id].match && formIsValid;
+    }
+    /* eslint-enable */
     this.setState({
-      userForm: stateEventChange
+      userForm: updatedOrderForm, formIsValid
     });
+    // if userAlreadyLoggedin
+    if (this.state.formIsValid) {
+      this.ifTokenInputData();
+    }
   }
 
   /**
@@ -120,6 +132,29 @@ class SignIn extends Component {
     };
 
     this.props.signinAction(data);
+  }
+
+  /**
+   * @function ifTokenAndInputData
+   *
+   * @param {*} Empty
+   *
+   * @returns {view} view page
+   */
+  ifTokenInputData = () => {
+    if (localStorage.getItem('userToken')) {
+      if (this.state.userForm.username.username !== ''
+        && this.state.userForm.password.password !== '') {
+        const data = {
+          username: this.state.userForm.username.username,
+          password: this.state.userForm.password.password
+        };
+        this.props.signinAction(data);
+      }
+    }
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/view');
+    }
   }
 
   /**

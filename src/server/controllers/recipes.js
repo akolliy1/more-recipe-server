@@ -1,6 +1,6 @@
+import Sequelize from 'sequelize';
 import { User, Recipe, Review } from '../models';
 import { Recipevalidation } from '../middlewares/recipeValidation';
-import Sequelize from 'sequelize';
 /**
  * @description Create Recipes
  * @param {object} req - request
@@ -15,8 +15,10 @@ export default class recipes {
    * @returns {object} object
    */
   static async createRecipes(req, res) {
+    const { decoded } = req;
+    const userId = decoded.id;
     const {
-      name, description, procedure, ingredients, imageUrl, imageId, userId
+      name, description, procedure, ingredients, imageUrl, imageId
     } = { ...req.body };
     const errors = Recipevalidation({ name, procedure, ingredients });
     if (errors.length > 0) {
@@ -28,7 +30,7 @@ export default class recipes {
      * @param {*} name
      * @return {Promise}npromise
      */
-    const RecipeNameAndIdCheck = async (userId, name) => {
+    const RecipeNameAndIdCheck = async () => {
       const { Op } = { ...Sequelize };
       const recipe = await Recipe.findOne({
         where: {
@@ -52,8 +54,8 @@ export default class recipes {
             imageId,
             userId
           })
-          .then((recipe) => {
-            if (!recipe) {
+          .then((isRecipe) => {
+            if (!isRecipe) {
               reject(res.status(400).send({
                 success: false,
                 message: 'unable to create recipe'
@@ -62,7 +64,7 @@ export default class recipes {
               resolve(res.status(201).send({
                 success: true,
                 message: 'Recipe successfuly added!',
-                recipe
+                recipe: isRecipe
               }));
             }
           })
@@ -85,6 +87,27 @@ export default class recipes {
    */
   static async getAllRecipes(req, res) {
     const recipe = await Recipe.findAll({});
+    if (recipes.length > 0) {
+      return res.status(200).send({
+        success: true,
+        recipe
+      });
+    }
+    return res.status(404).send({
+      success: false,
+      message: 'You have not added recipes'
+    });
+  }
+  /**
+   * @description getAllRecipes - get all user recipes
+   * @param {*} req request
+   * @param {*} res response
+   * @returns {object} object
+   */
+  static async getAllUserRecipes(req, res) {
+    const { decoded } = req;
+    const userId = decoded.id;
+    const recipe = await Recipe.findAll({ where: { userId } });
     if (recipes.length > 0) {
       return res.status(200).send({
         success: true,

@@ -1,6 +1,7 @@
 import React from 'react';
-// import classes from './Recipe.css';
+import RFooter from './Footer/RFooter';
 import Stories from './Stories/Stories';
+import Dot from "../../../UI/Icons/Dot/Dot";
 
 /**
  * @function recipe
@@ -27,10 +28,10 @@ const right = props => (
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >...
+              ><Dot />
               </span>
               {/* eslint-disable */}
-              <div className="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 {/* eslint-enable */}
                 <a className="dropdown-item" href="/">Today</a>
                 <a className="dropdown-item" href="/">This week</a>
@@ -47,6 +48,7 @@ const right = props => (
         {/* eslint-enable */}
       </div>
     </div>
+    <RFooter />
   </aside>
 );
 

@@ -1,0 +1,6 @@
+.Clear{clear: both !important;}
+.Post {
+    width: 100%;
+    display: flex;
+    flex-direction: column
+}

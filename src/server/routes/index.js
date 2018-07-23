@@ -4,6 +4,7 @@ import recipes from '../controllers/recipes';
 import reviews from '../controllers/reviews';
 import votes from '../controllers/votes';
 import Validations from '../middlewares/userValidations';
+import authetication from '../middlewares/auth';
 /**
  * @description Invoking Object Data as new object
  * @method  { any } method = new method
@@ -15,14 +16,20 @@ module.exports = (app) => {
   }));
   app.post('/api/v1/users/signup', User.signUp);
   app.post('/api/users/signin', Validations.validateUserSignin, User.signIn);
-  app.get('/api/user/:userId/profile', User.listAUser);
-  app.put('/api/user/:userId/update', Validations.ValidateUserUpdate, User.updateUser);
-  // route to create recipes
+  app.get('/api/user/:userId/profile', authetication.verify, User.listAUser);
+  app.put(
+    '/api/user/:userId/update', authetication.verify,
+    Validations.ValidateUserUpdate, User.updateUser
+  );
+
+  // route to create recipes and destroy user account
   app.route('/recipes')
-    .post(recipes.createRecipes)
+    .post(authetication.verify, recipes.createRecipes)
     .get(recipes.getAllRecipes);
-  app.get('/recipes/:recipeId', recipes.getSingleRecipe);
-  app.delete('/api/users/:userId', User.destroy);
+  app.get('/recipes/:recipeId', authetication.verify, recipes.getSingleRecipe);
+  app.route('/api/users/:userId')
+    .get(authetication.verify, recipes.getAllUserRecipes)
+    .delete(authetication.verify, User.destroy);
 
   // review route
   app.post('/:recipeId/review', reviews.addReview);

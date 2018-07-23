@@ -1,31 +1,29 @@
 import React, { Component } from 'react';
-import SignUpForm from '../../components/UI/Input/Input';
-import FormHeader from '../../components/UI/Input/FormH';
-import BtnContainer from '../../components/UI/Social/Container';
-import CButton from '../../components/UI/CButton/CButton';
+import { connect } from 'react-redux';
+import propTypes, { any } from 'prop-types';
+import Form from '../../components/Form/Form';
+import FormValidator from '../../validations/FormValidator';
+import { signupAction } from '../../redux/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Auxs/Auxs';
-import * as Regex from '../../validations/Regex';
 
 /**
  * @description Sign in component
+ *
  * @class SignIn
+ *
  * @extends Component
  */
-class SignUp extends Component {
+class Signup extends Component {
   state = {
-    // Authenticated: '',
-    // userData: {
-    //   name: '',
-    //   username: '',
-    //   email: '',
-    //   password: ''
-    // },
+    responseMsg: '',
     userForm: {
       name: {
         name: '',
-        type: 'text',
+        type: 'input',
         icon: 'fas fa-user',
         elementConfig: {
+          type: 'text',
           placeholder: 'e.g John Doe',
           minLength: 3
         },
@@ -41,9 +39,10 @@ class SignUp extends Component {
       },
       username: {
         username: '',
-        type: 'text',
+        type: 'input',
         icon: 'fas fa-user-circle fa-1.5x',
         elementConfig: {
+          type: 'text',
           placeholder: 'e.g Baptista',
           minLength: 3
         },
@@ -59,9 +58,10 @@ class SignUp extends Component {
       },
       email: {
         email: '',
-        type: 'text',
+        type: 'input',
         icon: 'fas fa-envelope',
         elementConfig: {
+          type: 'email',
           placeholder: ' e.g JohnDoe@yahoo.com',
           minLength: 3
         },
@@ -77,9 +77,10 @@ class SignUp extends Component {
       },
       password: {
         password: '',
-        type: 'password',
+        type: 'input',
         icon: 'fa fa-key',
         elementConfig: {
+          type: 'password',
           placeholder: 'e.g johndoe12345',
           minLength: 8
         },
@@ -95,106 +96,134 @@ class SignUp extends Component {
       }
     }
   }
+
+
   /**
-     * @method onChangeHandler
-     * @param {*} event
-     * @param {*} id
-     * @return {Event} Change State on event
-     */
+   * @function componentWillReceiveProps
+   *
+   * @param {*} nextProps
+   *
+   * @returns {state} state
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isAuthenticated) {
+      this.props.history.push('/view');
+    }
+    const error = 'Request failed with status code 404';
+    if (nextProps.errorMsg === error && nextProps.isAuthenticated === false) {
+      const errorMessage = nextProps.errorMsg === error ?
+        nextProps.errorMsg.replace(error, 'Comfirm your username and password')
+        : nextProps.errorMsg;
+      this.setState({
+        responseMsg: errorMessage
+      });
+    }
+  }
+
+  /**
+   * @method onChangeHandler
+   *
+   * @param {*} event
+   *
+   * @param {*} id
+   *
+   * @return {Event} Change State on event
+   */
   onChangeHandler = (event, id) => {
     const stateEventChange = { ...this.state.userForm };
     stateEventChange[id][id] = event.target.value;
     stateEventChange[id].touched = true;
     // validate
-    this.validSignin([id, stateEventChange]);
+    FormValidator([id, stateEventChange]);
     // change state
-    this.setState({ userForm: stateEventChange });
-    // console.log(this.state.userForm);
+    this.setState({
+      userForm: stateEventChange
+    });
   }
+
   /**
- * @method validSignin
- * @param {Array} validate
- * @returns {js} validation
- */
-  validSignin = (validate) => {
-    const [id, eventHandler] = [...validate];
-    let regex, test = /\s/gi;
-    if (id === 'name') { regex = Regex.validName; test = Regex.nameTest; }
-    if (id === 'username') { regex = Regex.validUsername; }
-    if (id === 'email') { regex = Regex.validMail; }
-    if (id === 'password') { regex = /[a-z][0-9]/gi; }
-    const whiteSpace = (test).test(eventHandler[id][id]);
-    if (whiteSpace) {
-      eventHandler[id]
-        .validation.InvalidMsg = eventHandler[id].validation.validMsg;
-    } else {
-      eventHandler[id]
-        .validation.InvalidMsg = eventHandler[id].validation.fallbackMsg;
-    }
-    if (eventHandler[id].touched
-      && eventHandler[id][id].length
-      < eventHandler[id].elementConfig.minLength) {
-      eventHandler[id].validation.isValid = false;
-      eventHandler[id].isSuccess = false;
-    }
-    if (eventHandler[id].touched
-      && eventHandler[id][id].length
-      >= eventHandler[id].elementConfig.minLength) {
-      eventHandler[id].validation.isValid = true;
-      eventHandler[id].isSuccess = true;
-      const boleanValue = eventHandler[id][id].match(regex);
-      if (boleanValue && !whiteSpace) {
-        eventHandler[id].validation.isValid = true;
-        eventHandler[id].match = true;
-        eventHandler[id].isSuccess = true;
-      } else {
-        eventHandler[id].validation.isValid = false;
-        eventHandler[id].isSuccess = false;
-      }
-    }
-  };
+   * @method onChangeHandler
+   *
+   * @param {*} event
+   *
+   * @return {Event} Change State on event
+   */
+  onSubmitHandler = (event) => {
+    event.preventDefault();
+    this.setState({
+      responseMsg: '',
+    });
+
+    const data = {
+      name: this.state.userForm.name.name,
+      username: this.state.userForm.username.username,
+      email: this.state.userForm.email.email,
+      password: this.state.userForm.password.password
+    };
+
+    this.props.signupAction(data);
+  }
+
   /**
+   * @method render
+   *
      * @description render Component
+     *
      * @return {jsx} jsx
      */
   render() {
-    const formElementsArray = [];
-    /* eslint-disable */
-    for (let key in this.state.userForm) {
-      formElementsArray.push({
-        id: key,
-        config: this.state.userForm[key]
-      });
-    };
-    const form = (
-      <FormHeader 
-      footerLink='/checkin' 
-      footerAction='Login Account'
-      footerStatus='Already a member'>
-        {
-          formElementsArray.map(el => (
-            <SignUpForm
-              key={el.id}
-              label={el.id}
-              name={el.id}
-              attributeType={el.config.type}
-              attributeConfig={el.config.elementConfig}
-              icon={el.config.icon}
-              success={el.config.isSuccess}
-              feedback={!this.state.userForm[el.id].validation.isValid ? el.config.validation.InvalidMsg : null}
-              changed={(event) => this.onChangeHandler(event, el.id)} />
-          ))
-        }
-        <BtnContainer socialStatus='Sign up with'/>
-        <CButton>Create Account</CButton>
-      </FormHeader>
-    )
+    const loader = this.props.loading ? <Spinner /> : null;
     return (
       <Aux>
-        {form}
+        {loader}
+        <Form
+          resMsg={this.state.responseMsg}
+          clicked={this.onSubmitHandler}
+          userForm={this.state.userForm}
+          changed={this.onChangeHandler}
+          status="Already a member"
+          alt="Login Account"
+          social="Sign up with"
+          link="/checkin"
+        >
+      Create Account
+        </Form>
       </Aux>
     );
   }
 }
 
-export default SignUp;
+
+Signup.propTypes = {
+  signupAction: propTypes.func.isRequired,
+  isAuthenticated: propTypes.bool.isRequired,
+  history: propTypes.objectOf(any).isRequired,
+  errorMsg: propTypes.string.isRequired,
+  loading: propTypes.bool.isRequired
+};
+
+/**
+ * @function mapStateToProps
+ *
+ * @param {*} state
+ *
+ * @return {props} Props
+ */
+const mapStateToProps = state => ({
+  isAuthenticated: state.signup.isAuthenticated,
+  errorMsg: state.signup.errorMessage,
+  loading: state.signin.loading
+});
+
+/**
+ * @function mapStateToProps
+ *
+ * @param {*} dispatch
+ *
+ * @return {props} Props
+ */
+const mapDispatchToProps = dispatch => ({
+  signupAction: data => dispatch(signupAction(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

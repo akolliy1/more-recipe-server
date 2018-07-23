@@ -1,34 +1,36 @@
-import React,{ Component } from "react";
-import Aux from "../../hoc/Auxs/Aux";
-import classes from "./Layout.css";
-import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import React, { Component } from 'react';
+import Aux from '../Auxs/Auxs';
+import classes from './Layout.css';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+
+/* eslint-disable */
 class Layout extends Component {
     state = {
-        showSideDrawer: false
+      showSideDrawer: false
     }
     cancelSideDrawer = () => {
-        this.setState({ showSideDrawer: false })
+      this.setState({ showSideDrawer: false });
     }
     sideDrawerStateHandler = () => {
-        this.setState( (prevState) => { 
-            return { showSideDrawer: !prevState.showSideDrawer }
-        })
+      this.setState((prevState) => ({ showSideDrawer: !prevState.showSideDrawer }));
     }
-    render () {
-        return (
+    render() {
+      return (
             // drawerToggle = { this.sideDrawerStateHandler } enabledSideDrawer = { this.state.showSideDrawer }
-            // <div>side nav,</div> 
-            <Aux>
-                <Toolbar 
-                drawerToggle={this.sideDrawerStateHandler} />
-                <SideDrawer 
-                showSideDrawer={this.state.showSideDrawer} 
-                cancelBackdrop={this.cancelSideDrawer}/>
-                <main className={classes.Content}> {this.props.children} </main>
+            // <div>side nav,</div>
+          <Aux>
+              <Toolbar
+                  drawerToggle={this.sideDrawerStateHandler}
+                />
+              <SideDrawer
+                  showSideDrawer={this.state.showSideDrawer}
+                  cancelBackdrop={this.cancelSideDrawer} 
+                />
+              <main className={classes.Content}> {this.props.children} </main>
             </Aux>
-        )
+      );
     }
 }
 
-export default Layout
+export default Layout;

@@ -1,0 +1,9 @@
+.Image{ height: 300px }
+.BoxSizing{box-sizing: border-box}
+.MediaContent{position: relative;left: -20%;top: 26px}
+.SmallPic {height: 70px;width: 40%;border-radius: 10px}
+.Color {color: rgb(166, 226, 203)!important}
+@media (max-width: 768px) {
+    .MediaContent{left: 32%;top: -80px}
+    .SmallPic {width: 25%}
+}

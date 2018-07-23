@@ -11,7 +11,7 @@ import Post from '../../UI/Post/Post';
 /* eslint-disable */
 const Main = () => (
     /* eslint-enable */
-  <article className="col-md-7">
+  <article className="col-md-8">
     <Recipe />
     <Post />
   </article>);

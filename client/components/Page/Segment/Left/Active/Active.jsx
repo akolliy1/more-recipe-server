@@ -1,6 +1,7 @@
 // this shows online friends
 import React from 'react';
 import userPic from '../../../../../assets/Images/person-1.jpg';
+import classes from './Active.css';
 
 /**
  * @function recipe
@@ -11,7 +12,12 @@ import userPic from '../../../../../assets/Images/person-1.jpg';
 const left = props => (
     /* eslint-enable */
   <div className="item">
-    <img className="ui avatar image" src={userPic} alt="onlinfrnd" />
+    <img
+      className={['ui avatar image',
+    classes.Active].join(' ')}
+      src={userPic}
+      alt="onlinfrnd"
+    />
     <div className="content">
       <div className="header">Helen</div>
     </div>

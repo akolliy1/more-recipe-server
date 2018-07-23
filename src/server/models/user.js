@@ -5,7 +5,7 @@
  * @return {object} The User model
  */
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
+  const User = sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -37,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Email cannot be empty'
         },
         isEmail: {
-          args: true,
           msg: 'invalid email address'
         }
       }
@@ -62,25 +61,25 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  })
+  });
   User.associate = (models) => {
     // associations can be defined here
     User.hasMany(models.Recipe, {
       foreignKey: 'userId'
-    })
+    });
     User.hasMany(models.Review, {
       foreignKey: 'userId',
       constraints: false
-    })
+    });
     User.hasMany(models.Favorite, {
       foreignKey: 'userId'
-    })
+    });
     User.hasMany(models.Upvote, {
       foreignKey: 'userId'
-    })
+    });
     User.hasMany(models.Downvote, {
       foreignKey: 'userId'
-    })
-  }
-  return User
-}
+    });
+  };
+  return User;
+};

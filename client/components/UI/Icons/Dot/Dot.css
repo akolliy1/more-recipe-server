@@ -8,12 +8,12 @@
     margin: 0.6 */
 }
 .Dot div {
-    height: 2px;
-    width: 2px;
-    color: rgb(165, 159, 159);
-    border: 1px solid green;
-    padding: 2px;
+    height: 1px;
+    width: 1px;
+    color: rgb(166, 226, 203);
+    border: 1px solid rgb(166, 226, 203);
+    padding: 1px;
     margin-bottom: 1px;
-    background: rgb(184, 184, 204);
-    z-index: -1;
+    background: rgb(166, 226, 203);
+    z-index: 1;
 }

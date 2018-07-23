@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import * as actionTypes from '../constants/SignIn';
+import setToken from '../Middleware/setToken';
 
 /**
  * @function signinRequest
@@ -51,13 +52,18 @@ export const signinAction = data =>
     return axios.post('/api/users/signin', data)
       .then((res) => {
         const { message, token } = res.data;
+        setToken(token);
+        const checkToken = localStorage.getItem('userToken');
+        if (checkToken) {
+          const userInfos = jwt.decode(token);
+          return dispatch(onSigninSuccess(userInfos, message));
+        }
         localStorage.setItem('userToken', token);
         const userInfos = jwt.decode(token);
-        dispatch(onSigninSuccess(userInfos, message));
+        return dispatch(onSigninSuccess(userInfos, message));
       })
       .catch((error) => {
-        console.log(error);
-        const errors = error.message;
+        const errors = error.response.data;
         dispatch(onSigninFail(errors));
       });
   };

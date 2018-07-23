@@ -1,14 +1,11 @@
-import models from '../models';
-
-
-const { Review } = models;
+import * as Regex from '../../../client/validations/Regex';
 /**
  * @description User input data for email and username
  * @param { object } req -request
  * @param { object } res - respond
  * @returns {object} promise
  */
-const inputValidation = (req, res) => {
+const inputValidation = (req) => {
   req.checkBody({
     name: {
       notEmpty: {
@@ -43,9 +40,13 @@ const inputValidation = (req, res) => {
         options: true,
         errorMessage: 'Email field cannot be empty'
       },
-      isEmail: {
+      matches: {
+        options: [(Regex.validMail)],
         errorMessage: 'Please input a valid Email Adrress'
-      }
+      },
+      // isEmail: {
+      //   errorMessage: 'Please input a valid Email Adrress'
+      // }
     },
     password: {
       notEmpty: {

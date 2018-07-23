@@ -1,11 +1,11 @@
 import * as Regex from './Regex';
 
 /**
- * @method validSignin
+ * @method validator
  * @param {Array} validate
  * @returns {js} validation
  */
-const validSignin = (validate) => {
+const validator = (validate) => {
   const [id, eventHandler] = [...validate];
   let regex, test = /\s/gi;
   if (id === 'name') { regex = Regex.validName; test = Regex.nameTest; }
@@ -58,4 +58,4 @@ const validSignin = (validate) => {
   }
 };
 
-export default validSignin;
+export default validator;
