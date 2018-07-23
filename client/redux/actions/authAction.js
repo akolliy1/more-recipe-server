@@ -60,8 +60,9 @@ export const signInAction = data =>
         localStorage.setItem('userToken', token);
         const userInfo = jwt.decode(token);
         dispatch(setCurrentUser(userInfo, message));
+        localStorage.setItem('user', userInfo);
       }).catch((err) => {
-        const errData = err;
+        const errData = err.response.message;
         dispatch(removeCurrentUser(errData));
       });
   };

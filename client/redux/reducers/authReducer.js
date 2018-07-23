@@ -9,7 +9,7 @@ const initialState = {
   isAuthenticated: false,
   responseMessage: '',
   errorMessage: '',
-  loading: false
+  loading: true
 };
 
 /**
