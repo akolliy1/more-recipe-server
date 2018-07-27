@@ -3,7 +3,7 @@ import Recipe from './Recipe';
 import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
-  authReducer,
+  auth: authReducer,
   recipe: Recipe
 });
 

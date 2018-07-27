@@ -38,6 +38,7 @@ export const setCurrentUser = (userData, resMsg) => ({
  */
 export const removeCurrentUser = error => ({
   type: actionTypes.REMOVE_CURRENT_USER,
+  data: {},
   isAuth: false,
   loading: false,
   errorMsg: error
@@ -59,11 +60,11 @@ export const signInAction = data =>
         setToken(token);
         localStorage.setItem('userToken', token);
         const userInfo = jwt.decode(token);
-        dispatch(setCurrentUser(userInfo, message));
         localStorage.setItem('user', userInfo);
+        return dispatch(setCurrentUser(userInfo, message));
       }).catch((err) => {
-        const errData = err.response.message;
-        dispatch(removeCurrentUser(errData));
+        const errData = err.response.data;
+        return dispatch(removeCurrentUser(errData));
       });
   };
 
@@ -88,3 +89,4 @@ export const signUpAction = data =>
         dispatch(removeCurrentUser(errData));
       });
   };
+

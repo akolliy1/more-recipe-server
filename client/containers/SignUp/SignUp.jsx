@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes, { any } from 'prop-types';
+import Toastr from 'toastr';
 import Form from '../../components/Form/Form';
 import FormValidator from '../../validations/FormValidator';
 import { signUpAction } from '../../redux/actions/index';
@@ -17,6 +18,7 @@ import Aux from '../../hoc/Auxs/Auxs';
 class Signup extends Component {
   state = {
     responseMsg: '',
+    formIsValid: false,
     userForm: {
       name: {
         name: '',
@@ -97,7 +99,18 @@ class Signup extends Component {
     }
   }
 
-
+  /**
+   * @function componentDidMount
+   *
+   * @param {*} nextProps
+   *
+   * @returns {state} state
+   */
+  componentDidMount() {
+    if (this.state.formIsValid && this.state.responseMsg) {
+      Toastr(this.state.responseMsg);
+    }
+  }
   /**
    * @function componentWillReceiveProps
    *
@@ -130,15 +143,25 @@ class Signup extends Component {
    * @return {Event} Change State on event
    */
   onChangeHandler = (event, id) => {
-    const stateEventChange = { ...this.state.userForm };
-    stateEventChange[id][id] = event.target.value;
-    stateEventChange[id].touched = true;
+    const updatedOrderForm = { ...this.state.userForm };
+    updatedOrderForm[id][id] = event.target.value;
+    updatedOrderForm[id].touched = true;
     // validate
-    FormValidator([id, stateEventChange]);
+    FormValidator([id, updatedOrderForm]);
     // change state
+    let formIsValid = true;
+    /* eslint-disable */
+    for (let id in updatedOrderForm) {
+      formIsValid = updatedOrderForm[id].match && formIsValid;
+    }
+    /* eslint-enable */
     this.setState({
-      userForm: stateEventChange
+      userForm: updatedOrderForm, formIsValid
     });
+    // if userAlreadyLoggedin
+    if (this.state.formIsValid) {
+      // this.ifTokenInputData();
+    }
   }
 
   /**
@@ -178,9 +201,10 @@ class Signup extends Component {
         {loader}
         <Form
           resMsg={this.state.responseMsg}
-          clicked={this.onSubmitHandler}
+          submit={this.onSubmitHandler}
           userForm={this.state.userForm}
           changed={this.onChangeHandler}
+          disabled={!this.state.formIsValid}
           status="Already a member"
           alt="Login Account"
           social="Sign up with"
@@ -210,9 +234,9 @@ Signup.propTypes = {
  * @return {props} Props
  */
 const mapStateToProps = state => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-  errorMsg: state.authReducer.errorMessage,
-  loading: state.authReducer.loading
+  isAuthenticated: state.auth.isAuthenticated,
+  errorMsg: state.auth.errorMessage,
+  loading: state.auth.loading
 });
 
 /**

@@ -17,14 +17,14 @@ const HeaderForm = props => (
   <Aux>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css" />
-    {/* <img src={bgImage} alt="background" className={classes.bgImage} /> */}
+    <img src={bgImage} alt="background" className={classes.bgImage} />
     <div className={['container', classes.Justify, 'mt-4'].join(' ')}>
       <div className={classes.JustifyContentCenter}>
         <div className="card mt-2">
           <div className="field card-body">
             <h2>More-recipe-server</h2>
             <hr />
-            <form>
+            <form onSubmit={props.submit}>
               {/* eslint-disable */}
               <div className="error-message">
                 {props.resMsg}

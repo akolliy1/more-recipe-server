@@ -26,6 +26,7 @@ const Form = (props) => {
       footerAction={props.alt}
       footerStatus={props.status}
       resMsg={props.resMsg}
+      submit={props.submit}
     >
       {
           formElementsArray.map(el => (
@@ -46,7 +47,7 @@ const Form = (props) => {
           ))
         }
       <BtnContainer socialStatus={props.social} />
-      <CButton clicked={props.clicked}>{props.children}</CButton>
+      <CButton isActive={props.disabled}>{props.children}</CButton>
     </FormHeader>
   );
   return form

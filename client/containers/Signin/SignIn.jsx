@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import miniToastr from 'mini-toastr';
 import propTypes, { any } from 'prop-types';
+
 import Form from '../../components/Form/Form';
 import FormValidator from '../../validations/FormValidator';
 import { signInAction } from '../../redux/actions/index';
@@ -61,6 +63,21 @@ class SignIn extends Component {
   }
 
   /**
+   * @function componentDidMount
+   *
+   * @param {*} nextProps
+   *
+   * @returns {state} state
+   */
+  componentDidMount() {
+    miniToastr.init();
+    // miniToastr.error('HELLO');
+    // miniToastr.error(this.state.responseMsg.message);
+    if (this.state.formIsValid && this.state.responseMsg) {
+      // Toastr.error('HELLO')
+    }
+  }
+  /**
    * @function componentWillReceiveProps
    *
    * @param {*} nextProps
@@ -79,6 +96,8 @@ class SignIn extends Component {
       this.setState({
         responseMsg: errorMessage
       });
+      miniToastr.init();
+      miniToastr.error(this.state.responseMsg.message);
     }
   }
 
@@ -109,7 +128,7 @@ class SignIn extends Component {
     });
     // if userAlreadyLoggedin
     if (this.state.formIsValid) {
-      this.ifTokenInputData();
+      // this.ifTokenInputData();
     }
   }
 
@@ -171,9 +190,10 @@ class SignIn extends Component {
         {loader}
         <Form
           resMsg={this.state.responseMsg}
-          clicked={this.onSubmitHandler}
+          submit={this.onSubmitHandler}
           userForm={this.state.userForm}
           changed={this.onChangeHandler}
+          disabled={!this.state.formIsValid}
           alt="Create an Account"
           status="New to Recipe"
           social="Log in with"
@@ -202,9 +222,9 @@ SignIn.propTypes = {
  * @return {props} Props
  */
 const mapStateToProps = state => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-  errorMsg: state.authReducer.errorMessage,
-  loading: state.authReducer.loading
+  isAuthenticated: state.auth.isAuthenticated,
+  errorMsg: state.auth.errorMessage,
+  loading: state.auth.loading
 });
 
 /**

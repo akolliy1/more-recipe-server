@@ -9,7 +9,7 @@ import React from 'react';
 const customButton = props => (
   <div className="field">
     {/* eslint-disable */}
-    <button onClick={props.clicked} className="btn btn-primary col-md-12 mt-2">{props.children}</button>
+    <button onClick={props.clicked} className="btn btn-primary col-md-12 mt-2" disabled={props.isActive}>{props.children}</button>
     {/* eslint-enable */}
   </div>
 );

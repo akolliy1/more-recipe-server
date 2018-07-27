@@ -9,7 +9,7 @@ const initialState = {
   isAuthenticated: false,
   responseMessage: '',
   errorMessage: '',
-  loading: true
+  loading: false
 };
 
 /**
@@ -90,13 +90,13 @@ const removeCurrentUser = (state, action) => {
  */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SIGNIN_REQUEST:
+    case actionTypes.REQUEST_CURRENT_USER:
       return requestCurrentUser(state, action);
 
-    case actionTypes.SIGNIN_SUCCESS:
+    case actionTypes.SET_CURRENT_USER:
       return setCurrentUser(state, action);
 
-    case actionTypes.SIGNIN_FAIL:
+    case actionTypes.REMOVE_CURRENT_USER:
       return removeCurrentUser(state, action);
 
     default:

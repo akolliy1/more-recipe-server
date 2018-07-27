@@ -65,6 +65,7 @@ Recipe.propTypes = {
  */
 const mapStateToProps = state => ({
   isAuthenticated: state.recipe.isAuthenticated,
+  data: state.auth.userData,
   errorMsg: state.recipe.errorMessage,
   loading: state.recipe.loading
 });
