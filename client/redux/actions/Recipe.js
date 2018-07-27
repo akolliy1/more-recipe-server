@@ -1,9 +1,9 @@
+import axios from 'axios';
 import jwt from 'jsonwebtoken';
-// import axios from 'axios';
-import verifyUser from '../Helper/verifyUser';
-import fetchRecipe from '../Helper/fetchRecipe';
 import * as actionType from '../constants/Recipe';
+import { setCurrentUser } from './index';
 
+const url = '/recipes/';
 /**
  * @function recipeRequest
  *
@@ -11,24 +11,23 @@ import * as actionType from '../constants/Recipe';
  *
  * @returns {action} dispatch
  */
-export const recipeRequest = isAuthenticated => ({
-  type: actionType.default.RECIPE_REQUEST,
-  isAuth: isAuthenticated,
+export const requestAllRecipes = () => ({
+  type: actionType.RESQUEST_ALL_RECIPES,
+  isAuth: false,
   recipe: []
 });
 
 /**
  * @function recipeSuccess
  *
- * @param {*} isAuthenticated
- *
  * @param {*} recipeData
  *
  * @returns {action} dispatch
  */
-export const recipeSuccess = (isAuthenticated, recipeData) => ({
-  type: actionType.default.RECIPE_SUCCESS,
-  isAuth: isAuthenticated,
+export const setAllRecipes = recipeData => ({
+  type: actionType.SET_ALL_RECIPES,
+  isAuth: true,
+  loading: false,
   recipe: recipeData
 });
 
@@ -39,8 +38,8 @@ export const recipeSuccess = (isAuthenticated, recipeData) => ({
  *
  * @returns {action} dispatch
  */
-export const recipeFail = errors => ({
-  type: actionType.default.RECIPE_FAIL,
+export const requestRecipeFail = errors => ({
+  type: actionType.REQUEST_RECIPES_FAIL,
   recipeData: [],
   error: errors
 });
@@ -54,21 +53,18 @@ export const recipeFail = errors => ({
  */
 export const onRecipeAction = () => (dispatch) => {
   const token = localStorage.getItem('userToken');
-  if (token) {
-    const tokenDetails = jwt.decode(token);
-    const { id } = tokenDetails;
-    const verified = verifyUser(id, token);
-    if (verified) {
-      dispatch(recipeRequest(true));
-
-      return fetchRecipe(id, token, (res) => {
-        const recipeDetails = res.data;
-        dispatch(recipeSuccess(true, recipeDetails));
-      }, (err) => {
-        const error = err.response.data;
-        dispatch(recipeFail(error));
-      });
-    }
-    dispatch(recipeRequest(false));
-  }
+  const userInfo = jwt.decode(token);
+  const response = 'welcome';
+  dispatch(setCurrentUser(userInfo, response));
+  axios.defaults.headers['x-access-toke'] = token;
+  axios.get(`${url}`)
+    .then((res) => {
+      const { recipe } = res.data;
+      const allRecipes = recipe;
+      dispatch(setAllRecipes(allRecipes));
+    })
+    .catch((err) => {
+      const { message } = err.response.data;
+      dispatch(requestRecipeFail(message));
+    });
 };

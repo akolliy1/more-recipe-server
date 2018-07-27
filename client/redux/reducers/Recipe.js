@@ -5,7 +5,6 @@ const initialState = {
   isAuthenticated: false,
   loading: true,
   recipes: [],
-  errorMsg: '',
   responseMsg: ''
 };
 
@@ -30,7 +29,7 @@ const recipeRequest = (state, action) => {
  * @returns {object} object
  */
 const recipeSuccess = (state, action) => {
-  const fetchFromServer = { ...action.data };
+  const fetchFromServer = { recipes: action.recipeData };
 
   const recipeUpdate = updated(state.recipes, fetchFromServer);
 
@@ -54,7 +53,9 @@ const recipeFail = (state, action) => {
 
   const loader = { loading: action.loading };
 
-  const userState = updated(userAuth, loader);
+  const response = { responseMsg: action.error };
+
+  const userState = updated(userAuth, loader, response);
 
   return updated(state, userState);
 };
@@ -65,15 +66,15 @@ const recipeFail = (state, action) => {
  * @param {*} action
  * @returns {Object} new state
  */
-const reducer = (state = initialState, action) => {
+const recipes = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.default.RECIPE_REQUEST:
+    case actionTypes.RESQUEST_ALL_RECIPES:
       return recipeRequest(state, action);
 
-    case actionTypes.default.RECIPE_SUCCESS:
+    case actionTypes.SET_ALL_RECIPES:
       return recipeSuccess(state, action);
 
-    case actionTypes.default.RECIPE_FAIL:
+    case actionTypes.REQUEST_RECIPES_FAIL:
       return recipeFail(state, action);
 
     default:
@@ -81,4 +82,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default recipes;

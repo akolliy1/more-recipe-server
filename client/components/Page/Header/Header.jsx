@@ -45,7 +45,10 @@ const recipe = props => (
           </li>
           <li className="nav-item" title="friends">
             <a href="/" className="nav-link">
-              <span className={['fas fa-user-friends', classes.HeaderSize, classes.Color].join(' ')} />
+              <span className={['fas fa-user-friends',
+              classes.HeaderSize, classes.Color].join(' ')}
+              />
+              {/* { window.innerWidth <= 992 ? 'friends' : null } */}
             </a>
           </li>
           <li className="nav-item" title="Messages">
@@ -73,14 +76,13 @@ const recipe = props => (
             </a>
             {/* eslint-disable */}
             <div className="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="top">
-              {/* eslint-enable */}
               <div className="menu">
                 <div className="item" data-value="jenny">
                   <img className="ui mini avatar image" src={userPics} alt="userSignPics" /> Jenny Hess
                 </div>
               </div>
               <div className="dropdown-divider" />
-              <a className="dropdown-item" href="/Logout"> Log Out</a>
+              <a className="dropdown-item" href="/checkin" onClick={props.signout}> Log Out</a>
               <div className="dropdown-divider" />
               <a className="dropdown-item" href="/"> Help</a>
               <a className="dropdown-item" href="/"> Favorite</a>

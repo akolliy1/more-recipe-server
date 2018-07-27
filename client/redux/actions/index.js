@@ -1,7 +1,13 @@
 export {
   signUpAction,
-  signInAction
+  signInAction,
+  setCurrentUser
 } from './authAction';
+
+export {
+  signOutAction,
+  signOutRequest
+} from './SignOut';
 
 export {
   recipeRequest,

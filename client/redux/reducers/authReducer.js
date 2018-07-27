@@ -99,6 +99,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_CURRENT_USER:
       return removeCurrentUser(state, action);
 
+    case actionTypes.SIGNOUT_USER:
+      return removeCurrentUser(state, action);
+
     default:
       return state;
   }

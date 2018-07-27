@@ -1,5 +1,4 @@
 import React from 'react';
-import Aux from '../../../../hoc/Auxs/Auxs';
 import Active from './Active/Active';
 // import classes from './Left.css';
 
@@ -11,33 +10,31 @@ import Active from './Active/Active';
 /* eslint-disable */
 const left = props => (
     /* eslint-enable */
-  <Aux>
-    <aside className="col-md-2 mb-2">
-      <div className="card">
-        <div className="card-body">
-          <div className="menu">
-            <div className="item">
-              <div className="header">
-                <i className="ui green empty circular label pr-2" />
-                <span> Online freinds </span>
-              </div>
+  <aside className="col-md-2 mb-2">
+    <div className="card">
+      <div className="card-body">
+        <div className="menu">
+          <div className="item">
+            <div className="header">
+              <i className="ui green empty circular label pr-2" />
+              <span> Online freinds </span>
             </div>
-            <div className="dropdown-divider" />
+          </div>
+          <div className="dropdown-divider" />
 
-            <div className="ui middle aligned animated list">
-              {/* eslint-disable */}
+          <div className="ui middle aligned animated list">
+            {/* eslint-disable */}
               
-              <Active />
+              <Active image={props.image} username={props.username}/>
               {/* { props.children } */}
 
               {/* eslint-enable */}
-            </div>
           </div>
-
         </div>
+
       </div>
-    </aside>
-  </Aux>
+    </div>
+  </aside>
 );
 
 export default left;

@@ -87,7 +87,7 @@ export default class recipes {
    */
   static async getAllRecipes(req, res) {
     const recipe = await Recipe.findAll({});
-    if (recipes.length > 0) {
+    if (recipe.length > 0) {
       return res.status(200).send({
         success: true,
         recipe

@@ -19,7 +19,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducers,
-  composeEnhancers(applyMiddleware(logger, thunk))
+  process.env.NODE_ENV !== 'production' ?
+    composeEnhancers(applyMiddleware(logger, thunk)) :
+    applyMiddleware(logger, thunk)
 );
 
 export default store;

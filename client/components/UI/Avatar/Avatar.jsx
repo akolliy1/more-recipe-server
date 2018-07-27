@@ -6,10 +6,10 @@ import classes from './Avatar.css';
 /**
  * @description small image and user's name
  * @function Avatar
- * @param {*} Empty
+ * @param {*} props
  * @returns {JSX} jsx
  */
-const Avatar = () => (
+const Avatar = props => (
   /* eslint-disable */
   <div className={classes.AvatarRow}>
     <div className={classes.AvatarCol1}>
@@ -18,9 +18,9 @@ const Avatar = () => (
         src={person}
         alt="Avatar"
       />
-      <a href="/recipe" className="user">Jenny Hess</a>
-      <span className="pl-1 pr-1">and</span>
-      <a href="/recipe" className="second-user">akolliy</a>
+      <a href="/recipe" className="user">I { props.recipeUserName }</a>
+      {/* <span className="pl-1 pr-1">and</span>
+      <a href="/recipe" className="second-user">akolliy</a> */}
     </div>
     <div className={[classes.AvatarCol2, 'dropdown no-border'].join(' ')}>
       <span

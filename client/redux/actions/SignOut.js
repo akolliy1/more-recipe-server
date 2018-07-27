@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/authAction';
+import * as actionTypes from '../constants/authConst';
 import setToken from '../Middleware/setToken';
 /**
  * @function signinRequest
@@ -7,6 +7,7 @@ import setToken from '../Middleware/setToken';
  */
 export const signOutRequest = () => ({
   type: actionTypes.SIGNOUT_USER,
+  responseMsg: 'SignOut succefully',
   data: {},
   loading: false,
   isAuth: false,
@@ -22,5 +23,5 @@ export const signOutAction = () =>
     localStorage.removeItem('userToken');
     setToken(false);
     dispatch(signOutRequest({}));
-    window.location('/');
+    window.location('/checkin');
   };

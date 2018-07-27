@@ -7,7 +7,7 @@ import Left from '../../components/Page/Segment/Left/Left';
 import Aux from '../../hoc/Auxs/Auxs';
 import Main from '../../components/Page/Main/Main';
 import Right from '../../components/Page/Segment/Right/Right';
-import { onRecipeAction } from '../../redux/actions/Recipe';
+import { onRecipeAction, signOutAction } from '../../redux/actions/index';
 
 /**
  * @description Sign in component
@@ -20,7 +20,8 @@ class Recipe extends Component {
    * @returns {viod} viod
    */
   componentDidMount() {
-    onRecipeAction();
+    // console.log(this.props.userData)
+    this.props.onRecipeAction();
     const token = localStorage.getItem('userToken');
     if (!token) {
       miniToastr.init();
@@ -36,7 +37,7 @@ class Recipe extends Component {
     return (
       <Aux>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css" />
-        <Header />
+        <Header signout={this.props.signOutAction} />
         <div className="container-fluid">
           <div className="mt-3">
             <section className="row">
@@ -52,7 +53,7 @@ class Recipe extends Component {
 }
 
 Recipe.propTypes = {
-  isAuthenticated: propTypes.bool.isRequired,
+  signOutAction: propTypes.func.isRequired,
   history: propTypes.objectOf(any).isRequired
 };
 
@@ -64,8 +65,8 @@ Recipe.propTypes = {
  * @return {props} Props
  */
 const mapStateToProps = state => ({
-  isAuthenticated: state.recipe.isAuthenticated,
-  data: state.auth.userData,
+  isAuthenticated: state.auth.isAuthenticated,
+  userData: state.auth.userData,
   errorMsg: state.recipe.errorMessage,
   loading: state.recipe.loading
 });
@@ -79,7 +80,8 @@ const mapStateToProps = state => ({
  * @return {props} Props
  */
 const mapDispatchToProps = dispatch => ({
-  onRecipeAction: () => dispatch(onRecipeAction())
+  onRecipeAction: () => dispatch(onRecipeAction()),
+  signOutAction: () => dispatch(signOutAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
