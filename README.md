@@ -51,7 +51,7 @@ You can get the app running locally in the following way:
    
 	  ```
     git clone https://github.com/akolliy/more-recipe-server.git
-    cd More-recipes
+    cd More-recipe-server
     ```
 		
  4. Install dependenices 
