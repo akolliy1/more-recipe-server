@@ -5,6 +5,10 @@ This app provides a platform for users to share the awesome and exciting  recipe
 ![Build Status](https://travis-ci.org/akolliy1/more-recipe-server.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/akolliy1/more-recipe-server/badge.svg?branch=master)](https://coveralls.io/github/akolliy1/more-recipe-server?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/61935e09f001a06fb347/maintainability)](https://codeclimate.com/github/akolliy1/more-recipe-server/maintainability)
 
 ### Features
+- Create account
+- Modify account
+- Sign-in account
+- Follow user
 - Add recipes to catalog
 - Modify a recipe
 - Delete a recipe
@@ -56,7 +60,7 @@ You can get the app running locally in the following way:
 		 
  5. Create a database in progresql
     
-		 In the application root directory, check the config.js file in
+		 In the application src directory, check the config.js file in
 		 `server/config/config.js` to setup your database
 		 
  6. Run database migrations
