@@ -113,7 +113,7 @@
     "dev-migrate": "sequelize db:migrate:undo:all&& sequelize db:migrate",
     "test-migrate": "set NODE_ENV=test&& npm run build&& sequelize db:migrate:undo:all&& sequelize db:migrate&& npm run test",
     "build": "babel src -d dist",
-    "start": "node src/app.js",
+    "start": "babel-node src/bin/www",
     "coverage": "npm run coveralls",
     "coveralls": "npm test&& nyc report --reporter=text-lcov | coveralls"
   }
